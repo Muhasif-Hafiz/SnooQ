@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SnooQ" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.SnooQ" parent="Base.Theme.SnooQ" />
+    <style name="CustomSnackbar" parent="Widget.Design.Snackbar">
+        <item name="backgroundTint">@color/SnakBarColor</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>

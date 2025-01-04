@@ -13,18 +13,15 @@ import com.muhasib.snooq.databinding.ActivityMainBinding
 class MainActivity : BaseActivity() {
 
     private  lateinit var binding  : ActivityMainBinding
-    private lateinit var text : TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        text =binding.loadProgress
-        text.setOnClickListener {
 
-           showCustomSnackbar("Invalid Credentials...")
-        }
+
 
 
     }

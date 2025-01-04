@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/img_1"
+    android:layout_height="match_parent"
+    tools:context=".view.onBoarding.screens.ThirdViewFragment">
+
+    <ImageView
+        android:layout_marginBottom="25dp"
+        android:layout_width="216dp"
+        android:layout_marginTop="170dp"
+        android:layout_height="195dp"
+        android:layout_gravity="center"
+        android:src="@drawable/cartimg"
+        android:contentDescription="Scan image" />
+
+    <!-- "Scan" Text -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enjoy"
+        android:textStyle="bold"
+        android:textSize="48sp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/extrabold_h1"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center" />
+
+    <!-- "Scan and hop into your favorite shop." Text -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shopping made seamless and fun."
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/bold_h1"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center" />
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/dotsIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_gravity="center"
+        app:dotsColor="@android:color/darker_gray"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="8dp"
+        app:dotsSpacing="4dp"
+        app:dotsWidthFactor="2.5"
+        app:selectedDotColor="#3AEA5F" />
+
+    \<com.google.android.material.button.MaterialButton
+    android:id="@+id/registerButton"
+    android:layout_width="297dp"
+    android:layout_marginTop="16dp"
+    android:layout_height="53dp"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="24dp"
+    android:layout_marginBottom="16dp"
+    android:backgroundTint="#3AEA5F"
+    android:padding="12dp"
+    android:text="Register"
+    android:fontFamily="@font/bold_h4"
+    android:textSize="16dp"
+    android:textAllCaps="false"
+    app:cornerRadius="24dp"
+   />
+
+    <TextView
+        android:id="@+id/skipText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Skip For Now"
+        android:layout_gravity="center"
+        android:textColor="#3AEA5F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</LinearLayout>

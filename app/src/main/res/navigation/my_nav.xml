@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.muhasib.snooq.view.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_viewpagerfragment"
+            app:destination="@id/viewpagerfragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment22"
+            app:destination="@id/homeFragment2"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewpagerfragment"
+        android:name="com.muhasib.snooq.view.onBoarding.viewpagerfragment"
+        android:label="fragment_viewpagerfragment"
+        tools:layout="@layout/fragment_viewpagerfragment" >
+        <action
+            android:id="@+id/action_viewpagerfragment_to_homeFragment22"
+            app:destination="@id/homeFragment2"
+            app:popUpTo="@id/viewpagerfragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.muhasib.snooq.view.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+</navigation>

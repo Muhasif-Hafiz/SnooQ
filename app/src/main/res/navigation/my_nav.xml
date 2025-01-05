@@ -31,10 +31,49 @@
             app:destination="@id/homeFragment2"
             app:popUpTo="@id/viewpagerfragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_viewpagerfragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment2"
         android:name="com.muhasib.snooq.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.muhasib.snooq.view.Registration.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_otpFragment"
+            app:destination="@id/otpFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
+        <action
+            android:id="@+id/action_signInFragment_to_viewpagerfragment"
+            app:destination="@id/viewpagerfragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpFragment"
+        android:name="com.muhasib.snooq.view.Registration.OtpFragment"
+        android:label="fragment_otp"
+        tools:layout="@layout/fragment_otp" >
+        <action
+            android:id="@+id/action_otpFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/from_left" />
+        <argument
+            android:name="Username"
+            app:argType="string" />
+        <argument
+            android:name="Mobile_Number"
+            app:argType="string" />
+    </fragment>
 </navigation>

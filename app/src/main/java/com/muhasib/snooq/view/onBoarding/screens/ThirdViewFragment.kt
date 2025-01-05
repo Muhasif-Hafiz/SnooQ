@@ -1,8 +1,6 @@
 package com.muhasib.snooq.view.onBoarding.screens
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,45 +13,62 @@ import androidx.viewpager2.widget.ViewPager2
 import com.muhasib.snooq.R
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
-
 class ThirdViewFragment : Fragment() {
 
     private lateinit var dotsIndicator: DotsIndicator
-    private lateinit var viewpager: ViewPager2
-    private lateinit var skipText : TextView
+    private lateinit var viewPager: ViewPager2
+    private lateinit var skipText: TextView
+    private lateinit var register: Button
 
-    @SuppressLint("MissingInflatedId")
+    companion object {
+        private const val ONBOARDING_PREF = "onBoarding"
+        private const val FINISH_KEY = "Finish"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view= inflater.inflate(R.layout.fragment_third_view, container, false)
+        val view = inflater.inflate(R.layout.fragment_third_view, container, false)
+
+        // Initialize views
         dotsIndicator = view.findViewById(R.id.dotsIndicator)
-        viewpager = requireActivity().findViewById(R.id.viewPager)
-        skipText= view.findViewById(R.id.skipText)
-        dotsIndicator.attachTo(viewpager)
+        register = view.findViewById(R.id.registerButton)
+        skipText = view.findViewById(R.id.skipText)
 
+        // Safely initialize viewPager using activity context
+        if (isAdded) {
+            viewPager = requireActivity().findViewById(R.id.viewPager)
+        } else {
+            // Handle the case where fragment is not yet attached
+            return view
+        }
 
-        val  reciever=
+        dotsIndicator.attachTo(viewPager)
 
+        // Handle the register button click
+        register.setOnClickListener {
+            // Navigates to the SignInFragment
+            findNavController().navigate(R.id.action_viewpagerfragment_to_signInFragment)
+        }
+
+        // Handle the skip button click
         skipText.setOnClickListener {
-
-
             onBoardingFinished()
+            // Navigates to the home fragment after finishing the onboarding process
             findNavController().navigate(R.id.action_viewpagerfragment_to_homeFragment22)
-
         }
 
         return view
     }
-private fun onBoardingFinished(){
 
-    val sharedPref= requireActivity().getSharedPreferences("onBoarding",Context.MODE_PRIVATE)
-    val editor= sharedPref.edit()
-    editor.putBoolean("Finish", true)
-    editor.apply()
-}
-
-
-
+    private fun onBoardingFinished() {
+        // Save the state of the onboarding completion using SharedPreferences
+        try {
+            val sharedPref = requireActivity().getSharedPreferences(ONBOARDING_PREF, Context.MODE_PRIVATE)
+            sharedPref.edit().putBoolean(FINISH_KEY, true).apply()
+        } catch (e: Exception) {
+            e.printStackTrace() // Log the error (optional)
+        }
+    }
 }

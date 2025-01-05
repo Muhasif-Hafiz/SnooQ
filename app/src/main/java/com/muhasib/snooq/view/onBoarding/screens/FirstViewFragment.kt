@@ -1,3 +1,4 @@
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,24 +14,34 @@ class FirstViewFragment : Fragment() {
     private lateinit var viewpager: ViewPager2
     private lateinit var dotsIndicator: DotsIndicator
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout
+
         val view = inflater.inflate(R.layout.fragment_first_view, container, false)
 
         // Initialize views
         next = view.findViewById(R.id.Next1ViewPager)
-        viewpager = requireActivity().findViewById(R.id.viewPager)
+
+        // Ensure fragment is attached before using requireActivity
+        if (isAdded) {
+            viewpager = requireActivity().findViewById(R.id.viewPager)
+        } else {
+            // Handle case where fragment is not yet attached
+            return view
+        }
+
         dotsIndicator = view.findViewById(R.id.dotsIndicator)
 
-        // Attach DotsIndicator to ViewPager2
         dotsIndicator.attachTo(viewpager)
 
-        // Button click listener
         next.setOnClickListener {
-            viewpager.currentItem = 1 // Navigate to the next page
+            // Check if viewpager is attached
+            if (isAdded) {
+                viewpager.currentItem = 1 // Navigate to the next page
+            }
         }
 
         return view

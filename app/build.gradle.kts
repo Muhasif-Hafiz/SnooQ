@@ -1,7 +1,10 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("androidx.navigation.safeargs.kotlin")
     kotlin("plugin.serialization") version "2.0.21"
+
+
 }
 
 android {
@@ -41,6 +44,7 @@ android {
 }
 
 
+
 dependencies {
 
     implementation("com.airbnb.android:lottie:6.6.2")
@@ -72,4 +76,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
     implementation("com.tbuonomo:dotsindicator:4.3")
+
+
 }

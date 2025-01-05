@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:background="@drawable/background_without_shade"
+    android:layout_height="match_parent"
+    tools:context=".view.Registration.SignInFragment">
+
+    <View
+        android:id="@+id/statusBarSpace"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <ImageButton
+        android:id="@+id/backButtonSignIn"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/statusBarSpace"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:src="@drawable/ic_arow_back" />
+
+    <!-- Logo -->
+    <LinearLayout
+        android:id="@+id/logoContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backButtonSignIn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="173dp"
+            android:layout_height="93dp"
+            android:src="@drawable/logo_name_header"
+
+            />
+
+
+    </LinearLayout>
+
+    <!-- Sign In Text -->
+    <TextView
+        android:id="@+id/signInText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoContainer"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:text="Sign In"
+        android:fontFamily="@font/bold_h2"
+        android:textColor="#000000"
+        android:textSize="32sp"
+        android:textStyle="bold"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:helperTextEnabled="true"
+        android:layout_below="@id/signInText"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="32dp"
+        app:boxStrokeWidth="1dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="#DAE2DB"
+        app:hintTextColor="@color/PrimarySnooQ"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/usernameTextField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:inputType="text" />
+</com.google.android.material.textfield.TextInputLayout>
+
+
+<com.google.android.material.textfield.TextInputLayout
+android:id="@+id/mobileNumberLayout"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+app:helperTextEnabled="true"
+android:layout_below="@id/usernameLayout"
+android:layout_marginHorizontal="24dp"
+android:layout_marginTop="24dp"
+    app:boxCornerRadiusBottomEnd="10dp"
+    app:boxCornerRadiusBottomStart="10dp"
+    app:boxCornerRadiusTopEnd="10dp"
+    app:boxCornerRadiusTopStart="10dp"
+app:boxStrokeWidth="1dp"
+app:boxStrokeColor="#DAE2DB"
+app:hintTextColor="@color/PrimarySnooQ"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+<com.google.android.material.textfield.TextInputEditText
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:id="@+id/mobileTextfield"
+android:hint="Mobile Number"
+android:inputType="phone" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+    <!-- Continue Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/continueButton"
+        android:layout_width="306dp"
+        android:layout_height="53dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="56dp"
+        android:layout_alignParentBottom="true"
+        android:text="Continue"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:backgroundTint="#2ECC71" />
+
+
+
+
+
+</RelativeLayout>

@@ -25,7 +25,15 @@ class SecondViewFragment : Fragment() {
 
         // Initialize views
         next2 = view.findViewById(R.id.Next2ViewPager)
-        viewpager = requireActivity().findViewById(R.id.viewPager)
+
+        // Ensure fragment is attached before accessing activity
+        if (isAdded) {
+            viewpager = requireActivity().findViewById(R.id.viewPager)
+        } else {
+            // Handle the case where fragment is not yet attached
+            return view
+        }
+
         dotsIndicator = view.findViewById(R.id.dotsIndicator)
 
         dotsIndicator.attachTo(viewpager)

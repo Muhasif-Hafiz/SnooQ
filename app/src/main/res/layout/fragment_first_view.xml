@@ -23,11 +23,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Scan"
-        android:textStyle="bold"
+
         android:textSize="48sp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:fontFamily="@font/extrabold_h1"
+        android:fontFamily="@font/bold_h1"
         android:layout_marginTop="30dp"
         android:layout_gravity="center" />
 

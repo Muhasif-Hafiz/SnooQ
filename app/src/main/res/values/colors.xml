@@ -5,4 +5,8 @@
     <color name = "background"> #FFFFFF</color>
     <color name="textColor">#000000</color>
     <color name="SnakBarColor">#ff0000</color>
-    </resources>
+    <color name="PrimarySnooQ">#3AEA5F</color>
+    <color name="default_hint_color">#808080</color> <!-- Gray for default -->
+    <color name="focused_hint_color">#FF5722</color> <!-- Orange for focused -->
+
+</resources>

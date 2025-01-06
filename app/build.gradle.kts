@@ -77,5 +77,9 @@ dependencies {
 
     implementation("com.tbuonomo:dotsindicator:4.3")
 
+    //AppWrite dependency
+    implementation("io.appwrite:sdk-for-android:6.0.0")
+    implementation ("io.insert-koin:koin-android:3.5.0")
+
 
 }

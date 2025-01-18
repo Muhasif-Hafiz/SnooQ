@@ -36,11 +36,11 @@ class ThirdViewFragment : Fragment() {
         register = view.findViewById(R.id.registerButton)
         skipText = view.findViewById(R.id.skipText)
 
-        // Safely initialize viewPager using activity context
+
         if (isAdded) {
             viewPager = requireActivity().findViewById(R.id.viewPager)
         } else {
-            // Handle the case where fragment is not yet attached
+
             return view
         }
 
@@ -48,7 +48,7 @@ class ThirdViewFragment : Fragment() {
 
         // Handle the register button click
         register.setOnClickListener {
-            // Navigates to the SignInFragment
+           onBoardingFinished()
             findNavController().navigate(R.id.action_viewpagerfragment_to_signInFragment)
         }
 

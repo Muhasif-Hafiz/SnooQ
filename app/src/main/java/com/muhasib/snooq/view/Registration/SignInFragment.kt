@@ -1,5 +1,6 @@
 package com.muhasib.snooq.view.Registration
 
+import AppWriteViewModel
 import BaseActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,17 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.muhasib.snooq.R
-import com.muhasib.snooq.R.id.mobileTextfield
+
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInFragment : Fragment() {
 
     private lateinit var username: TextInputEditText
-    private lateinit var mobileNumber: TextInputEditText
+    private lateinit var EmailAddress: TextInputEditText
     private lateinit var btnContinue: Button
     private lateinit var backButtonSignIn: ImageButton
+
+    private val appWriteViewModel : AppWriteViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,33 +36,39 @@ class SignInFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_sign_in, container, false)
 
-
-
+        // Initialize UI elements
         username = view.findViewById(R.id.usernameTextField)
-        mobileNumber = view.findViewById(R.id.mobileTextfield)
+        EmailAddress = view.findViewById(R.id.mobileTextfield)
         btnContinue = view.findViewById(R.id.continueButton)
         backButtonSignIn = view.findViewById(R.id.backButtonSignIn)
+        backButtonSignIn.isEnabled=false
 
         // Set onClickListener for the continue button
         btnContinue.setOnClickListener {
+            val userEmail = EmailAddress.text.toString()
             val userName = username.text.toString()
-            val mobileNumber = mobileNumber.text.toString()
 
-            val action = SignInFragmentDirections.actionSignInFragmentToOtpFragment(userName, mobileNumber)
-            findNavController().navigate(action)
-        }
-        backButtonSignIn.setOnClickListener {
-            navigateleft()
-        }
+            // Check if the fields are not empty
+            if (userEmail.isNotEmpty() && userName.isNotEmpty()) {
+                // Call the email verification function
+                appWriteViewModel.emailVerification(userEmail)
 
-        // back press manually functionality
+                // Navigate to OTP Fragment, passing userName and userEmail
+                val action = SignInFragmentDirections.actionSignInFragmentToOtpFragment(userName, userEmail)
+                findNavController().navigate(action)
+            } else {
+                // Show a message or error if the fields are empty
+                // You can use a Snackbar or Toast to inform the user
+                Toast.makeText(context, "Please enter both username and email", Toast.LENGTH_SHORT).show()
+            }
+        }
 
 
 
         return view
     }
+
     private fun navigateleft() {
         findNavController().navigate(R.id.action_signInFragment_to_viewpagerfragment)
     }
-
 }

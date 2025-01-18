@@ -25,22 +25,20 @@ class FirstViewFragment : Fragment() {
         // Initialize views
         next = view.findViewById(R.id.Next1ViewPager)
 
-        // Ensure fragment is attached before using requireActivity
-        if (isAdded) {
-            viewpager = requireActivity().findViewById(R.id.viewPager)
-        } else {
-            // Handle case where fragment is not yet attached
-            return view
-        }
+        // Use 'activity?.findViewById' instead of 'requireActivity()' for safety
+        viewpager = activity?.findViewById(R.id.viewPager) ?: return view
 
         dotsIndicator = view.findViewById(R.id.dotsIndicator)
 
+        // Attach the dots indicator to the view pager
         dotsIndicator.attachTo(viewpager)
 
         next.setOnClickListener {
-            // Check if viewpager is attached
+            // Ensure viewpager is valid and then navigate
             if (isAdded) {
-                viewpager.currentItem = 1 // Navigate to the next page
+                // Navigate to the next page
+                val currentItem = viewpager.currentItem
+                viewpager.currentItem =1
             }
         }
 

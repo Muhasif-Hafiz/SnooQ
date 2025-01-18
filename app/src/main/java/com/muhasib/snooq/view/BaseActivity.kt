@@ -11,8 +11,11 @@ import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.muhasib.snooq.R
+import com.muhasib.snooq.mvvm.appWriteModule
+import kotlinx.coroutines.launch
 
 
 open class BaseActivity : AppCompatActivity() {
@@ -29,7 +32,7 @@ open class BaseActivity : AppCompatActivity() {
 
 
     }
-    fun showProgressDialog(text:String){
+    fun showProgressDialog(){
         myProgressDialog= Dialog(this)
 
         myProgressDialog.setContentView(R.layout.layout_progress_bar)
@@ -38,6 +41,8 @@ open class BaseActivity : AppCompatActivity() {
 
 
         myProgressDialog.show()
+
+
     }
 
 

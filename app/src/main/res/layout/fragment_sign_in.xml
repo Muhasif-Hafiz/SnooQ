@@ -107,8 +107,9 @@ app:hintTextColor="@color/PrimarySnooQ"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:id="@+id/mobileTextfield"
-android:hint="Mobile Number"
-android:inputType="phone" />
+android:hint="Email"
+android:inputType="textEmailAddress"
+    />
     </com.google.android.material.textfield.TextInputLayout>
 
 

@@ -56,7 +56,7 @@ class ThirdViewFragment : Fragment() {
         skipText.setOnClickListener {
             onBoardingFinished()
             // Navigates to the home fragment after finishing the onboarding process
-            findNavController().navigate(R.id.action_viewpagerfragment_to_homeFragment22)
+            findNavController().navigate(R.id.homeActivity)
         }
 
         return view

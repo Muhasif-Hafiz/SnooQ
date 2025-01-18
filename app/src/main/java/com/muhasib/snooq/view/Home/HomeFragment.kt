@@ -1,4 +1,4 @@
-package com.muhasib.snooq.view
+package com.muhasib.snooq.view.Home
 
 import BaseActivity
 import android.os.Bundle
@@ -13,7 +13,7 @@ import com.muhasib.snooq.R
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
 class HomeFragment : Fragment() {
-    private lateinit var text : TextView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,12 +21,7 @@ class HomeFragment : Fragment() {
     ): View? {
         val view= inflater.inflate(R.layout.fragment_home, container, false)
         val baseActivity = activity as? BaseActivity
-        text=view.findViewById(R.id.HomeTesting)
-        text.setOnClickListener {
 
-            baseActivity?.showCustomSnackbar("Testing SnackBar... Thanks Yasar")
-
-                    }
 
         return view
 

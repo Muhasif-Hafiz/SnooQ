@@ -32,30 +32,26 @@ class SplashFragment : Fragment() {
 
 
         Handler().postDelayed({
-
-            if(onBoardingFinish()){
+            if (onBoardingFinish()) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     try {
-
                         val user = account.get()
-
                         if (user != null) {
-                            findNavController().navigate(R.id.action_splashFragment_to_homeFragment22)
+                            findNavController().navigate(R.id.homeActivity)
                         } else {
+                            // If the user is not logged in, navigate to SignInFragment directly
                             findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
                         }
-
-                    }catch (e: AppwriteException) {
+                    } catch (e: AppwriteException) {
                         // If an error occurs (user not logged in), navigate to SignInFragment
                         findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
                     }
                 }
-
-            }else{
+            } else {
                 findNavController().navigate(R.id.action_splashFragment_to_viewpagerfragment)
             }
+        }, 2500)
 
-        },3000)
 
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }

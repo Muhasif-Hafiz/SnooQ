@@ -88,6 +88,23 @@ open class BaseActivity : AppCompatActivity() {
 
         snackbar.show()
     }
+    @SuppressLint("RestrictedApi")
+    fun showCustomSnackbarPositive(message: String) {
+        val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
+
+        val snackbarView = snackbar.view
+        val customView = layoutInflater.inflate(R.layout.custom_snackbar_positive, null)
+
+        snackbarView.setBackgroundColor(Color.TRANSPARENT)
+
+        val layout = snackbarView as Snackbar.SnackbarLayout
+        layout.addView(customView, 0)
+
+        val textView = customView.findViewById<TextView>(R.id.snackbar_text)
+        textView.text = message
+
+        snackbar.show()
+    }
 
 
 

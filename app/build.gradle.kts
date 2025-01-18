@@ -49,7 +49,9 @@ dependencies {
 
     implementation("com.airbnb.android:lottie:6.6.2")
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
+   // implementation(libs.androidx.appcompat)
+
+    implementation("androidx.core:core:1.15.0")
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
@@ -82,5 +84,9 @@ dependencies {
     implementation ("io.insert-koin:koin-android:3.5.0")
 
     implementation("com.tbuonomo:dotsindicator:4.2")
+
+    //Navigation Drawer
+
+    implementation("com.github.shrikanth7698:Custom-Navigation-Drawer:v0.0.1")
 
 }

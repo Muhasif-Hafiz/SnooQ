@@ -57,4 +57,11 @@ class AppWriteRepository(val context: Context) {
     }
   }
 
+  suspend fun  logOutUser(){
+
+     val account = Account(client)
+
+    account.deleteSessions()
+  }
+
 }

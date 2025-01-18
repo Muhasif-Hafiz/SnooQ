@@ -16,13 +16,11 @@
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_splashFragment_to_homeFragment22"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_splashFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
     </fragment>
     <fragment
         android:id="@+id/viewpagerfragment"
@@ -30,21 +28,11 @@
         android:label="fragment_viewpagerfragment"
         tools:layout="@layout/fragment_viewpagerfragment" >
         <action
-            android:id="@+id/action_viewpagerfragment_to_homeFragment22"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/viewpagerfragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_viewpagerfragment_to_signInFragment"
             app:destination="@id/signInFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left" />
     </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.muhasib.snooq.view.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.muhasib.snooq.view.Registration.SignInFragment"
@@ -79,7 +67,12 @@
             android:name="Mobile_Number"
             app:argType="string" />
         <action
-            android:id="@+id/action_otpFragment_to_homeFragment22"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_otpFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
     </fragment>
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="com.muhasib.snooq.view.Home.HomeActivity"
+        android:label="activity_home"
+        tools:layout="@layout/activity_home" />
 </navigation>

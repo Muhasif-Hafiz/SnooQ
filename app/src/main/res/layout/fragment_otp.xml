@@ -7,11 +7,13 @@
     android:background="@drawable/background_without_shade"
     tools:context=".view.Registration.OTPVerificationFragment">
 
+    <!-- Status Bar Space -->
     <View
         android:id="@+id/statusBarSpace"
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp" />
 
+    <!-- Back Button -->
     <ImageButton
         android:id="@+id/backButtonOtp"
         android:layout_width="40dp"
@@ -30,7 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/backButtonOtp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
         android:orientation="horizontal"
         android:gravity="center">
 
@@ -53,7 +54,7 @@
         android:fontFamily="@font/bold_h2"
         android:textColor="#000000"
         android:textSize="32sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <!-- Verification Message -->
     <TextView
@@ -66,9 +67,8 @@
         android:layout_marginTop="16dp"
         android:text="@string/enter_the_verification_code_received_on_your_email_address"
         android:textColor="#666666"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
-    <!-- OTP Input Container -->
     <!-- OTP Input Container -->
     <LinearLayout
         android:id="@+id/otpContainer"
@@ -159,8 +159,52 @@
 
     </LinearLayout>
 
+    <!-- "Didn't receive the code?" Section -->
+    <LinearLayout
+        android:id="@+id/resendContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/otpContainer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
-    <!-- Log In Button -->
+        <TextView
+            android:id="@+id/didntReceiveCodeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Didn't receive the code?"
+            android:textColor="#666666"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/timerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:30"
+            android:textColor="#FF0000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/resendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resend"
+            android:textColor="#2ECC71"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+    <!-- Submit Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/SubmitButton"
         android:layout_width="306dp"

@@ -43,12 +43,12 @@ class SignInFragment : Fragment() {
         backButtonSignIn = view.findViewById(R.id.backButtonSignIn)
         backButtonSignIn.isEnabled=false
 
-        // Set onClickListener for the continue button
+
         btnContinue.setOnClickListener {
             val userEmail = EmailAddress.text.toString()
             val userName = username.text.toString()
 
-            // Check if the fields are not empty
+
             if (userEmail.isNotEmpty() && userName.isNotEmpty()) {
                 // Call the email verification function
                 appWriteViewModel.emailVerification(userEmail)

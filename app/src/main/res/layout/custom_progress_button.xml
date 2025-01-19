@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- Default Button View -->
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="306dp"
+        android:layout_height="53dp"
+        android:backgroundTint="#2ECC71"
+        android:layout_gravity="center"
+        android:text="Submit"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:visibility="visible"/>
+
+    <!-- Progress and Text View -->
+    <LinearLayout
+        android:id="@+id/progress_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/please_wait_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Please Wait"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"/>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -26,6 +26,7 @@ class AppWriteViewModel(private val appWriteRepository: AppWriteRepository) : Vi
             _loginResult.postValue(isLoginSuccessful) // Post result to LiveData
         }
     }
+    // Inside your ViewModel
     fun LogoutUserSession() {
         viewModelScope.launch {
             try {
@@ -40,4 +41,5 @@ class AppWriteViewModel(private val appWriteRepository: AppWriteRepository) : Vi
             }
         }
     }
+
 }

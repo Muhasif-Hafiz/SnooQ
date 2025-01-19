@@ -14,6 +14,8 @@ import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
 
 import com.muhasib.snooq.R
 import com.muhasib.snooq.view.MainActivity
@@ -72,13 +74,15 @@ navigationDrawer.menuItemSemiTransparentColor
         navigationDrawer.setOnMenuItemClickListener { position ->
             // Handle the menu item click
             fragmentClass = when (position) {
-                0 -> HomeFragment::class.java
+                0 ->  HomeFragment::class.java
                 1 -> ProfileFragment::class.java
                 2 -> MyShopFragment::class.java
                 3 -> FavoriteFragment::class.java
                 4 -> AboutUsFragment::class.java
                 5 -> {
+
                     logOutUser()
+                    navigationDrawer.setAppbarTitleTV("")
                     return@setOnMenuItemClickListener
                 }
                 else -> null
@@ -120,21 +124,51 @@ navigationDrawer.menuItemSemiTransparentColor
     }
 
     private fun logOutUser() {
-        appWriteViewModel.LogoutUserSession()
 
-        appWriteViewModel.logoutResult.observe(this, Observer { result ->
-            result.fold(
-                onSuccess = {
-                    // Clear the back stack and launch the MainActivity directly
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish() // Finish the current activity to prevent returning to it
-                },
-                onFailure = { exception ->
-                    showCustomSnackbar("Please Check Your Network Connection!")
-                }
-            )
-        })
+
+        val bottomSheetDialog = BottomSheetDialog(this)
+
+
+        val view = layoutInflater.inflate(R.layout.logout_bottom_sheet, null)
+        bottomSheetDialog.setContentView(view)
+
+        // Find the cancel and logout buttons from the inflated layout
+        val cancelButton = view.findViewById<MaterialButton>(R.id.cancelButton)
+        val logoutButton = view.findViewById<MaterialButton>(R.id.logoutButton)
+
+        // Show the bottom sheet dialog
+        bottomSheetDialog.show()
+
+        // Cancel button click listener
+        cancelButton.setOnClickListener {
+            bottomSheetDialog.dismiss()  // Dismiss the bottom sheet without doing anything
+        }
+
+        // Logout button click listener
+        logoutButton.setOnClickListener {
+            // Call the logout function here
+            appWriteViewModel.LogoutUserSession()
+
+            // Observe the logout result from the ViewModel
+            appWriteViewModel.logoutResult.observe(this, Observer { result ->
+                result.fold(
+                    onSuccess = {
+                        // If successful, navigate to MainActivity and finish the current activity
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish() // Finish the current activity to prevent returning to it
+                    },
+                    onFailure = { exception ->
+                        // Show an error message in case of failure
+                        showCustomSnackbar("Please Check Your Network Connection!")
+                    }
+                )
+            })
+
+            // Dismiss the bottom sheet after clicking logout
+            bottomSheetDialog.dismiss()
+        }
     }
+
     private fun animateBackgroundColor(fromColor: Int, toColor: Int) {
         val colorAnimator = ObjectAnimator.ofInt(navigationDrawer, "backgroundColor", fromColor, toColor)
         colorAnimator.setEvaluator(ArgbEvaluator())

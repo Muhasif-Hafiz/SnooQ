@@ -23,6 +23,8 @@ class OtpFragment : Fragment() {
     private lateinit var timerTextView: TextView
     private lateinit var resendButton: TextView
     private var countDownTimer: CountDownTimer? = null
+    private lateinit  var progress : ProgressBar
+    private lateinit var progress_layout : LinearLayout
 
     private val appWriteViewModel: AppWriteViewModel by viewModel()
     private val args: OtpFragmentArgs by navArgs()
@@ -35,9 +37,12 @@ class OtpFragment : Fragment() {
 
         // Initialize UI components
         backButton = view.findViewById(R.id.backButtonOtp)
-        submitButton = view.findViewById(R.id.SubmitButton)
+        submitButton = view.findViewById(R.id.submit_button)
         timerTextView = view.findViewById(R.id.timerText)
         resendButton = view.findViewById(R.id.resendButton)
+        progress = view.findViewById(R.id.progress_bar)
+        progress_layout = view.findViewById(R.id.progress_layout)
+
 
         otpInputs = listOf(
             view.findViewById(R.id.otpDigit1),
@@ -123,18 +128,26 @@ class OtpFragment : Fragment() {
     }
 
     private fun handleLogin() {
-        val secretCode = otpInputs.joinToString("") { it.text.toString().trim() }
+        val secretCode = otpInputs.joinToString(separator = "") { it.text.toString().trim() }
 
         if (secretCode.length != 6 || secretCode.any { !it.isDigit() }) {
             (activity as BaseActivity).showCustomSnackbar("Invalid OTP. Please enter a 6-digit code.")
             return
         }
 
+        // Show progress bar and disable the submit button
+        progress.visibility = View.VISIBLE
+        submitButton.text = "Verifying..."
+        submitButton.isEnabled = false
+
         (activity as BaseActivity).showProgressDialog()
 
-        // Observe the login result
         appWriteViewModel.loginResult.observe(viewLifecycleOwner) { isLoginSuccessful ->
             (activity as BaseActivity).hideProgressDialog()
+            progress.visibility = View.GONE  // Hide the progress bar
+            submitButton.isEnabled = true // Re-enable the submit button
+            submitButton.text = "Submit" // Reset the button text
+
             if (isLoginSuccessful) {
                 navigateToHome()
             } else {
@@ -142,9 +155,10 @@ class OtpFragment : Fragment() {
             }
         }
 
-        // Trigger login
         appWriteViewModel.logginUser(secretCode)
     }
+
+
 
     private fun navigateLeft() {
         findNavController().navigate(R.id.action_otpFragment_to_signInFragment)

@@ -1,27 +1,28 @@
 package com.muhasib.snooq.view.Home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.muhasib.snooq.R
+import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer
 
 
 class MyShopFragment : Fragment() {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
-
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_shop, container, false)
+        val view =  inflater.inflate(R.layout.fragment_my_shop, container, false)
+
+        return view
     }
 
 

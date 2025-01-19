@@ -80,6 +80,7 @@
         android:orientation="horizontal"
         android:gravity="center">
 
+        <!-- OTP Digits -->
         <EditText
             android:id="@+id/otpDigit1"
             android:layout_width="0dp"
@@ -159,7 +160,7 @@
 
     </LinearLayout>
 
-    <!-- "Didn't receive the code?" Section -->
+    <!-- Resend Code Section -->
     <LinearLayout
         android:id="@+id/resendContainer"
         android:layout_width="wrap_content"
@@ -204,18 +205,52 @@
 
     </LinearLayout>
 
-    <!-- Submit Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/SubmitButton"
+    <!-- Custom Submit Button -->
+    <FrameLayout
+        android:id="@+id/customSubmitButton"
         android:layout_width="306dp"
         android:layout_height="53dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="56dp"
-        android:layout_alignParentBottom="true"
-        android:text="Submit"
-        android:gravity="center"
-        android:textAllCaps="false"
-        android:textSize="24sp"
-        android:backgroundTint="#2ECC71" />
+        android:layout_alignParentBottom="true">
+
+        <!-- Submit Button Background -->
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#2ECC71"
+            android:text="Submit"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <!-- Progress Bar and Text Overlay -->
+        <LinearLayout
+            android:id="@+id/progress_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:indeterminate="true"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/please_wait_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please Wait"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </FrameLayout>
+
 
 </RelativeLayout>

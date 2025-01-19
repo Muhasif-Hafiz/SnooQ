@@ -12,6 +12,7 @@
     <com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer
 android:layout_marginTop="22dp"
         android:id="@+id/NavDrawer"
+        android:transitionName=""
         android:layout_width="match_parent"
         android:background="#3AEA5F"
         android:layout_height="match_parent">

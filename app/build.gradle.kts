@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -88,5 +89,9 @@ dependencies {
     //Navigation Drawer
 
     implementation("com.github.shrikanth7698:Custom-Navigation-Drawer:v0.0.1")
+
+    //Stepper
+    implementation ("com.github.shuhart:stepview:1.5.1")
+
 
 }

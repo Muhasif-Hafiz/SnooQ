@@ -12,10 +12,27 @@
     <com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer
 android:layout_marginTop="22dp"
         android:id="@+id/NavDrawer"
-        android:transitionName=""
+
         android:layout_width="match_parent"
-        android:background="#3AEA5F"
-        android:layout_height="match_parent">
+
+        android:layout_height="match_parent"
+        app:navigationDrawerBackgroundColor="#80ECA0"
+
+        app:appbarTitleTextColor="@android:color/white"
+        app:HamMenuIconTintColor="@android:color/black"
+        app:appbarColor="@android:color/white"
+        app:primaryMenuItemTextColor="@android:color/white"
+        app:secondaryMenuItemTextColor="@android:color/white"
+        app:appbarTitleTextSize="7sp"
+        app:primaryMenuItemTextSize="10sp"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        app:secondaryMenuItemTextSize="10sp"
+
+
+
+
+
+        >
 
         <!-- FrameLayout to hold the content -->
         <FrameLayout

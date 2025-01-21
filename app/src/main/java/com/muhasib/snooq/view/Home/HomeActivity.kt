@@ -7,19 +7,17 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 
 import com.muhasib.snooq.R
 import com.muhasib.snooq.view.MainActivity
-import com.muhasib.snooq.view.Registration.SignInFragment
+import com.muhasib.snooq.view.ShopRegistration.ShopRegistrationActivity
 import com.shrikanthravi.customnavigationdrawer2.data.MenuItem
 import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -72,17 +70,25 @@ navigationDrawer.menuItemSemiTransparentColor
 
         // Set the navigation drawer item click listener
         navigationDrawer.setOnMenuItemClickListener { position ->
+
+            try {
+                navigationDrawer.setAppbarTitleTV("") // Set title bar to empty string
+            } catch (e: Exception) {
+                Toast.makeText(this@HomeActivity, "Error", Toast.LENGTH_SHORT).show()
+            }
             // Handle the menu item click
             fragmentClass = when (position) {
                 0 ->  HomeFragment::class.java
                 1 -> ProfileFragment::class.java
-                2 -> MyShopFragment::class.java
+                2 ->
+                {
+                    navigateToMyShop()
+                    return@setOnMenuItemClickListener
+                }
                 3 -> FavoriteFragment::class.java
                 4 -> AboutUsFragment::class.java
                 5 -> {
-
                     logOutUser()
-                    navigationDrawer.setAppbarTitleTV("")
                     return@setOnMenuItemClickListener
                 }
                 else -> null
@@ -174,6 +180,11 @@ navigationDrawer.menuItemSemiTransparentColor
         colorAnimator.setEvaluator(ArgbEvaluator())
         colorAnimator.duration = 500 // Duration of animation
         colorAnimator.start()
+    }
+    private fun navigateToMyShop(){
+
+        startActivity(Intent(this@HomeActivity, ShopRegistrationActivity::class.java))
+
     }
 
 }

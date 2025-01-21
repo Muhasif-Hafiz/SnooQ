@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ShopRegistration.ShopMediaFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <!-- Shop Images Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shop Images"
+            android:textColor="@color/PrimarySnooQ"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Shop Photos -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload multiple shop photos (interior, exterior)"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnUploadShopPhotos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Photos" />
+
+        <!-- Shop Logo -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload shop logo"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnUploadLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Logo" />
+
+        <!-- Banner Image -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Banner Image (Optional for shop profile page)"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnUploadBanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Banner" />
+
+        <!-- Verification Documents Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verification Documents"
+            android:textColor="@color/PrimarySnooQ"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Business Registration Proof -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Business Registration Proof (e.g., GST, trade license, etc.)"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnUploadBusinessProof"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Document" />
+
+        <!-- ID Proof -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload ID Proof (e.g., Aadhaar, Passport)"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnUploadIDProof"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload ID Proof" />
+
+        <!-- Social Media Links Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Social Media Links"
+            android:textColor="@color/PrimarySnooQ"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add links to Instagram, Facebook, or other platforms (optional)"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp" />
+
+        <!-- Instagram Link -->
+        <EditText
+            android:id="@+id/editTextInstagram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Instagram Link"
+            android:inputType="textUri"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Facebook Link -->
+        <EditText
+            android:id="@+id/editTextFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Facebook Link"
+            android:inputType="textUri"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Other Platform Link -->
+        <EditText
+            android:id="@+id/editTextOtherPlatform"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Other Platform Link"
+            android:inputType="textUri" />
+    </LinearLayout>
+
+</ScrollView>
+

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ShopRegistration.ShopRegistrationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <com.shuhart.stepview.StepView
+            android:id="@+id/stepview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:sv_selectedCircleColor="#3AEA5F"
+        app:sv_selectedTextColor="#000000"
+        app:sv_stepLineWidth="2dp"
+        app:sv_stepPadding="4dp"
+        app:sv_nextTextColor="#0EE13B"
+        app:sv_nextStepLineColor="#123E20"
+        app:sv_doneCircleColor="#80ECA0"
+        app:sv_doneStepLineColor="#B3F2C2"
+        app:sv_steps="@array/steps"
+        app:sv_doneCircleRadius="18dp"
+        app:sv_selectedCircleRadius="18dp"
+        app:sv_selectedStepNumberColor="#3AEA5F"
+        app:sv_stepViewStyle="@style/StepView"
+        app:sv_doneStepMarkColor="#FFFFFF"
+        app:sv_stepNumberTextSize="12sp"
+        app:sv_animationType="Line"
+        app:sv_typeface="@font/bold_h2"/>
+
+
+        <!-- ViewPager2 for managing content -->
+
+        <!-- Navigation Buttons -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Back"
+                android:backgroundTint="@color/PrimarySnooQ"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/nextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/PrimarySnooQ"
+                android:layout_weight="1"
+                android:text="Next" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

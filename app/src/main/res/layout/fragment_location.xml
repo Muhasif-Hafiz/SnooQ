@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.ShopRegistration.LocationFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location and Operating Hours"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/extrabold_h1"
+            android:textColor="@color/PrimarySnooQ"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Full Address -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:boxStrokeColor="@color/PrimarySnooQ"
+            app:hintTextColor="@color/PrimarySnooQ"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextFullAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Address"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:gravity="top" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Map Location -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Map Location"
+                android:textColor="@color/PrimarySnooQ"
+                android:layout_marginBottom="8dp"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/buttonPickLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Location on Map"
+                android:backgroundTint="@color/PrimarySnooQ"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <!-- Operating Hours -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Operating Hours"
+            android:textColor="@color/PrimarySnooQ"
+            android:layout_marginBottom="16dp"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <!-- Opening Time -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Opening Time"
+                android:textColor="@color/PrimarySnooQ"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                app:endIconMode="custom"
+                android:layout_height="wrap_content"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/timePickerOpening"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint="HH:MM" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <!-- Closing Time -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Closing Time"
+                android:textColor="@color/PrimarySnooQ"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:endIconMode="custom"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/timePickerClosing"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+
+                    android:hint="HH:MM" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <!-- Closed Days -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Closed Days"
+                android:textColor="@color/PrimarySnooQ"
+                android:layout_marginBottom="8dp"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupClosedDays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleSelection="false">
+
+                <!-- Sunday -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunday"
+                    app:chipBackgroundColor="@color/white" />
+
+                <!-- Monday -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipMonday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monday"
+                    app:chipBackgroundColor="@color/white" />
+
+                <!-- Tuesday -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipTuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tuesday"
+                    app:chipBackgroundColor="@color/white" />
+
+                <!-- Wednesday -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipWednesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wednesday"
+                    app:chipBackgroundColor="@color/white" />
+
+                <!-- Thursday -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipThursday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thursday"
+                    app:chipBackgroundColor="@color/white" />
+
+                <!-- Friday -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFriday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Friday"
+                    app:chipBackgroundColor="@color/white" />
+
+                <!-- Saturday -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSaturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Saturday"
+                    app:chipBackgroundColor="@color/white" />
+            </com.google.android.material.chip.ChipGroup>
+        </LinearLayout>
+
+        <!-- Delivery Options -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delivery Options"
+                android:textColor="@color/PrimarySnooQ"
+                android:layout_marginBottom="8dp"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <Switch
+                android:id="@+id/switchDelivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enable Delivery" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutDeliveryRange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:boxStrokeColor="@color/PrimarySnooQ"
+                app:hintTextColor="@color/PrimarySnooQ">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextDeliveryRange"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Delivery Range (km)"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

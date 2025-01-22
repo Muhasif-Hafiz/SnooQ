@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    android:gravity="center"> <!-- Ensures that child views are centered -->
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/FindingProgressView"
+        android:layout_width="81dp"
+        android:layout_height="85dp"
+        android:layout_gravity="center"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="location_finding.json"
+        app:lottie_loop="true" />
+
+</LinearLayout>

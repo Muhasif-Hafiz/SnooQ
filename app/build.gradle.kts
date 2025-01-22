@@ -93,5 +93,8 @@ dependencies {
     //Stepper
     implementation ("com.github.shuhart:stepview:1.5.1")
 
+    // Google play services Location dependency
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+
 
 }

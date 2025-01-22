@@ -1,26 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     tools:context=".view.ShopRegistration.LocationFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="24dp"
+      >
 
+        <!-- Section Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Location and Operating Hours"
-            android:textSize="28sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:fontFamily="@font/extrabold_h1"
             android:textColor="@color/PrimarySnooQ"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="24dp"
+            android:paddingStart="8dp" />
 
         <!-- Full Address -->
         <com.google.android.material.textfield.TextInputLayout
@@ -38,10 +41,20 @@
                 android:hint="Full Address"
                 android:inputType="textMultiLine"
                 android:lines="3"
-                android:gravity="top" />
+                android:gravity="top"
+                android:textSize="16sp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Map Location -->
+        <!-- ProgressBar -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:indeterminate="true"/>
+
+        <!-- Map Location Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +68,7 @@
                 android:textColor="@color/PrimarySnooQ"
                 android:layout_marginBottom="8dp"
                 android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/buttonPickLocation"
@@ -63,10 +76,20 @@
                 android:layout_height="wrap_content"
                 android:text="Select Location on Map"
                 android:backgroundTint="@color/PrimarySnooQ"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/buttonGoToLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View On Map"
+                android:backgroundTint="@color/PrimarySnooQ"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
         </LinearLayout>
 
-        <!-- Operating Hours -->
+        <!-- Operating Hours Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,9 +97,10 @@
             android:textColor="@color/PrimarySnooQ"
             android:layout_marginBottom="16dp"
             android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:paddingStart="8dp" />
 
-        <!-- Opening Time -->
+        <!-- Opening Time Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,22 +115,16 @@
                 android:textColor="@color/PrimarySnooQ"
                 android:textSize="16sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <!-- TimePicker for Opening Time -->
+            <TimePicker
+                android:id="@+id/timePickerOpening"
                 android:layout_width="wrap_content"
-                app:endIconMode="custom"
                 android:layout_height="wrap_content"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/timePickerOpening"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:hint="HH:MM" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:timePickerMode="spinner"
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Closing Time -->
+        <!-- Closing Time Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -121,23 +139,16 @@
                 android:textColor="@color/PrimarySnooQ"
                 android:textSize="16sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <!-- TimePicker for Closing Time -->
+            <TimePicker
+                android:id="@+id/timePickerClosing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:endIconMode="custom"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/timePickerClosing"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-
-                    android:hint="HH:MM" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:timePickerMode="spinner"
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Closed Days -->
+        <!-- Closed Days Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -159,69 +170,94 @@
                 android:layout_height="wrap_content"
                 app:singleSelection="false">
 
-                <!-- Sunday -->
+                <!-- Days Chips -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipSunday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sunday"
-                    app:chipBackgroundColor="@color/white" />
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeColor="@color/PrimarySnooQ"
+                    app:chipStrokeWidth="1dp"
+                    android:textSize="14sp" />
 
-                <!-- Monday -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipMonday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Monday"
-                    app:chipBackgroundColor="@color/white" />
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeColor="@color/PrimarySnooQ"
+                    app:chipStrokeWidth="1dp"
+                    android:textSize="14sp" />
 
-                <!-- Tuesday -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipTuesday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tuesday"
-                    app:chipBackgroundColor="@color/white" />
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeColor="@color/PrimarySnooQ"
+                    app:chipStrokeWidth="1dp"
+                    android:textSize="14sp" />
 
-                <!-- Wednesday -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipWednesday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Wednesday"
-                    app:chipBackgroundColor="@color/white" />
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeColor="@color/PrimarySnooQ"
+                    app:chipStrokeWidth="1dp"
+                    android:textSize="14sp" />
 
-                <!-- Thursday -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipThursday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Thursday"
-                    app:chipBackgroundColor="@color/white" />
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeColor="@color/PrimarySnooQ"
+                    app:chipStrokeWidth="1dp"
+                    android:textSize="14sp" />
 
-                <!-- Friday -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipFriday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Friday"
-                    app:chipBackgroundColor="@color/white" />
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeColor="@color/PrimarySnooQ"
+                    app:chipStrokeWidth="1dp"
+                    android:textSize="14sp" />
 
-                <!-- Saturday -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipSaturday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Saturday"
-                    app:chipBackgroundColor="@color/white" />
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeColor="@color/PrimarySnooQ"
+                    app:chipStrokeWidth="1dp"
+                    android:textSize="14sp" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAllDays"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All Days"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeColor="@color/PrimarySnooQ"
+                    app:chipStrokeWidth="1dp"
+                    android:textSize="14sp" />
             </com.google.android.material.chip.ChipGroup>
         </LinearLayout>
 
-        <!-- Delivery Options -->
+        <!-- Delivery Options Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -236,7 +272,8 @@
                 android:id="@+id/switchDelivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enable Delivery" />
+                android:text="Enable Delivery"
+                android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layoutDeliveryRange"
@@ -252,7 +289,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Delivery Range (km)"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textSize="16sp"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </LinearLayout>

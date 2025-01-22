@@ -8,5 +8,6 @@
     <color name="PrimarySnooQ">#3AEA5F</color>
     <color name="default_hint_color">#808080</color> <!-- Gray for default -->
     <color name="focused_hint_color">#FF5722</color> <!-- Orange for focused -->
+    <color name="Selected_chip_color">#C8E6C9</color>
 
 </resources>

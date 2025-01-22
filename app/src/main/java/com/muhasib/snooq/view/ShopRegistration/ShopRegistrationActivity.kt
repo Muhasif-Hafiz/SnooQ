@@ -3,6 +3,7 @@ package com.muhasib.snooq.view.ShopRegistration
 import BaseActivity
 import android.app.Fragment
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -13,9 +14,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.muhasib.snooq.R
+import com.muhasib.snooq.databinding.ActivityMainBinding
 import com.shuhart.stepview.StepView
 
 class ShopRegistrationActivity : BaseActivity() {
+
+
 
     private lateinit var stepView: StepView
     private lateinit var viewPager: ViewPager2
@@ -24,6 +28,8 @@ class ShopRegistrationActivity : BaseActivity() {
     private var currentStep = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         enableEdgeToEdge()
         setContentView(R.layout.activity_shop_registration)
 

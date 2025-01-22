@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.CalendarContract.Colors
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 
@@ -22,6 +23,7 @@ open class BaseActivity : AppCompatActivity() {
 
     private lateinit var myProgressDialog: Dialog
     private var doubleBackToExitPressedOnce = false
+    private lateinit var locationProgressBar: Dialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,7 @@ open class BaseActivity : AppCompatActivity() {
 
 
     }
+
 
 
     fun hideProgressDialog(){
@@ -105,7 +108,27 @@ open class BaseActivity : AppCompatActivity() {
 
         snackbar.show()
     }
+    fun showLocationProgressDialog(){
 
+        locationProgressBar = Dialog(this)
+
+
+        locationProgressBar.setContentView(R.layout.location_progress_bar)
+        locationProgressBar.setCancelable(false)
+        locationProgressBar.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        locationProgressBar.show()
+
+
+    }
+
+    fun hideLocationProgressbar(){
+
+        if(::locationProgressBar.isInitialized && locationProgressBar.isShowing){
+
+            locationProgressBar.dismiss()
+        }
+    }
 
 
 }

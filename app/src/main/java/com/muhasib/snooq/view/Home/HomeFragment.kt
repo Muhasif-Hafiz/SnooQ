@@ -7,12 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.muhasib.snooq.R
 import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 
 class HomeFragment : Fragment() {
 
@@ -23,8 +24,16 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view= inflater.inflate(R.layout.fragment_home, container, false)
-        val baseActivity = activity as? BaseActivity
 
+
+        val imageView = view.findViewById<ImageView>(R.id.imageView)
+        val url = "https://cloud.appwrite.io/v1/storage/buckets/6792800d001d344a8d58/files/6792855d001b9eadfb33/view?project=677a4b92001bbd3a3742&project=677a4b92001bbd3a3742&mode=admin"
+
+        Glide.with(this)
+            .load(url)
+            .placeholder(R.drawable.placeholder_image)  // Optional placeholder
+            .error(R.drawable.error_image)  // Optional error image
+            .into(imageView)
 
         return view
 

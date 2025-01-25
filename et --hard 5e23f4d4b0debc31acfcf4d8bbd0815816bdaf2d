@@ -1,0 +1,202 @@
+[33mcommit 5e23f4d4b0debc31acfcf4d8bbd0815816bdaf2d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Fri Jan 24 02:29:43 2025 +0530
+
+    Registration images uploaded on backend, fetching also successful
+
+[33mcommit 9216262b94bffc51641aebbeb09c9b6bc5369610[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Thu Jan 23 02:54:01 2025 +0530
+
+    User Location Fetched Successfully, added some basic Ui connectivity
+
+[33mcommit 6186443954b84936b763dcd19ecb5bee7e49a56b[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Thu Jan 23 02:53:52 2025 +0530
+
+    User Location Fetched Successfully, added some basic Ui connectivity
+
+[33mcommit 33f20bdaad3514101c03805046b9038e4093e983[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Wed Jan 22 03:12:43 2025 +0530
+
+    Shop Registration viewPager2 Added, minor fixes
+
+[33mcommit 9799f4d7637c9e667faab976c3194891ffa5f8d6[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Wed Jan 22 03:12:35 2025 +0530
+
+    Shop Registration viewPager2 Added, minor fixes
+
+[33mcommit 92ce6d15365a352173f4a5cfa2c4ac9c7ae11c0f[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Mon Jan 20 03:30:22 2025 +0530
+
+    Bottom Navigation Added for logout
+
+[33mcommit afab6dd3c3dbeece2f869e6e342e25f73fe585da[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Mon Jan 20 03:30:11 2025 +0530
+
+    Bottom Navigation Added for logout
+
+[33mcommit 79368781e3c6a559632aff57f9fcb9cbc330f855[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sun Jan 19 03:59:11 2025 +0530
+
+    Custom Navigation Bar Added, OTP Fragment Enhanced
+
+[33mcommit 8091507eab7a775d73c92888faef66c5dc8cd0e5[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sun Jan 19 03:58:59 2025 +0530
+
+    Custom Navigation Bar Added, OTP Fragment Enhanced
+
+[33mcommit 00a182698565de49e3e852a31f6b53ce0a03e4b3[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sat Jan 18 06:06:01 2025 +0530
+
+    LogIn Session Included, UI Fixed
+
+[33mcommit aa1ef679a09a98422907325fda72bf7e6c2a36fc[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sat Jan 18 06:05:49 2025 +0530
+
+    LogIn Session Included, UI Fixed
+
+[33mcommit bc746287439cec5f112acfd05909af04f24844ce[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Tue Jan 7 02:14:31 2025 +0530
+
+    AppWrite Setup
+
+[33mcommit e37884f6c560be0441c4997a2dbdfcaf81d70400[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Mon Jan 6 04:55:55 2025 +0530
+
+    Sign In screen Added + OTP Verification Screen Added, Navigation Animation Screens Added
+
+[33mcommit 064ab6b445b51e923dd251a2ea1ce64514e4f709[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sun Jan 5 03:56:39 2025 +0530
+
+    OnBoarding Activities Added
+
+[33mcommit 06fa7ef0ebee50092cab2b1fc130489de51f2e52[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sat Jan 4 04:06:08 2025 +0530
+
+    Logo Updated
+
+[33mcommit a07537821311331eae6eb3ca110ad418dfd6d5b0[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sat Jan 4 04:05:55 2025 +0530
+
+    Logo Updated
+
+[33mcommit 159070eb295269f60e5b6fd5794a5de1e54eca47[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sat Jan 4 03:48:43 2025 +0530
+
+    BaseActivity added
+[33mcommit 5e23f4d4b0debc31acfcf4d8bbd0815816bdaf2d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Fri Jan 24 02:29:43 2025 +0530
+
+    Registration images uploaded on backend, fetching also successful
+
+[33mcommit 9216262b94bffc51641aebbeb09c9b6bc5369610[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Thu Jan 23 02:54:01 2025 +0530
+
+    User Location Fetched Successfully, added some basic Ui connectivity
+
+[33mcommit 6186443954b84936b763dcd19ecb5bee7e49a56b[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Thu Jan 23 02:53:52 2025 +0530
+
+    User Location Fetched Successfully, added some basic Ui connectivity
+
+[33mcommit 33f20bdaad3514101c03805046b9038e4093e983[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Wed Jan 22 03:12:43 2025 +0530
+
+    Shop Registration viewPager2 Added, minor fixes
+
+[33mcommit 9799f4d7637c9e667faab976c3194891ffa5f8d6[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Wed Jan 22 03:12:35 2025 +0530
+
+    Shop Registration viewPager2 Added, minor fixes
+
+[33mcommit 92ce6d15365a352173f4a5cfa2c4ac9c7ae11c0f[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Mon Jan 20 03:30:22 2025 +0530
+
+    Bottom Navigation Added for logout
+
+[33mcommit afab6dd3c3dbeece2f869e6e342e25f73fe585da[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Mon Jan 20 03:30:11 2025 +0530
+
+    Bottom Navigation Added for logout
+
+[33mcommit 79368781e3c6a559632aff57f9fcb9cbc330f855[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sun Jan 19 03:59:11 2025 +0530
+
+    Custom Navigation Bar Added, OTP Fragment Enhanced
+
+[33mcommit 8091507eab7a775d73c92888faef66c5dc8cd0e5[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sun Jan 19 03:58:59 2025 +0530
+
+    Custom Navigation Bar Added, OTP Fragment Enhanced
+
+[33mcommit 00a182698565de49e3e852a31f6b53ce0a03e4b3[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sat Jan 18 06:06:01 2025 +0530
+
+    LogIn Session Included, UI Fixed
+
+[33mcommit aa1ef679a09a98422907325fda72bf7e6c2a36fc[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sat Jan 18 06:05:49 2025 +0530
+
+    LogIn Session Included, UI Fixed
+
+[33mcommit bc746287439cec5f112acfd05909af04f24844ce[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Tue Jan 7 02:14:31 2025 +0530
+
+    AppWrite Setup
+
+[33mcommit e37884f6c560be0441c4997a2dbdfcaf81d70400[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Mon Jan 6 04:55:55 2025 +0530
+
+    Sign In screen Added + OTP Verification Screen Added, Navigation Animation Screens Added
+
+[33mcommit 064ab6b445b51e923dd251a2ea1ce64514e4f709[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sun Jan 5 03:56:39 2025 +0530
+
+    OnBoarding Activities Added
+
+[33mcommit 06fa7ef0ebee50092cab2b1fc130489de51f2e52[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sat Jan 4 04:06:08 2025 +0530
+
+    Logo Updated
+
+[33mcommit a07537821311331eae6eb3ca110ad418dfd6d5b0[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sat Jan 4 04:05:55 2025 +0530
+
+    Logo Updated
+
+[33mcommit 159070eb295269f60e5b6fd5794a5de1e54eca47[m
+Author: Muhasif Hafiz <muhasibhafeez91@gmail.com>
+Date:   Sat Jan 4 03:48:43 2025 +0530
+
+    BaseActivity added

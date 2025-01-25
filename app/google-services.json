@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "43447902266",
+    "project_id": "snooqdatabase",
+    "storage_bucket": "snooqdatabase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43447902266:android:208f10b1a24c7116915503",
+        "android_client_info": {
+          "package_name": "com.muhasib.snooq"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi04rPJBdL1euYA2nNXWw64EbXmx3-aC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

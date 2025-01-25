@@ -39,14 +39,14 @@ class ShopRegistrationViewModel : ViewModel() {
             "closingMinute" to "Closing Minute",
             "closingHour" to "Closing Hour",
             "openingMinute" to "Opening Minute",
-         //   "closedDays" to "Closed Days",
+            //   "closedDays" to "Closed Days",
             "DeliveryAvailable" to "Delivery Availability",
             "DeliveryRadius" to "Delivery Radius"
         ))
 
         // Validate payment info from paymentInfoMap
         validateFieldsForMap(paymentInfoMap.value, missingFields, listOf(
-        //    "paymentMethod" to "Payment Method",
+            //    "paymentMethod" to "Payment Method",
             "bankName" to "Bank Name",
             "accountNumber" to "Account Number",
             "ifscCode" to "IFSC Code",

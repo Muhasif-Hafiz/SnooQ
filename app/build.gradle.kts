@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("androidx.navigation.safeargs.kotlin")
     kotlin("plugin.serialization") version "2.0.21"
+    id("com.google.gms.google-services")
 
 
 }
@@ -97,6 +98,11 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.3.0")
 
    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+
+    implementation("com.google.firebase:firebase-firestore")
 
 
 }

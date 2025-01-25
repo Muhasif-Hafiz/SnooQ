@@ -1,6 +1,7 @@
 package com.muhasib.snooq.view.ShopRegistration
 
 import BaseActivity
+import ShopRegistrationViewModel
 import android.Manifest
 import android.content.Intent
 import android.content.IntentSender
@@ -19,6 +20,9 @@ import android.widget.Button
 import android.widget.Switch
 import android.widget.TimePicker
 import androidx.core.app.ActivityCompat
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -45,7 +49,6 @@ class LocationFragment : Fragment() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var timePickerOpening : TimePicker
     private lateinit var  timePickerClosing : TimePicker
-    //switch
     private lateinit var deliverSwitch : Switch
     private lateinit var layoutDeliveryRange: TextInputLayout
     private lateinit var editTextDeliveryRange: TextInputEditText
@@ -60,7 +63,7 @@ class LocationFragment : Fragment() {
     private lateinit var chipFriday: Chip
     private lateinit var chipSaturday: Chip
     private lateinit var  chipAllDay : Chip
-
+    private lateinit var  viewModel : ShopRegistrationViewModel
 
     companion object {
         const val GPS_REQUEST_CODE = 200
@@ -72,6 +75,9 @@ class LocationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_location, container, false)
+
+        //Initialize view Model ---?
+        viewModel = ViewModelProvider(requireActivity())[ShopRegistrationViewModel::class.java]
 
         locationPickButton = view.findViewById(R.id.buttonPickLocation)
         editTextAddress = view.findViewById(R.id.editTextFullAddress)
@@ -88,9 +94,10 @@ class LocationFragment : Fragment() {
         chipFriday = view.findViewById(R.id.chipFriday)
         chipSaturday = view.findViewById(R.id.chipSaturday)
         chipAllDay= view.findViewById(R.id.chipAllDays)
+        chipGroup = view.findViewById(R.id.chipGroupClosedDays)
         layoutDeliveryRange =view. findViewById(R.id.layoutDeliveryRange)
         editTextDeliveryRange = view.findViewById(R.id.editTextDeliveryRange)
-        
+
         // setting up the chip listener
 
         selectedDays = mutableSetOf()
@@ -131,6 +138,71 @@ class LocationFragment : Fragment() {
 
 
         }
+        chipGroup = view.findViewById(R.id.chipGroupClosedDays)
+
+        viewModel.selectedDays.observe(viewLifecycleOwner, Observer { days ->
+            selectedDays = days.toMutableSet()
+            viewModel.updateLocationDetails("closedDays" , selectedDays.joinToString { "," })
+            updateChipColors()
+        })
+
+        chipAllDay.setOnClickListener {
+            if (selectedDays.size == 7) {
+                selectedDays.clear()
+                chipAllDay.setChipBackgroundColorResource(R.color.white)
+            } else {
+                selectedDays.clear()
+                selectedDays.addAll(listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
+                chipAllDay.setChipBackgroundColorResource(R.color.Selected_chip_color)
+            }
+            viewModel.updateSelectedDays(selectedDays)
+        }
+
+
+
+
+
+        editTextAddress.addTextChangedListener {
+
+            viewModel.updateLocationDetails( "fullAddress"  , it.toString())
+        }
+        // selected  Days
+
+
+
+        //  do it  for opening hours  opening minutes, closing hours closing minutes , closed days , enable delivery switch which is boolean and for delivery range
+        timePickerOpening.setOnTimeChangedListener { _, hourOfDay, minute ->
+            val openingHour = hourOfDay
+            val openingMinute = minute
+            viewModel.updateLocationDetails("openingHour", openingHour.toString())
+            viewModel.updateLocationDetails("openingMinute", openingMinute.toString())
+        }
+        timePickerClosing.setOnTimeChangedListener { _, hourOfDay, minute ->
+            val closingHour = hourOfDay
+            val closingMinute = minute
+            viewModel.updateLocationDetails("closingHour", closingHour.toString())
+            viewModel.updateLocationDetails("closingMinute", closingMinute.toString())
+        }
+
+
+        deliverSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                layoutDeliveryRange.visibility = View.VISIBLE
+                viewModel.updateLocationDetails("DeliveryAvailable", "true")
+                // Update the delivery range if needed
+                editTextDeliveryRange.addTextChangedListener {
+                    viewModel.updateLocationDetails("DeliveryRadius", it.toString())
+                }
+            } else {
+                layoutDeliveryRange.visibility = View.GONE
+                viewModel.updateLocationDetails("DeliveryAvailable", "false")
+            }
+        }
+
+
+
+
+
 
 
 
@@ -138,6 +210,33 @@ class LocationFragment : Fragment() {
 
         return view
     }
+
+    private fun updateChipColors() {
+        chipSunday.setChipBackgroundColorResource(
+            if (selectedDays.contains("Sunday")) R.color.Selected_chip_color else R.color.white
+        )
+        chipMonday.setChipBackgroundColorResource(
+            if (selectedDays.contains("Monday")) R.color.Selected_chip_color else R.color.white
+        )
+        chipTuesday.setChipBackgroundColorResource(
+            if (selectedDays.contains("Tuesday")) R.color.Selected_chip_color else R.color.white
+        )
+        chipWednesday.setChipBackgroundColorResource(
+            if (selectedDays.contains("Wednesday")) R.color.Selected_chip_color else R.color.white
+        )
+        chipThursday.setChipBackgroundColorResource(
+            if (selectedDays.contains("Thursday")) R.color.Selected_chip_color else R.color.white
+        )
+        chipFriday.setChipBackgroundColorResource(
+            if (selectedDays.contains("Friday")) R.color.Selected_chip_color else R.color.white
+        )
+        chipSaturday.setChipBackgroundColorResource(
+            if (selectedDays.contains("Saturday")) R.color.Selected_chip_color else R.color.white
+        )
+    }
+
+
+
 
     private fun setChipClickListener(chip: Chip?, day: String) {
         chip?.setOnClickListener {
@@ -152,6 +251,7 @@ class LocationFragment : Fragment() {
         }
 
     }
+
 
     private fun checkLocationPermission() {
         if (ActivityCompat.checkSelfPermission(
@@ -284,5 +384,7 @@ class LocationFragment : Fragment() {
             Toast.makeText(requireContext(), "Address is empty", Toast.LENGTH_SHORT).show()
         }
     }
+
+
 
 }

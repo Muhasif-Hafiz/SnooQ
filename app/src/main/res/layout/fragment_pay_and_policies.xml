@@ -164,6 +164,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="I accept the privacy policy" />
+
+        <Button
+            android:layout_width="250dp"
+
+            android:layout_gravity="center"
+            android:text="Upload Data"
+            android:id="@+id/uploadData"
+            android:layout_height="match_parent">
+
+
+
+
+        </Button>
     </LinearLayout>
 
 </ScrollView>

@@ -11,14 +11,11 @@ class ShopRegistrationViewModel : ViewModel() {
     val paymentInfoMap = MutableLiveData<HashMap<String, String>>(hashMapOf())
     val mediaFiles = MutableLiveData<List<Uri>>(mutableListOf())
 
-    private val _selectedDays = MutableLiveData<Set<String>>()
-    val selectedDays: LiveData<Set<String>> get() = _selectedDays
 
-    fun updateSelectedDays(newSelectedDays: Set<String>) {
-        _selectedDays.value = newSelectedDays
-    }
+    private val _locationDetails = MutableLiveData<Map<String, String>>()
+    val locationDetails: LiveData<Map<String, String>> = _locationDetails
 
-    // Method to validate fields by checking if any required fields are missing
+
     fun validateFields(): Pair<Boolean, List<String>> {
         val missingFields = mutableListOf<String>()
 
@@ -39,9 +36,9 @@ class ShopRegistrationViewModel : ViewModel() {
             "closingMinute" to "Closing Minute",
             "closingHour" to "Closing Hour",
             "openingMinute" to "Opening Minute",
-            //   "closedDays" to "Closed Days",
-            "DeliveryAvailable" to "Delivery Availability",
-            "DeliveryRadius" to "Delivery Radius"
+              "selectedDays" to "selectedDays",
+        //    "DeliveryAvailable" to "Delivery Availability",
+         //   "DeliveryRadius" to "Delivery Radius"
         ))
 
         // Validate payment info from paymentInfoMap
@@ -78,10 +75,16 @@ class ShopRegistrationViewModel : ViewModel() {
     }
 
     fun updateLocationDetails(field: String, value: String) {
+
+
+
+
         updateDetails(locationDetailsMap, field, value)
     }
 
     fun updatePaymentInfo(field: String, value: String) {
+
+
         updateDetails(paymentInfoMap, field, value)
     }
 

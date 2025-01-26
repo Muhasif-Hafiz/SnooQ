@@ -1,20 +1,19 @@
 package com.muhasib.snooq.view.ShopRegistration
 
 import BaseActivity
-import android.app.Fragment
+
+
 import android.os.Bundle
-import android.view.LayoutInflater
+
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.muhasib.snooq.R
-import com.muhasib.snooq.databinding.ActivityMainBinding
+
 import com.shuhart.stepview.StepView
 
 class ShopRegistrationActivity : BaseActivity() {

@@ -11,6 +11,7 @@ import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,11 +19,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Switch
+import android.widget.TextView
 import android.widget.TimePicker
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -36,7 +39,11 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.FirebaseFirestore
 import com.muhasib.snooq.R
+import com.muhasib.snooq.constants.userDetail.Companion.SHOP_ID
+import com.muhasib.snooq.constants.userDetail.Companion.closedDays
+import kotlinx.coroutines.launch
 import java.io.IOException
 import java.util.Locale
 
@@ -54,7 +61,7 @@ class LocationFragment : Fragment() {
     private lateinit var editTextDeliveryRange: TextInputEditText
     // chips
     private lateinit var chipGroup: ChipGroup
-    private lateinit var selectedDays: MutableSet<String> // To hold the selected days
+    private var selectedDays = mutableSetOf<String>()
     private lateinit var chipSunday: Chip
     private lateinit var chipMonday: Chip
     private lateinit var chipTuesday: Chip
@@ -64,6 +71,7 @@ class LocationFragment : Fragment() {
     private lateinit var chipSaturday: Chip
     private lateinit var  chipAllDay : Chip
     private lateinit var  viewModel : ShopRegistrationViewModel
+    private lateinit var testingTextView: TextView
 
     companion object {
         const val GPS_REQUEST_CODE = 200
@@ -86,39 +94,15 @@ class LocationFragment : Fragment() {
         timePickerClosing=  view. findViewById(R.id.timePickerClosing)
         deliverSwitch = view.findViewById(R.id.switchDelivery)
 
-        chipSunday = view.findViewById(R.id.chipSunday)
-        chipMonday = view.findViewById(R.id.chipMonday)
-        chipTuesday = view.findViewById(R.id.chipTuesday)
-        chipWednesday = view.findViewById(R.id.chipWednesday)
-        chipThursday = view.findViewById(R.id.chipThursday)
-        chipFriday = view.findViewById(R.id.chipFriday)
-        chipSaturday = view.findViewById(R.id.chipSaturday)
-        chipAllDay= view.findViewById(R.id.chipAllDays)
+
         chipGroup = view.findViewById(R.id.chipGroupClosedDays)
+
         layoutDeliveryRange =view. findViewById(R.id.layoutDeliveryRange)
         editTextDeliveryRange = view.findViewById(R.id.editTextDeliveryRange)
 
-        // setting up the chip listener
-
-        selectedDays = mutableSetOf()
-        // Set chip click listeners
-        setChipClickListener(chipSunday, "Sunday")
-        setChipClickListener(chipMonday, "Monday")
-        setChipClickListener(chipTuesday, "Tuesday")
-        setChipClickListener(chipWednesday, "Wednesday")
-        setChipClickListener(chipThursday, "Thursday")
-        setChipClickListener(chipFriday, "Friday")
-        setChipClickListener(chipSaturday, "Saturday")
-        setChipClickListener(chipAllDay,"All Days")
 
 
-        // Opening & Closing Hours Functioning
-        val openingHour = timePickerOpening.hour
-        val openingMinute = timePickerOpening.minute
 
-        val closingHour = timePickerClosing.hour
-        val closingMinute = timePickerClosing.minute
-        /////////
 
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -134,28 +118,6 @@ class LocationFragment : Fragment() {
             }else{
                 layoutDeliveryRange.visibility = View.GONE
             }
-
-
-
-        }
-        chipGroup = view.findViewById(R.id.chipGroupClosedDays)
-
-        viewModel.selectedDays.observe(viewLifecycleOwner, Observer { days ->
-            selectedDays = days.toMutableSet()
-            viewModel.updateLocationDetails("closedDays" , selectedDays.joinToString { "," })
-            updateChipColors()
-        })
-
-        chipAllDay.setOnClickListener {
-            if (selectedDays.size == 7) {
-                selectedDays.clear()
-                chipAllDay.setChipBackgroundColorResource(R.color.white)
-            } else {
-                selectedDays.clear()
-                selectedDays.addAll(listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
-                chipAllDay.setChipBackgroundColorResource(R.color.Selected_chip_color)
-            }
-            viewModel.updateSelectedDays(selectedDays)
         }
 
 
@@ -166,7 +128,7 @@ class LocationFragment : Fragment() {
 
             viewModel.updateLocationDetails( "fullAddress"  , it.toString())
         }
-        // selected  Days
+
 
 
 
@@ -174,13 +136,15 @@ class LocationFragment : Fragment() {
         timePickerOpening.setOnTimeChangedListener { _, hourOfDay, minute ->
             val openingHour = hourOfDay
             val openingMinute = minute
-            viewModel.updateLocationDetails("openingHour", openingHour.toString())
+           viewModel.updateLocationDetails("openingHour", openingHour.toString())
             viewModel.updateLocationDetails("openingMinute", openingMinute.toString())
         }
         timePickerClosing.setOnTimeChangedListener { _, hourOfDay, minute ->
             val closingHour = hourOfDay
             val closingMinute = minute
-            viewModel.updateLocationDetails("closingHour", closingHour.toString())
+
+
+              viewModel.updateLocationDetails("closingHour", closingHour.toString())
             viewModel.updateLocationDetails("closingMinute", closingMinute.toString())
         }
 
@@ -189,7 +153,7 @@ class LocationFragment : Fragment() {
             if (isChecked) {
                 layoutDeliveryRange.visibility = View.VISIBLE
                 viewModel.updateLocationDetails("DeliveryAvailable", "true")
-                // Update the delivery range if needed
+
                 editTextDeliveryRange.addTextChangedListener {
                     viewModel.updateLocationDetails("DeliveryRadius", it.toString())
                 }
@@ -205,53 +169,65 @@ class LocationFragment : Fragment() {
 
 
 
+        val checkedDaysList= arrayListOf<String>()
+
+        chipGroup.setOnCheckedStateChangeListener{ group, checkedIds ->
+
+            checkedDaysList.clear()
+            if(checkedIds.isEmpty()){
+
+            }else{
+
+
+                checkedIds.forEach {idx ->
+
+
+                    val chip = view.findViewById<Chip>(idx)
+                    checkedDaysList.add(chip.text.toString())
+
+
+                }
+
+
+                viewModel.updateLocationDetails("selectedDays", checkedDaysList.toString())
+
+
+            }
+
+
+
+        }
+
+        action(checkedDaysList)
+
+
+
+
+
 
 
 
         return view
     }
 
-    private fun updateChipColors() {
-        chipSunday.setChipBackgroundColorResource(
-            if (selectedDays.contains("Sunday")) R.color.Selected_chip_color else R.color.white
-        )
-        chipMonday.setChipBackgroundColorResource(
-            if (selectedDays.contains("Monday")) R.color.Selected_chip_color else R.color.white
-        )
-        chipTuesday.setChipBackgroundColorResource(
-            if (selectedDays.contains("Tuesday")) R.color.Selected_chip_color else R.color.white
-        )
-        chipWednesday.setChipBackgroundColorResource(
-            if (selectedDays.contains("Wednesday")) R.color.Selected_chip_color else R.color.white
-        )
-        chipThursday.setChipBackgroundColorResource(
-            if (selectedDays.contains("Thursday")) R.color.Selected_chip_color else R.color.white
-        )
-        chipFriday.setChipBackgroundColorResource(
-            if (selectedDays.contains("Friday")) R.color.Selected_chip_color else R.color.white
-        )
-        chipSaturday.setChipBackgroundColorResource(
-            if (selectedDays.contains("Saturday")) R.color.Selected_chip_color else R.color.white
-        )
+
+
+//--------------------------------------START CHIP FUNCTIONING-------------------------------------------------------------------------------
+fun action (list : ArrayList<String>){
+
+    if(list.isEmpty()){
+      Toast.makeText(requireContext(), " NO Day selected", Toast.LENGTH_SHORT).show()
+    }else{
+
+        Toast.makeText(requireContext(), " $list", Toast.LENGTH_SHORT).show()
     }
+}
 
 
 
 
-    private fun setChipClickListener(chip: Chip?, day: String) {
-        chip?.setOnClickListener {
 
-            if(selectedDays.contains(day)){
-                selectedDays.remove(day)
-                chip.setChipBackgroundColorResource(R.color.white)
-            }else{
-                selectedDays.add(day)
-                chip.setChipBackgroundColorResource(R.color.Selected_chip_color)
-            }
-        }
-
-    }
-
+    //   ---------------------------------END CHIP FUNCTIONING--------------------------------------------------------------------------------------------
 
     private fun checkLocationPermission() {
         if (ActivityCompat.checkSelfPermission(

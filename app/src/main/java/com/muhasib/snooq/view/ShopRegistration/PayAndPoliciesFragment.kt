@@ -1,6 +1,7 @@
 package com.muhasib.snooq.view.ShopRegistration
 
 import ShopRegistrationViewModel
+import UploadData
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,17 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputEditText
 import com.muhasib.snooq.R
 import com.muhasib.snooq.mvvm.ShopRegistrationRepository
-import com.muhasib.snooq.singleton.AppWriteSingleton
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class PayAndPoliciesFragment : Fragment() {
 
@@ -73,65 +68,13 @@ class PayAndPoliciesFragment : Fragment() {
         btnUpload.setOnClickListener {
 
 
-            uploadData()
+            UploadData(requireContext(), lifecycleOwner = viewLifecycleOwner, shopRegistrationViewModel, shopRegistrationRepository).uploadData()
+
         }
 
 
         return view
     }
 
-    private fun uploadData() {
-        // Validate the fields before proceeding with the upload
-        val (isValid, missingFields) = shopRegistrationViewModel.validateFields()
 
-
-
-
-
-        if (isValid) {
-            // Gather all the necessary details from the ViewModel
-            val userDetails = shopRegistrationViewModel.userDetailsMap.value ?: hashMapOf()
-            val locationDetails = shopRegistrationViewModel.locationDetailsMap.value ?: hashMapOf()
-            val paymentDetails = shopRegistrationViewModel.paymentInfoMap.value ?: hashMapOf()
-
-            val shopDetails = hashMapOf<String, String>().apply {
-                // Merge the user details
-                put("shopName", userDetails["shopName"] ?: "")
-                put("shopCategory", userDetails["shopCategory"] ?: "")
-                put("ownerName", userDetails["ownerName"] ?: "")
-                put("contactNumber", userDetails["contactNumber"] ?: "")
-                put("emailAddress", userDetails["emailAddress"] ?: "")
-                put("shopDescription", userDetails["shopDescription"] ?: "")
-
-                // Add the location details
-                put("fullAddress", locationDetails["fullAddress"] ?: "")
-                put("openingHour", locationDetails["openingHour"] ?: "")
-                put("closingHour", locationDetails["closingHour"] ?: "")
-                put("DeliveryAvailable", locationDetails["DeliveryAvailable"] ?: "")
-
-                // Add the payment details
-                put("bankName", paymentDetails["bankName"] ?: "")
-                put("accountNumber", paymentDetails["accountNumber"] ?: "")
-                put("ifscCode", paymentDetails["ifscCode"] ?: "")
-                put("refundPolicy", paymentDetails["refundPolicy"] ?: "")
-            }
-
-            // Upload shop details to FireStore
-            lifecycleScope.launch {
-                val result = withContext(Dispatchers.IO) {
-                    shopRegistrationRepository.uploadShopDetails(shopDetails)
-                }
-
-                if (result) {
-                    Toast.makeText(requireContext(), "Uploaded Successfully", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), "Upload Failed", Toast.LENGTH_SHORT).show()
-                }
-            }
-        } else {
-            // Show error message for missing fields
-            val missingFieldsMessage = "The following fields are missing: ${missingFields.joinToString(", ")}"
-            Toast.makeText(requireContext(), missingFieldsMessage, Toast.LENGTH_LONG).show()
-        }
-    }
 }

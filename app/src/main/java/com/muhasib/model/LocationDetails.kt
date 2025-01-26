@@ -7,7 +7,7 @@ data class LocationDetails(
     val openingMinute: Int,
     val closingHour: Int,
     val closingMinute: Int,
-    val closedDays : String? = null,
+    val selectedDays: String? = null ,
     val DeliveryAvailable : Boolean? = null,
     val DeliveryRadius : String? = null
 

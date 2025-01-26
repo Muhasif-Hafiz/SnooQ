@@ -172,7 +172,7 @@
 
                 <!-- Days Chips -->
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipSunday"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sunday"
@@ -182,7 +182,7 @@
                     android:textSize="14sp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipMonday"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Monday"
@@ -192,7 +192,8 @@
                     android:textSize="14sp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipTuesday"
+
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tuesday"
@@ -202,7 +203,7 @@
                     android:textSize="14sp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipWednesday"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Wednesday"
@@ -212,7 +213,7 @@
                     android:textSize="14sp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipThursday"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Thursday"
@@ -222,7 +223,7 @@
                     android:textSize="14sp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipFriday"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Friday"
@@ -232,7 +233,8 @@
                     android:textSize="14sp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipSaturday"
+
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Saturday"
@@ -241,7 +243,7 @@
                     app:chipStrokeWidth="1dp"
                     android:textSize="14sp" />
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipAllDays"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="All Days"
@@ -293,5 +295,7 @@
                     android:textSize="16sp"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+
+
     </LinearLayout>
 </ScrollView>

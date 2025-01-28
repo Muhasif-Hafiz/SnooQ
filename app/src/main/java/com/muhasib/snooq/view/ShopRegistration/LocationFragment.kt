@@ -3,6 +3,8 @@ package com.muhasib.snooq.view.ShopRegistration
 import BaseActivity
 import ShopRegistrationViewModel
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
@@ -17,6 +19,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebView
 import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
@@ -54,106 +58,52 @@ class LocationFragment : Fragment() {
     private lateinit var editTextAddress: TextInputEditText
     private lateinit var locationRequest: LocationRequest
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var timePickerOpening : TimePicker
-    private lateinit var  timePickerClosing : TimePicker
-    private lateinit var deliverSwitch : Switch
+    private lateinit var timePickerOpening: TimePicker
+    private lateinit var timePickerClosing: TimePicker
+    private lateinit var deliverSwitch: Switch
     private lateinit var layoutDeliveryRange: TextInputLayout
     private lateinit var editTextDeliveryRange: TextInputEditText
-    // chips
     private lateinit var chipGroup: ChipGroup
-    private var selectedDays = mutableSetOf<String>()
-    private lateinit var chipSunday: Chip
-    private lateinit var chipMonday: Chip
-    private lateinit var chipTuesday: Chip
-    private lateinit var chipWednesday: Chip
-    private lateinit var chipThursday: Chip
-    private lateinit var chipFriday: Chip
-    private lateinit var chipSaturday: Chip
-    private lateinit var  chipAllDay : Chip
-    private lateinit var  viewModel : ShopRegistrationViewModel
-    private lateinit var testingTextView: TextView
+
+    private lateinit var viewModel: ShopRegistrationViewModel
+
 
     companion object {
         const val GPS_REQUEST_CODE = 200
         const val LOCATION_PERMISSION_CODE = 100
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_location, container, false)
 
-        //Initialize view Model ---?
+        //Initialize view Model
         viewModel = ViewModelProvider(requireActivity())[ShopRegistrationViewModel::class.java]
 
+        // Bind views
         locationPickButton = view.findViewById(R.id.buttonPickLocation)
         editTextAddress = view.findViewById(R.id.editTextFullAddress)
         goToLocationButton = view.findViewById(R.id.buttonGoToLocation)
         timePickerOpening = view.findViewById(R.id.timePickerOpening)
-        timePickerClosing=  view. findViewById(R.id.timePickerClosing)
+        timePickerClosing = view.findViewById(R.id.timePickerClosing)
         deliverSwitch = view.findViewById(R.id.switchDelivery)
-
-
         chipGroup = view.findViewById(R.id.chipGroupClosedDays)
-
-        layoutDeliveryRange =view. findViewById(R.id.layoutDeliveryRange)
+        layoutDeliveryRange = view.findViewById(R.id.layoutDeliveryRange)
         editTextDeliveryRange = view.findViewById(R.id.editTextDeliveryRange)
-
-
-
-
-
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         locationPickButton.setOnClickListener { checkLocationPermission() }
 
-        goToLocationButton.setOnClickListener {moveToGoogleMaps()}
-        deliverSwitch.setOnCheckedChangeListener{ _, isChecked ->
-
-            if(isChecked){
-                layoutDeliveryRange.visibility = View.VISIBLE
-                // Take the Delivery range Data from here ----------------------------------------------
-            }else{
-                layoutDeliveryRange.visibility = View.GONE
-            }
-        }
-
-
-
-
-
-        editTextAddress.addTextChangedListener {
-
-            viewModel.updateLocationDetails( "fullAddress"  , it.toString())
-        }
-
-
-
-
-        //  do it  for opening hours  opening minutes, closing hours closing minutes , closed days , enable delivery switch which is boolean and for delivery range
-        timePickerOpening.setOnTimeChangedListener { _, hourOfDay, minute ->
-            val openingHour = hourOfDay
-            val openingMinute = minute
-           viewModel.updateLocationDetails("openingHour", openingHour.toString())
-            viewModel.updateLocationDetails("openingMinute", openingMinute.toString())
-        }
-        timePickerClosing.setOnTimeChangedListener { _, hourOfDay, minute ->
-            val closingHour = hourOfDay
-            val closingMinute = minute
-
-
-              viewModel.updateLocationDetails("closingHour", closingHour.toString())
-            viewModel.updateLocationDetails("closingMinute", closingMinute.toString())
-        }
-
+        goToLocationButton.setOnClickListener { moveToGoogleMaps() }
 
         deliverSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 layoutDeliveryRange.visibility = View.VISIBLE
                 viewModel.updateLocationDetails("DeliveryAvailable", "true")
-
                 editTextDeliveryRange.addTextChangedListener {
                     viewModel.updateLocationDetails("DeliveryRadius", it.toString())
                 }
@@ -163,71 +113,46 @@ class LocationFragment : Fragment() {
             }
         }
 
+        editTextAddress.addTextChangedListener {
+            viewModel.updateLocationDetails("fullAddress", it.toString())
+        }
 
+        // Set listeners for opening and closing hours
+        timePickerOpening.setOnTimeChangedListener { _, hourOfDay, minute ->
+            viewModel.updateLocationDetails("openingHour", hourOfDay.toString())
+            viewModel.updateLocationDetails("openingMinute", minute.toString())
+        }
 
+        timePickerClosing.setOnTimeChangedListener { _, hourOfDay, minute ->
+            viewModel.updateLocationDetails("closingHour", hourOfDay.toString())
+            viewModel.updateLocationDetails("closingMinute", minute.toString())
+        }
 
-
-
-
-        val checkedDaysList= arrayListOf<String>()
-
-        chipGroup.setOnCheckedStateChangeListener{ group, checkedIds ->
-
+        val checkedDaysList = arrayListOf<String>()
+        chipGroup.setOnCheckedStateChangeListener { _, checkedIds ->
             checkedDaysList.clear()
-            if(checkedIds.isEmpty()){
-
-            }else{
-
-
-                checkedIds.forEach {idx ->
-
-
+            if (checkedIds.isNotEmpty()) {
+                checkedIds.forEach { idx ->
                     val chip = view.findViewById<Chip>(idx)
                     checkedDaysList.add(chip.text.toString())
-
-
                 }
-
-
                 viewModel.updateLocationDetails("selectedDays", checkedDaysList.toString())
-
-
             }
-
-
-
         }
 
         action(checkedDaysList)
 
-
-
-
-
-
-
-
         return view
     }
 
-
-
-//--------------------------------------START CHIP FUNCTIONING-------------------------------------------------------------------------------
-fun action (list : ArrayList<String>){
-
-    if(list.isEmpty()){
-      Toast.makeText(requireContext(), " NO Day selected", Toast.LENGTH_SHORT).show()
-    }else{
-
-        Toast.makeText(requireContext(), " $list", Toast.LENGTH_SHORT).show()
+    // Chip handling function
+    fun action(list: ArrayList<String>) {
+        if (list.isEmpty()) {
+            Toast.makeText(requireContext(), "No Day selected", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "$list", Toast.LENGTH_SHORT).show()
+        }
     }
-}
-
-
-
-
-
-    //   ---------------------------------END CHIP FUNCTIONING--------------------------------------------------------------------------------------------
 
     private fun checkLocationPermission() {
         if (ActivityCompat.checkSelfPermission(
@@ -303,13 +228,11 @@ fun action (list : ArrayList<String>){
         }
         (activity as BaseActivity).showLocationProgressDialog()
 
-        // Request location updates if last location is null
         fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
             val location = task.result
             if (location != null) {
                 handleLocation(location)
             } else {
-                // Fallback: Request location updates if last location is null
                 fusedLocationProviderClient.requestLocationUpdates(locationRequest, object : LocationCallback() {
                     override fun onLocationResult(locationResult: LocationResult) {
                         if (locationResult != null) {
@@ -334,6 +257,7 @@ fun action (list : ArrayList<String>){
             if (addresses != null && addresses.isNotEmpty()) {
                 val address = addresses[0]
                 val addressLine = address.getAddressLine(0) ?: "No Address"
+                showWebView(addressLine)
                 val city = address.locality ?: "No City"
                 val country = address.countryName ?: "India"
                 val finalLocation = "$addressLine, $country"
@@ -348,11 +272,13 @@ fun action (list : ArrayList<String>){
         (activity as BaseActivity).hideLocationProgressbar()
     }
 
-    private fun moveToGoogleMaps(){
-
+    private fun moveToGoogleMaps() {
         if (!editTextAddress.text.isNullOrEmpty()) {
             val location = editTextAddress.text.toString()
+
+
             val uri = Uri.parse("geo:0,0?q=$location")
+
             val intent = Intent(Intent.ACTION_VIEW, uri)
             intent.setPackage("com.google.android.apps.maps")
             startActivity(intent)
@@ -361,6 +287,23 @@ fun action (list : ArrayList<String>){
         }
     }
 
+    private fun showWebView(location: String) {
+        val webView1: WebView? = view?.findViewById<WebView>(R.id.web_view)
+        if (webView1 == null) {
+            Toast.makeText(requireContext(), "WebView not found", Toast.LENGTH_SHORT).show()
+            return
+        }
 
 
+
+        val webView: WebView = view?.findViewById(R.id.web_view) ?: return
+
+        // Enable JavaScript in WebView
+        val webSettings = webView.settings
+        webSettings.javaScriptEnabled = true
+
+        // Load Google Maps URL into WebView
+        val geoUrl = "https://www.google.com/maps/search/?q=$location"
+        webView.loadUrl(geoUrl)
+    }
 }

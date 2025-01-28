@@ -10,4 +10,25 @@
         <item name="backgroundTint">@color/SnakBarColor</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+
+
+    <style name="CustomTimePickerTheme" parent="Base.Theme.SnooQ">
+        <item name="android:spinnerItemStyle">@style/SpinnerTextStyle</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownTextStyle</item>
+        <item name="android:timePickerMode">spinner</item>
+    </style>
+
+    <!-- Spinner Text Style -->
+    <style name="SpinnerTextStyle">
+        <item name="android:textColor">#FF5722</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Spinner Drop Down Text Style -->
+    <style name="SpinnerDropDownTextStyle">
+        <item name="android:textColor">#3F51B5</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

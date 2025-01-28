@@ -9,7 +9,7 @@ class ShopRegistrationViewModel : ViewModel() {
     val userDetailsMap = MutableLiveData<HashMap<String, String>>(hashMapOf())
     val locationDetailsMap = MutableLiveData<HashMap<String, String>>(hashMapOf())
     val paymentInfoMap = MutableLiveData<HashMap<String, String>>(hashMapOf())
-    val mediaFiles = MutableLiveData<List<Uri>>(mutableListOf())
+    val mediaFiles = MutableLiveData<HashMap<String, String>>(hashMapOf())
 
 
     private val _locationDetails = MutableLiveData<Map<String, String>>()
@@ -49,6 +49,15 @@ class ShopRegistrationViewModel : ViewModel() {
             "ifscCode" to "IFSC Code",
             "refundPolicy" to "Refund Policy"
         ))
+        validateFieldsForMap(mediaFiles.value, missingFields, listOf(
+
+
+             "shopLogo" to "Shop Logo"
+
+
+        ))
+
+
 
         return Pair(missingFields.isEmpty(), missingFields)
     }
@@ -73,6 +82,9 @@ class ShopRegistrationViewModel : ViewModel() {
     fun updateUserDetails(field: String, value: String) {
         updateDetails(userDetailsMap, field, value)
     }
+    fun updateShopMediaDetails(field  : String , value : String){
+        updateDetails(mediaFiles, field, value)
+    }
 
     fun updateLocationDetails(field: String, value: String) {
 
@@ -88,24 +100,7 @@ class ShopRegistrationViewModel : ViewModel() {
         updateDetails(paymentInfoMap, field, value)
     }
 
-    // Function to add a new media file to the list of media files
-    fun addMediaFile(uri: Uri) {
-        val updatedMediaFiles = mediaFiles.value?.toMutableList() ?: mutableListOf()
-        updatedMediaFiles.add(uri)
-        mediaFiles.value = updatedMediaFiles
-    }
 
-    // Function to remove a media file from the list of media files
-    fun removeMediaFile(uri: Uri) {
-        val updatedMediaFiles = mediaFiles.value?.toMutableList() ?: mutableListOf()
-        updatedMediaFiles.remove(uri)
-        mediaFiles.value = updatedMediaFiles
-    }
-
-    // Function to clear all media files
-    fun clearMediaFiles() {
-        mediaFiles.value = mutableListOf()
-    }
 
 
 }

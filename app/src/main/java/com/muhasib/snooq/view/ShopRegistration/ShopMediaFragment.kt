@@ -146,6 +146,8 @@ class ShopMediaFragment : Fragment() {
 
 
 
+
+
                 Toast.makeText(requireContext(), "$fileName uploaded successfully!", Toast.LENGTH_SHORT).show()
             } catch (e: AppwriteException) {
                 Toast.makeText(requireContext(), "Error uploading $fileName: ${e.message}", Toast.LENGTH_LONG).show()

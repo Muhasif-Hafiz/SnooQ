@@ -125,7 +125,7 @@ class LocationFragment : Fragment() {
         }
 ////////////////////////
         val handler = Handler(Looper.getMainLooper())
-        val delay = 500L  // Delay to wait before triggering API call
+        val delay = 1000L  // Delay to wait before triggering API call
 
         var lastAddress: String? = null
 

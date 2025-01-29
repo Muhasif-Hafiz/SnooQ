@@ -25,10 +25,20 @@
             android:layout_marginBottom="24dp"
             android:paddingStart="8dp" />
 
-        <WebView
-            android:id="@+id/web_view"
-            android:layout_width="250dp"
-            android:layout_height="210dp" />
+<!--        <WebView-->
+<!--            android:id="@+id/web_view"-->
+<!--            android:layout_width="250dp"-->
+<!--            android:layout_height="210dp" />-->
+        
+        <ImageView
+            android:id="@+id/mapImageView"
+            android:layout_width="370dp"
+            android:layout_gravity="center"
+
+
+            android:src="@drawable/maps_placeholder"
+            android:layout_marginBottom="20dp"
+            android:layout_height="250dp"/>
 
 
 

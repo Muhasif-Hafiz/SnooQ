@@ -12,7 +12,10 @@ import android.location.Geocoder
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -22,6 +25,7 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.TimePicker
@@ -30,6 +34,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -47,8 +52,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.muhasib.snooq.R
 import com.muhasib.snooq.constants.userDetail.Companion.SHOP_ID
 import com.muhasib.snooq.constants.userDetail.Companion.closedDays
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import java.io.IOException
+import java.net.URL
+import java.net.URLEncoder
 import java.util.Locale
 
 class LocationFragment : Fragment() {
@@ -66,7 +77,7 @@ class LocationFragment : Fragment() {
     private lateinit var chipGroup: ChipGroup
 
     private lateinit var viewModel: ShopRegistrationViewModel
-
+    private var lastAddress: String? = null
 
     companion object {
         const val GPS_REQUEST_CODE = 200
@@ -112,11 +123,53 @@ class LocationFragment : Fragment() {
                 viewModel.updateLocationDetails("DeliveryAvailable", "false")
             }
         }
+////////////////////////
+        val handler = Handler(Looper.getMainLooper())
+        val delay = 500L  // Delay to wait before triggering API call
 
-        editTextAddress.addTextChangedListener {
-            viewModel.updateLocationDetails("fullAddress", it.toString())
-        }
+        var lastAddress: String? = null
 
+        editTextAddress.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val address = s.toString()
+
+                // Remove any previous pending API calls to avoid multiple requests
+                handler.removeCallbacksAndMessages(null)
+
+                // Only proceed if the address has changed and no request is in progress
+                if (address != lastAddress) {
+
+                    // Start the progress bar only after a delay (indicating user has finished typing)
+                    handler.postDelayed({
+
+
+
+                        // Perform the API call after the delay
+                        val apiKey = "AlzaSyrUEpS0h2OP1Lk6uHj2OPBz-Br8wuIAzBH"
+                        getLatLngFromAddress(address, apiKey) { lat, lng ->
+                            // Update the location details in the view model
+                            viewModel.updateLocationDetails("fullAddress", address)
+
+                            // Set the address text
+                            editTextAddress.setText(address)
+
+                            // Load the static map
+                            loadStaticMap(lat, lng)
+
+
+
+                            // Store the current address to prevent reloading for the same address
+                            lastAddress = address
+                        }
+                    }, delay)  // Set the delay time
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+///////////////////////////////
         // Set listeners for opening and closing hours
         timePickerOpening.setOnTimeChangedListener { _, hourOfDay, minute ->
             viewModel.updateLocationDetails("openingHour", hourOfDay.toString())
@@ -257,11 +310,14 @@ class LocationFragment : Fragment() {
             if (addresses != null && addresses.isNotEmpty()) {
                 val address = addresses[0]
                 val addressLine = address.getAddressLine(0) ?: "No Address"
-                showWebView(addressLine)
+          //      showWebView(addressLine)
                 val city = address.locality ?: "No City"
                 val country = address.countryName ?: "India"
                 val finalLocation = "$addressLine, $country"
                 editTextAddress.setText(finalLocation)
+
+
+                loadStaticMap(location.latitude, location.longitude)
             } else {
                 Toast.makeText(requireContext(), "No address found", Toast.LENGTH_SHORT).show()
             }
@@ -287,23 +343,85 @@ class LocationFragment : Fragment() {
         }
     }
 
-    private fun showWebView(location: String) {
-        val webView1: WebView? = view?.findViewById<WebView>(R.id.web_view)
-        if (webView1 == null) {
-            Toast.makeText(requireContext(), "WebView not found", Toast.LENGTH_SHORT).show()
-            return
-        }
+//    private fun showWebView(location: String) {
+//        val webView1: WebView? = view?.findViewById<WebView>(R.id.web_view)
+//        if (webView1 == null) {
+//            Toast.makeText(requireContext(), "WebView not found", Toast.LENGTH_SHORT).show()
+//            return
+//        }
+//
+//
+//
+//        val webView: WebView = view?.findViewById(R.id.web_view) ?: return
+//
+//        // Enable JavaScript in WebView
+//        val webSettings = webView.settings
+//        webSettings.javaScriptEnabled = true
+//
+//        // Load Google Maps URL into WebView
+//        val geoUrl = "https://www.google.com/maps/search/?q=$location"
+//        webView.loadUrl(geoUrl)
+//    }
+
+    private fun loadStaticMap(lat: Double, long: Double, ) {
+        val imageView = requireView().findViewById<ImageView>(R.id.mapImageView)
+
+        val apiKey = "AlzaSyrUEpS0h2OP1Lk6uHj2OPBz-Br8wuIAzBH" // Replace with your API key
+
+        val mapUrl = "https://maps.gomaps.pro/maps/api/staticmap?" +
+                "center=$lat,$long&zoom=15&size=600x400&" +
+                "markers=color:red%7Csize:mid%7C$lat,$long&key=$apiKey"
+
+        // Load the image into ImageView using Glide
+        Glide.with(this)
+            .load(mapUrl)
+
+            .into(imageView)
 
 
 
-        val webView: WebView = view?.findViewById(R.id.web_view) ?: return
 
-        // Enable JavaScript in WebView
-        val webSettings = webView.settings
-        webSettings.javaScriptEnabled = true
-
-        // Load Google Maps URL into WebView
-        val geoUrl = "https://www.google.com/maps/search/?q=$location"
-        webView.loadUrl(geoUrl)
     }
+
+    //
+
+    fun getLatLngFromAddress(address: String, apiKey: String, callback: (lat: Double, lng: Double) -> Unit) {
+        val url = "https://maps.gomaps.pro/maps/api/geocode/json?address=${URLEncoder.encode(address, "UTF-8")}&key=${apiKey}"
+
+        // Create a background thread to handle the API call (using a coroutine or async task is preferred)
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val response = URL(url).readText()
+                val jsonResponse = JSONObject(response)
+                val results = jsonResponse.getJSONArray("results")
+
+                if (results.length() > 0) {
+                    val location = results.getJSONObject(0).getJSONObject("geometry").getJSONObject("location")
+                    val lat = location.getDouble("lat")
+                    val lng = location.getDouble("lng")
+
+                    // Call the callback to pass back the latitude and longitude to the main thread
+                    withContext(Dispatchers.Main) {
+                        callback(lat, lng)
+                    }
+                } else {
+                    // Handle the case where no results are found
+                    withContext(Dispatchers.Main) {
+                        // Optional: Show an error message or handle the case where no address is found
+                        Log.e("Geocoding", "No results found for address: $address")
+                    }
+                }
+            } catch (e: Exception) {
+                // Handle any errors that occur during the network call
+                withContext(Dispatchers.Main) {
+                    Log.e("Geocoding", "Error: ${e.localizedMessage}")
+                }
+            }
+        }
+    }
+
+
+
+
+
 }

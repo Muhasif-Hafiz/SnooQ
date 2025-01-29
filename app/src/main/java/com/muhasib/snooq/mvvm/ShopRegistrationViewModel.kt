@@ -49,13 +49,13 @@ class ShopRegistrationViewModel : ViewModel() {
             "ifscCode" to "IFSC Code",
             "refundPolicy" to "Refund Policy"
         ))
-        validateFieldsForMap(mediaFiles.value, missingFields, listOf(
-
-
-             "shopLogo" to "Shop Logo"
-
-
-        ))
+//        validateFieldsForMap(mediaFiles.value, missingFields, listOf(
+//
+//
+//             "shopLogo" to "Shop Logo"
+//
+//
+//        ))
 
 
 

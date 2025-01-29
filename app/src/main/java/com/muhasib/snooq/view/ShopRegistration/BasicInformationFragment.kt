@@ -88,19 +88,20 @@ class BasicInformationFragment : Fragment() {
 //
         lifecycleScope.launch {
             try {
-                // Fetch the email asynchronously on the IO thread
-                val email = fetchUserEmail() // This should be a suspend function that handles the I/O operation
+                // Fetch the email asynchronously
+                val email: String? = fetchUserEmail() // Ensure this returns a String
 
-                // Check if fragment is still attached to activity before updating UI
-                if (isAdded) {
-                    // Ensure that updates to the UI are made on the main thread
+
+
+                // Ensure email is valid before updating Firestore
+                if (!email.isNullOrBlank() && isAdded) {
                     withContext(Dispatchers.Main) {
-                        // Update the ViewModel with the fetched email
-                        viewModel.updateUserDetails("emailAddress", email.toString())
+                        viewModel.updateUserDetails("emailAddress", email)
                     }
+                } else {
+
                 }
             } catch (e: Exception) {
-                // Handle any errors (network issues, parsing issues, etc.)
                 if (isAdded) {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(requireContext(), "Error fetching email: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -112,7 +113,7 @@ class BasicInformationFragment : Fragment() {
         return view
     }
 
-    private suspend fun fetchUserEmail() {
+    private suspend fun fetchUserEmail() :String {
         val accountService = Account(client)
 
         try {
@@ -121,10 +122,13 @@ class BasicInformationFragment : Fragment() {
 
             // Update email in ViewModel
             emailAddress.setText(userEmail)
-            viewModel.updateUserDetails("emailAddress", userEmail)
+
+
+            return userEmail
 
         } catch (e: AppwriteException) {
             Toast.makeText(context, "Error fetching user details", Toast.LENGTH_SHORT).show()
         }
+        return "No Email Found"
     }
 }

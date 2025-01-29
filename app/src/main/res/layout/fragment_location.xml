@@ -107,66 +107,128 @@
                 android:textSize="16sp"/>
         </LinearLayout>
 
-        <!-- Operating Hours Section -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Operating Hours"
-            android:textColor="@color/PrimarySnooQ"
-            android:layout_marginBottom="16dp"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:paddingStart="8dp" />
-
-        <!-- Opening Time Section -->
         <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+
+            android:orientation="vertical"
+           >
+
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:text="Operating Schedule"
+                android:textSize="24sp"
+                android:textColor="#00E676"
+                android:layout_marginBottom="24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Opening Time"
-                android:textColor="@color/PrimarySnooQ"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"/>
 
-            <!-- TimePicker for Opening Time -->
-            <TimePicker
-                android:id="@+id/timePickerOpening"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/CustomTimePickerTheme"
-                android:timePickerMode="spinner"
-                android:textSize="16sp" />
-        </LinearLayout>
+            <RelativeLayout
+                android:layout_width="280dp"
+                android:layout_height="62dp"
+                android:background="@drawable/time_input_background"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp">
 
-        <!-- Closing Time Section -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/openingTimeEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="12:30"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:longClickable="false"
+                    android:fontFamily="@font/extrabold_h2"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:id="@+id/openingAMTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AM"
+                    android:textSize="20sp"
+                    android:layout_toEndOf="@id/openingTimeEdit"
+                    android:layout_marginStart="8dp"
+                    android:layout_centerVertical="true"/>
+
+                <Button
+                    android:id="@+id/btnOpeningTime"
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:text="Change"
+                    android:textAllCaps="false"
+                    android:backgroundTint="#00E676"
+                    android:textColor="#FFFFFF"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
+            </RelativeLayout>
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Closing Time"
-                android:textColor="@color/PrimarySnooQ"
-                android:textSize="16sp" />
-
-            <!-- TimePicker for Closing Time -->
-            <TimePicker
-                android:id="@+id/timePickerClosing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:timePickerMode="spinner"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:text="Closing Time"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"/>
 
+            <RelativeLayout
+                android:layout_width="280dp"
+                android:layout_height="62dp"
+                android:background="@drawable/time_input_background"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp">
+
+                <EditText
+                    android:id="@+id/closingTimeEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="12:30"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:longClickable="false"
+                    android:fontFamily="@font/extrabold_h2"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AM"
+                    android:textSize="20sp"
+                    android:id="@+id/closingAmTV"
+                    android:layout_toEndOf="@id/closingTimeEdit"
+                    android:layout_marginStart="8dp"
+                    android:layout_centerVertical="true"/>
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:text="Change"
+
+                    android:id="@+id/btnClosingTime"
+                    android:textAllCaps="false"
+                    android:backgroundTint="#00E676"
+                    android:textColor="#FFFFFF"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
+            </RelativeLayout>
+        </LinearLayout>
         <!-- Closed Days Section -->
         <LinearLayout
             android:layout_width="match_parent"

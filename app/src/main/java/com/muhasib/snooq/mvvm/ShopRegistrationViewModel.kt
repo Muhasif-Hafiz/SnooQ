@@ -32,10 +32,10 @@ class ShopRegistrationViewModel : ViewModel() {
         // Validate location details from locationDetailsMap
         validateFieldsForMap(locationDetailsMap.value, missingFields, listOf(
             "fullAddress" to "User Location",
-            "openingHour" to "Opening Hour",
-            "closingMinute" to "Closing Minute",
-            "closingHour" to "Closing Hour",
-            "openingMinute" to "Opening Minute",
+            "openingTime" to "Opening Time",
+            "closingTime" to "Closing Time",
+//            "closingHour" to "Closing Hour",
+//            "openingMinute" to "Opening Minute",
               "selectedDays" to "selectedDays",
         //    "DeliveryAvailable" to "Delivery Availability",
          //   "DeliveryRadius" to "Delivery Radius"
@@ -49,13 +49,13 @@ class ShopRegistrationViewModel : ViewModel() {
             "ifscCode" to "IFSC Code",
             "refundPolicy" to "Refund Policy"
         ))
-        validateFieldsForMap(mediaFiles.value, missingFields, listOf(
-
-
-             "shopLogo" to "Shop Logo"
-
-
-        ))
+//        validateFieldsForMap(mediaFiles.value, missingFields, listOf(
+//
+//
+//             "shopLogo" to "Shop Logo"
+//
+//
+//        ))
 
 
 

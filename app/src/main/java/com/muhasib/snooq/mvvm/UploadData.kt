@@ -2,18 +2,18 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import com.muhasib.snooq.constants.userDetail.Companion.closedDays
-import com.muhasib.snooq.mvvm.ShopRegistrationRepository
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class UploadData(
     private val context: Context,
     private val lifecycleOwner: LifecycleOwner,
-    private val shopRegistrationViewModel: ShopRegistrationViewModel,
-    private val shopRegistrationRepository: ShopRegistrationRepository
+    private val shopRegistrationViewModel: ShopRegistrationViewModel
 ) {
+    private val db = FirebaseFirestore.getInstance()
 
     fun uploadData() {
         val (isValid, missingFields) = shopRegistrationViewModel.validateFields()
@@ -23,32 +23,55 @@ class UploadData(
             val locationDetails = shopRegistrationViewModel.locationDetailsMap.value ?: hashMapOf()
             val paymentDetails = shopRegistrationViewModel.paymentInfoMap.value ?: hashMapOf()
 
-            val shopDetails = hashMapOf<String, Any>().apply {
-                put("shopName", userDetails["shopName"] ?: "")
-                put("shopCategory", userDetails["shopCategory"] ?: "")
-                put("ownerName", userDetails["ownerName"] ?: "")
-                put("contactNumber", userDetails["contactNumber"] ?: "")
-                put("emailAddress", userDetails["emailAddress"] ?: "")
-                put("shopDescription", userDetails["shopDescription"] ?: "")
-                put("fullAddress", locationDetails["fullAddress"] ?: "")
-                put("openingHour", locationDetails["openingHour"] ?: "")
-                put("closingHour", locationDetails["closingHour"] ?: "")
-                put("closingMinute", locationDetails["closingMinute"] ?: "")
-                put("openingMinute", locationDetails["openingMinute"] ?: "")
-                put("openingMinute", locationDetails["openingMinute"] ?: "")
-                put("selectedDays", locationDetails["selectedDays"] ?: "")
+            // Generate Unique IDs for shopkeeper and shop
+            val shopkeeperId = userDetails["shopkeeperId"] ?: "shopkeeper_${System.currentTimeMillis()}"
+            val shopId = "shop_${System.currentTimeMillis()}"
 
-                put("DeliveryAvailable", locationDetails["DeliveryAvailable"] ?: "false")
-                put("DeliveryRadius", locationDetails["DeliveryRadius"] ?: "0")
-                put("bankName", paymentDetails["bankName"] ?: "")
-                put("accountNumber", paymentDetails["accountNumber"] ?: "")
-                put("ifscCode", paymentDetails["ifscCode"] ?: "")
-                put("refundPolicy", paymentDetails["refundPolicy"] ?: "")
-            }
+            val shopDetails = hashMapOf(
+                "shop_name" to (userDetails["shopName"] ?: ""),
+                "shop_type" to (userDetails["shopCategory"] ?: ""),
+                "description" to (userDetails["shopDescription"] ?: ""),
+                "address" to (locationDetails["fullAddress"] ?: ""),
+                "location" to hashMapOf(
+                    "latitude" to (locationDetails["latitude"] ?: 0.0),
+                    "longitude" to (locationDetails["longitude"] ?: 0.0)
+                ),
+                "openingTime" to "${locationDetails["openingTime"] ?: "00"}:${locationDetails["openingTime"] ?: "00"}",
+                "closingTime" to "${locationDetails["closingTime"] ?: "00"}:${locationDetails["closingTime"] ?: "00"}",
+                "days_open" to (locationDetails["selectedDays"] ?: listOf<String>()),
+                "current_visitors" to 0,
+                "visit_count" to 0,
+                "average_rating" to 0.0,
+                "rating_count" to 0,
+                "offers" to listOf<HashMap<String, Any>>(),
+                "products" to listOf<HashMap<String, Any>>(),
+                "qr_code" to "",
+                "customer_reviews" to listOf<HashMap<String, Any>>(),
+                "is_verified" to false,
+                "verification_documents" to listOf<String>(),
+                "subscription_plan" to "Basic",
+                "subscription_expiry" to "",
+                "tags" to listOf<String>(),
+                "shop_images" to listOf<String>()
+            )
+
+            val shopkeeperDetails = hashMapOf(
+                "name" to (userDetails["ownerName"] ?: ""),
+                "email" to (userDetails["emailAddress"] ?: ""),
+                "phone_number" to (userDetails["contactNumber"] ?: ""),
+                "profile_picture" to (userDetails["profilePicture"] ?: ""),
+                "registration_date" to System.currentTimeMillis(),
+                "shops" to hashMapOf(shopId to shopDetails)
+            )
 
             lifecycleOwner.lifecycleScope.launch {
                 val result = withContext(Dispatchers.IO) {
-                    shopRegistrationRepository.uploadShopDetails(shopDetails)
+                    try {
+                        db.collection("shopkeepers").document(shopkeeperId).set(shopkeeperDetails).await()
+                        true
+                    } catch (e: Exception) {
+                        false
+                    }
                 }
 
                 if (result) {

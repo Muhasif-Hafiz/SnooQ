@@ -104,5 +104,8 @@ dependencies {
 
     implementation("com.google.firebase:firebase-firestore")
 
+    implementation("com.google.android.material:material:1.11.0")
+
+
 
 }

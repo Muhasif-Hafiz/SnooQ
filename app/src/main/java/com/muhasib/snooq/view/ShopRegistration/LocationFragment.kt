@@ -4,7 +4,7 @@ import BaseActivity
 import ShopRegistrationViewModel
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
+
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
@@ -22,18 +22,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebChromeClient
-import android.webkit.WebView
+
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
+
 import android.widget.TimePicker
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.Observer
+import androidx.fragment.app.FragmentManager
+
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+
 import com.bumptech.glide.Glide
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
@@ -48,10 +50,10 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import com.muhasib.snooq.R
-import com.muhasib.snooq.constants.userDetail.Companion.SHOP_ID
-import com.muhasib.snooq.constants.userDetail.Companion.closedDays
+import com.muhasib.snooq.constants.ApiKeys
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -69,22 +71,28 @@ class LocationFragment : Fragment() {
     private lateinit var editTextAddress: TextInputEditText
     private lateinit var locationRequest: LocationRequest
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var timePickerOpening: TimePicker
-    private lateinit var timePickerClosing: TimePicker
+
     private lateinit var deliverSwitch: Switch
     private lateinit var layoutDeliveryRange: TextInputLayout
     private lateinit var editTextDeliveryRange: TextInputEditText
     private lateinit var chipGroup: ChipGroup
 
+    private lateinit var  openingTimeEditText : EditText
+    private lateinit var  closingTimeEditText : EditText
+    private lateinit var  openingTimeAm  : TextView
+    private lateinit var  closingTimeAm : TextView
+    private  lateinit var  btnOpening : Button
+    private lateinit var  btnClosing : Button
+
     private lateinit var viewModel: ShopRegistrationViewModel
-    private var lastAddress: String? = null
+
 
     companion object {
         const val GPS_REQUEST_CODE = 200
         const val LOCATION_PERMISSION_CODE = 100
     }
 
-    @SuppressLint("SuspiciousIndentation")
+    @SuppressLint("SuspiciousIndentation", "MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -98,12 +106,19 @@ class LocationFragment : Fragment() {
         locationPickButton = view.findViewById(R.id.buttonPickLocation)
         editTextAddress = view.findViewById(R.id.editTextFullAddress)
         goToLocationButton = view.findViewById(R.id.buttonGoToLocation)
-        timePickerOpening = view.findViewById(R.id.timePickerOpening)
-        timePickerClosing = view.findViewById(R.id.timePickerClosing)
+
         deliverSwitch = view.findViewById(R.id.switchDelivery)
         chipGroup = view.findViewById(R.id.chipGroupClosedDays)
         layoutDeliveryRange = view.findViewById(R.id.layoutDeliveryRange)
         editTextDeliveryRange = view.findViewById(R.id.editTextDeliveryRange)
+
+        // time picker
+        openingTimeEditText = view.findViewById(R.id.openingTimeEdit)
+        closingTimeEditText = view.findViewById(R.id.closingTimeEdit)
+        openingTimeAm = view.findViewById(R.id.openingAMTV)
+        closingTimeAm = view.findViewById(R.id.closingAmTV)
+        btnOpening = view.findViewById(R.id.btnOpeningTime)
+        btnClosing = view.findViewById(R.id.btnClosingTime)
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
@@ -125,8 +140,7 @@ class LocationFragment : Fragment() {
         }
 ////////////////////////
         val handler = Handler(Looper.getMainLooper())
-        val delay = 1000L  // Delay to wait before triggering API call
-
+        val delay = 1000L
         var lastAddress: String? = null
 
         editTextAddress.addTextChangedListener(object : TextWatcher {
@@ -145,7 +159,7 @@ class LocationFragment : Fragment() {
 
 
                         // Perform the API call after the delay
-                        val apiKey = "AlzaSyrUEpS0h2OP1Lk6uHj2OPBz-Br8wuIAzBH"
+                        val apiKey = ApiKeys.mapsApi
                         getLatLngFromAddress(address, apiKey) { lat, lng ->
                             // Update the location details in the view model
                             viewModel.updateLocationDetails("fullAddress", address)
@@ -158,7 +172,7 @@ class LocationFragment : Fragment() {
 
 
 
-                            // Store the current address to prevent reloading for the same address
+
                             lastAddress = address
                         }
                     }, delay)  // Set the delay time
@@ -171,15 +185,15 @@ class LocationFragment : Fragment() {
         })
 ///////////////////////////////
         // Set listeners for opening and closing hours
-        timePickerOpening.setOnTimeChangedListener { _, hourOfDay, minute ->
-            viewModel.updateLocationDetails("openingHour", hourOfDay.toString())
-            viewModel.updateLocationDetails("openingMinute", minute.toString())
-        }
-
-        timePickerClosing.setOnTimeChangedListener { _, hourOfDay, minute ->
-            viewModel.updateLocationDetails("closingHour", hourOfDay.toString())
-            viewModel.updateLocationDetails("closingMinute", minute.toString())
-        }
+//        timePickerOpening.setOnTimeChangedListener { _, hourOfDay, minute ->
+//            viewModel.updateLocationDetails("openingHour", hourOfDay.toString())
+//            viewModel.updateLocationDetails("openingMinute", minute.toString())
+//        }
+//
+//        timePickerClosing.setOnTimeChangedListener { _, hourOfDay, minute ->
+//            viewModel.updateLocationDetails("closingHour", hourOfDay.toString())
+//            viewModel.updateLocationDetails("closingMinute", minute.toString())
+//        }
 
         val checkedDaysList = arrayListOf<String>()
         chipGroup.setOnCheckedStateChangeListener { _, checkedIds ->
@@ -195,8 +209,93 @@ class LocationFragment : Fragment() {
 
         action(checkedDaysList)
 
+
+
+        btnOpening.setOnClickListener {
+            showTimePickerOpening()
+        }
+
+        btnClosing.setOnClickListener {
+            showTimePickerClosing()
+        }
+
+
+
+
+
+
+
+
+
+
         return view
     }
+    @SuppressLint("SuspiciousIndentation")
+    private fun showTimePickerOpening() {
+        val timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_12H)
+            .setHour(12)
+            .setMinute(0)
+            .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
+            .setTitleText( "Choose Opening Time" )
+            .build()
+
+
+        timePicker.show(parentFragmentManager, "TIME_PICKER")
+
+        timePicker.addOnPositiveButtonClickListener {
+            val hour = timePicker.hour
+            val minute = timePicker.minute
+            val amPm = if (hour < 12) "AM" else "PM"
+            val formattedHour = if (hour == 0 || hour == 12) 12 else hour % 12
+            val formattedTime = String.format("%02d:%02d", formattedHour, minute)
+
+                openingTimeEditText.setText(formattedTime)
+                openingTimeAm.text = amPm
+
+
+            viewModel.updateLocationDetails("openingTime", openingTimeEditText.text.toString() )
+
+
+
+
+
+        }
+    }
+
+    private fun showTimePickerClosing() {
+        val timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_12H)
+            .setHour(12)
+            .setMinute(0)
+            .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
+            .setTitleText( "Choose Closing Time" )
+            .build()
+
+
+        timePicker.show(parentFragmentManager, "TIME_PICKER")
+
+        timePicker.addOnPositiveButtonClickListener {
+            val hour = timePicker.hour
+            val minute = timePicker.minute
+            val amPm = if (hour < 12) "AM" else "PM"
+            val formattedHour = if (hour == 0 || hour == 12) 12 else hour % 12
+            val formattedTime = String.format("%02d:%02d", formattedHour, minute)
+
+            closingTimeEditText.setText(formattedTime)
+             closingTimeAm.text = amPm
+
+       viewModel.updateLocationDetails("closingTime", closingTimeEditText.text.toString() )
+
+
+
+
+
+        }
+    }
+
+
+
 
     // Chip handling function
     fun action(list: ArrayList<String>) {
@@ -310,8 +409,7 @@ class LocationFragment : Fragment() {
             if (addresses != null && addresses.isNotEmpty()) {
                 val address = addresses[0]
                 val addressLine = address.getAddressLine(0) ?: "No Address"
-          //      showWebView(addressLine)
-                val city = address.locality ?: "No City"
+
                 val country = address.countryName ?: "India"
                 val finalLocation = "$addressLine, $country"
                 editTextAddress.setText(finalLocation)
@@ -343,27 +441,9 @@ class LocationFragment : Fragment() {
         }
     }
 
-//    private fun showWebView(location: String) {
-//        val webView1: WebView? = view?.findViewById<WebView>(R.id.web_view)
-//        if (webView1 == null) {
-//            Toast.makeText(requireContext(), "WebView not found", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-//
-//
-//
-//        val webView: WebView = view?.findViewById(R.id.web_view) ?: return
-//
-//        // Enable JavaScript in WebView
-//        val webSettings = webView.settings
-//        webSettings.javaScriptEnabled = true
-//
-//        // Load Google Maps URL into WebView
-//        val geoUrl = "https://www.google.com/maps/search/?q=$location"
-//        webView.loadUrl(geoUrl)
-//    }
 
-    private fun loadStaticMap(lat: Double, long: Double, ) {
+
+    private fun loadStaticMap(lat: Double, long: Double ) {
         val imageView = requireView().findViewById<ImageView>(R.id.mapImageView)
 
         val apiKey = "AlzaSyrUEpS0h2OP1Lk6uHj2OPBz-Br8wuIAzBH" // Replace with your API key

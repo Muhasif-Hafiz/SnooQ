@@ -16,6 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 
 import com.muhasib.snooq.R
+import com.muhasib.snooq.TestingLocationActivity
 import com.muhasib.snooq.view.MainActivity
 import com.muhasib.snooq.view.ShopRegistration.ShopRegistrationActivity
 import com.shrikanthravi.customnavigationdrawer2.data.MenuItem
@@ -86,7 +87,16 @@ navigationDrawer.menuItemSemiTransparentColor
                     return@setOnMenuItemClickListener
                 }
                 3 -> FavoriteFragment::class.java
-                4 -> AboutUsFragment::class.java
+                4 ->
+
+                    {
+                    // AboutUsFragment::class.java
+                        navigateToTestingActivity()
+
+
+                    return@setOnMenuItemClickListener
+
+                }
                 5 -> {
                     logOutUser()
                     return@setOnMenuItemClickListener
@@ -185,6 +195,9 @@ navigationDrawer.menuItemSemiTransparentColor
 
         startActivity(Intent(this@HomeActivity, ShopRegistrationActivity::class.java))
 
+    }
+    private fun navigateToTestingActivity(){
+        startActivity(Intent(this@HomeActivity, TestingLocationActivity::class.java))
     }
 
 }

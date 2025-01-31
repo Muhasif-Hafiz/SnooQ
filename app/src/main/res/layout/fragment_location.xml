@@ -17,11 +17,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location and Operating Hours"
-            android:textSize="24sp"
+            android:text="Shop Location"
+            android:textSize="32sp"
             android:textStyle="bold"
-            android:fontFamily="@font/extrabold_h1"
-            android:textColor="@color/PrimarySnooQ"
+
+            android:fontFamily="@font/extra_bold_h3"
+            android:textColor="@color/black"
             android:layout_marginBottom="24dp"
             android:paddingStart="8dp" />
 
@@ -30,21 +31,52 @@
 <!--            android:layout_width="250dp"-->
 <!--            android:layout_height="210dp" />-->
         
-        <ImageView
-            android:id="@+id/mapImageView"
-            android:layout_width="370dp"
-            android:layout_gravity="center"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/locationCard"
+            android:layout_width="376dp"
+            android:layout_height="244dp"
+            app:cardCornerRadius="14dp"
+
+            >
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:indeterminate="true"/>
+            <ImageView
+                android:id="@+id/locationImageView"
+                android:layout_width="match_parent"
+                android:background="@drawable/img_location_background"
+                android:layout_height="match_parent">
+
+            </ImageView>
 
 
-            android:src="@drawable/maps_placeholder"
-            android:layout_marginBottom="20dp"
-            android:layout_height="250dp"/>
 
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:layout_width="290dp"
+
+            android:layout_marginTop="24dp"
+            android:textSize="16dp"
+            android:text="@string/enter_city"
+
+            android:layout_height="wrap_content">
+
+
+        </TextView>
 
 
 
         <!-- Full Address -->
         <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -52,60 +84,45 @@
             app:hintTextColor="@color/PrimarySnooQ"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+
+
+
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextFullAddress"
+                android:id="@+id/editCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Full Address"
+                android:hint="City name"
                 android:inputType="textMultiLine"
-                android:lines="3"
+                android:lines="1"
                 android:gravity="top"
                 android:textSize="16sp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- ProgressBar -->
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:indeterminate="true"/>
 
-        <!-- Map Location Section -->
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginBottom="16dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Map Location"
-                android:textColor="@color/PrimarySnooQ"
-                android:layout_marginBottom="8dp"
-                android:textStyle="bold"
-                android:textSize="18sp" />
+
 
             <Button
-                android:id="@+id/buttonPickLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Select Location on Map"
-                android:backgroundTint="@color/PrimarySnooQ"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
+                android:id="@+id/btnSubmitLocation"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/black"
 
-            <Button
-                android:id="@+id/buttonGoToLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="View On Map"
-                android:backgroundTint="@color/PrimarySnooQ"
+                android:text="Submit"
                 android:textColor="@color/white"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
+
         </LinearLayout>
+
 
         <LinearLayout
 
@@ -121,8 +138,9 @@
                 android:layout_height="wrap_content"
                 android:text="Operating Schedule"
                 android:textSize="24sp"
-                android:textColor="#00E676"
-                android:layout_marginBottom="24dp"/>
+                android:fontFamily="@font/extra_bold_h3"
+                android:textColor="@color/black"
+                android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -239,8 +257,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Closed Days"
-                android:textColor="@color/PrimarySnooQ"
+                android:text="Opening Days"
+                android:textColor="@color/black"
                 android:layout_marginBottom="8dp"
                 android:textStyle="bold"
                 android:textSize="16sp" />
@@ -346,7 +364,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Delivery Options"
-                android:textColor="@color/PrimarySnooQ"
+                android:textColor="@color/black"
                 android:layout_marginBottom="8dp"
                 android:textStyle="bold"
                 android:textSize="16sp" />
@@ -355,7 +373,9 @@
                 android:id="@+id/switchDelivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enable Delivery"
+                android:text="Enable Delivery                                         "
+                android:switchMinWidth="20dp"
+                android:ellipsize="marquee"
                 android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout

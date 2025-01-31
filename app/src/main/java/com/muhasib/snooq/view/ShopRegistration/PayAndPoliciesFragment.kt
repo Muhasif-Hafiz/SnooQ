@@ -68,7 +68,7 @@ class PayAndPoliciesFragment : Fragment() {
         btnUpload.setOnClickListener {
 
 
-            UploadData(requireContext(), lifecycleOwner = viewLifecycleOwner, shopRegistrationViewModel).uploadData()
+            UploadData(requireContext(), lifecycleOwner = viewLifecycleOwner, shopRegistrationViewModel, shopRegistrationRepository).uploadData()
 
         }
 

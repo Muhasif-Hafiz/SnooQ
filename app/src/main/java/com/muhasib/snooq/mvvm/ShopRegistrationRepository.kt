@@ -2,10 +2,11 @@ package com.muhasib.snooq.mvvm
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.muhasib.snooq.constants.userDetail.Companion.SHOP_ID
+import com.muhasib.snooq.model.Shopkeeper
 
 import kotlinx.coroutines.tasks.await
 
-import java.util.HashMap
+import kotlin.collections.HashMap
 
 
 class ShopRegistrationRepository{
@@ -15,7 +16,7 @@ class ShopRegistrationRepository{
     private val firestore = FirebaseFirestore.getInstance()
 
     // Upload shop details to the database
-    suspend fun uploadShopDetails(shopDetails: HashMap<String, Any>): Boolean {
+    suspend fun uploadShopDetails(shopDetails: HashMap<String, Shopkeeper>): Boolean {
         return try {
             val collectionRef = firestore.collection("shops")
 

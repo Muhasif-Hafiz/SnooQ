@@ -1,4 +1,4 @@
-package com.muhasib.model
+package com.muhasib.snooq.model
 
 data class PaymentInfo(
     val paymentMethod : String? = null,

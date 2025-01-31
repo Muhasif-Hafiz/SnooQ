@@ -4,77 +4,98 @@ import BaseActivity
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.muhasib.snooq.R.id
+import com.muhasib.snooq.model.NominatimResponse
+import com.muhasib.snooq.singleton.RetrofitClient
 import org.w3c.dom.Text
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TestingLocationActivity : BaseActivity() {
 
-    private lateinit var  openingTimeEditText : EditText
-    private lateinit var  closingTimeEditText : EditText
-    private lateinit var  openingTimeAm  : TextView
-    private lateinit var  closingTimeAm : TextView
-    private  lateinit var  btnOpening : Button
-    private lateinit var  btnClosing : Button
+
+    private lateinit var editText : EditText
+    private lateinit var  btnSearch : MaterialButton
+    private lateinit var  locationText : TextView
+    private lateinit var  imgLocation : ImageView
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_testing_location)
 
-        openingTimeEditText = findViewById(id.openingTimeEdit)
-        closingTimeEditText = findViewById(id.closingTimeEdit)
-        openingTimeAm = findViewById(id.openingAMTV)
-        closingTimeAm = findViewById(id.closingAmTV)
-        btnOpening = findViewById(id.btnOpeningTime)
-        btnClosing = findViewById(id.btnClosingTime)
 
 
-        btnOpening.setOnClickListener {
-            showTimePicker(isOpeningTime = true)
+        editText= findViewById(R.id.etLocation)
+        btnSearch= findViewById(R.id.btnSearchLocation)
+        locationText = findViewById(R.id.locationText)
+        imgLocation = findViewById(R.id.mapImageView)
+
+
+
+        btnSearch.setOnClickListener{
+
+            val location = editText.text.toString()
+            getLatLngFromAddress(location)
         }
 
-        btnClosing.setOnClickListener {
-            showTimePicker(isOpeningTime = false)
-        }
+
 
 
     }
-    private fun showTimePicker(isOpeningTime: Boolean) {
-        val timePicker = MaterialTimePicker.Builder()
-            .setTimeFormat(TimeFormat.CLOCK_12H)
-            .setHour(12)
-            .setMinute(0)
-            .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
-            .setTitleText(if (isOpeningTime) "Choose Opening Time" else "Choose Closing Time")
-            .build()
+    fun getLatLngFromAddress(address: String) {
+        val call = RetrofitClient.instance.getLocation(address)
 
-        timePicker.show(supportFragmentManager, "TIME_PICKER")
+        call.enqueue(object : Callback<List<NominatimResponse>> {
+            override fun onResponse(call: Call<List<NominatimResponse>>, response: Response<List<NominatimResponse>>) {
+                if (response.isSuccessful) {
+                    response.body()?.firstOrNull()?.let { location ->
 
-        timePicker.addOnPositiveButtonClickListener {
-            val hour = timePicker.hour
-            val minute = timePicker.minute
-            val amPm = if (hour < 12) "AM" else "PM"
-            val formattedHour = if (hour == 0 || hour == 12) 12 else hour % 12
-            val formattedTime = String.format("%02d:%02d", formattedHour, minute)
+                        val latitude = location.latitude.toDoubleOrNull() ?: 0.0
+                        val longitude = location.longitude.toDoubleOrNull() ?: 0.0
 
-            if (isOpeningTime) {
-                openingTimeEditText.setText(formattedTime)
-                openingTimeAm.text = amPm
-            } else {
-                closingTimeEditText.setText(formattedTime)
-                closingTimeAm.text = amPm
+                        // Load static map with location
+                        loadStaticMap(latitude, longitude, 10, imgLocation)
+
+                        // Display location information
+                        locationText.text = "${location.displayName} ($latitude, $longitude)"
+                    } ?: Log.e("Geocoding", "No results found")
+                } else {
+                    Log.e("Geocoding", "Error: ${response.errorBody()?.string()}")
+                }
             }
-        }
+
+            override fun onFailure(call: Call<List<NominatimResponse>>, t: Throwable) {
+                Log.e("Geocoding", "Request failed: ${t.message}")
+            }
+        })
+    }
+
+
+    fun loadStaticMap(latitude: Double, longitude: Double, zoom: Int, imageView: ImageView) {
+        // Construct the static map URL with lang set to English
+        val staticMapUrl = "https://static-maps.yandex.ru/1.x/?ll=$longitude,$latitude&z=$zoom&size=650,450&l=map&pt=$longitude,$latitude,pm2rdm&lang=en"
+
+        // Load the map image into the ImageView using Glide
+        Glide.with(imageView.context)
+            .load(staticMapUrl)
+            .into(imageView)
     }
 }

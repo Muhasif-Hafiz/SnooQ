@@ -1,21 +1,25 @@
 package com.muhasib.snooq.view.ShopRegistration
 
+import ShopRegistrationViewModel
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.dynamicfeatures.Constants
 import com.muhasib.snooq.R
-import com.muhasib.snooq.R.id.btnUploadPhoto2
-import com.muhasib.snooq.constants.ClientConstants
 import com.muhasib.snooq.singleton.AppWriteSingleton
 import io.appwrite.Client
 import io.appwrite.ID
@@ -32,29 +36,40 @@ class ShopMediaFragment : Fragment() {
     private lateinit var btnUploadPhoto2: ImageButton
     private lateinit var btnUploadPhoto3: ImageButton
     private lateinit var btnUploadPhoto4: ImageButton
-    private lateinit var btnUploadLogo: ImageButton
-    private lateinit var btnUploadBanner: ImageButton
-    private lateinit var btnUploadBusinessProof: ImageButton
-    private lateinit var btnUploadIDProof: ImageButton
+    private lateinit var btnUploadPhoto5: ImageButton
+    private lateinit var btnUploadPhoto6: ImageButton
+    private  lateinit var  instagram : EditText
+    private lateinit var  facebook : EditText
+    private lateinit var  otherLinks : EditText
 
-    private lateinit var btnUploadAll: Button
+
+
     private lateinit var client: Client
     private lateinit var storage: Storage
+    private  lateinit var  viewModel : ShopRegistrationViewModel
 
     private val selectedImages = mutableMapOf<Int, Uri>()
+
+    private val uploadedFileIds = mutableMapOf<Int, String>()
 
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             val buttonId = currentButtonId
             if (buttonId != null) {
                 selectedImages[buttonId] = it
-                view?.findViewById<ImageButton>(buttonId)?.setImageURI(it) // Update the ImageButton
+                view?.findViewById<ImageButton>(buttonId)?.setImageURI(it) // Update ImageButton
+
+                // Upload new image and replace the existing one if needed
+                lifecycleScope.launch {
+                    uploadImageToAppwrite(buttonId, it)
+                }
             }
         } ?: Toast.makeText(requireContext(), "No image selected", Toast.LENGTH_SHORT).show()
     }
 
-    private var currentButtonId: Int? = null // Keeps track of the currently clicked ImageButton
+    private var currentButtonId: Int? = null
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,89 +86,115 @@ class ShopMediaFragment : Fragment() {
         btnUploadPhoto2 = view.findViewById(R.id.btnUploadPhoto2)
         btnUploadPhoto3 = view.findViewById(R.id.btnUploadPhoto3)
         btnUploadPhoto4 = view.findViewById(R.id.btnUploadPhoto4)
-        btnUploadLogo = view.findViewById(R.id.btnUploadLogo)
-        btnUploadBanner = view.findViewById(R.id.btnUploadBanner)
-        btnUploadBusinessProof = view.findViewById(R.id.btnUploadBusinessProof)
-        btnUploadIDProof = view.findViewById(R.id.btnUploadIDProof)
+        btnUploadPhoto5 = view.findViewById(R.id.btnUploadPhoto5)
+        btnUploadPhoto6 = view.findViewById(R.id.btnUploadPhoto6)
+        instagram  = view.findViewById<EditText>(R.id.insta_link)
+        facebook = view.findViewById(R.id.facebook_link)
+        otherLinks = view.findViewById( R.id.other_link)
 
-        // Initialize Upload button
-        btnUploadAll = view.findViewById(R.id.btnUploadToAppwrite)
+
+        viewModel = ViewModelProvider(requireActivity())[ShopRegistrationViewModel::class.java]
 
         // Set click listeners for ImageButtons
         setImageButtonClickListener(btnUploadPhoto1)
         setImageButtonClickListener(btnUploadPhoto2)
         setImageButtonClickListener(btnUploadPhoto3)
         setImageButtonClickListener(btnUploadPhoto4)
-        setImageButtonClickListener(btnUploadLogo)
-        setImageButtonClickListener(btnUploadBanner)
-        setImageButtonClickListener(btnUploadBusinessProof)
-        setImageButtonClickListener(btnUploadIDProof)
+        setImageButtonClickListener(btnUploadPhoto5)
+        setImageButtonClickListener(btnUploadPhoto6)
+        val scrollView: ScrollView = view.findViewById(R.id.scrollView)
+        scrollView.setEdgeEffectColor(Color.GREEN)
+        scrollView.isSmoothScrollingEnabled
 
-        // Set click listener for Upload button
-        btnUploadAll.setOnClickListener {
-            if (selectedImages.isNotEmpty()) {
-                lifecycleScope.launch {
-                    uploadAllImagesToAppwrite()
-                }
-            } else {
-                Toast.makeText(requireContext(), "Please select at least one image", Toast.LENGTH_SHORT).show()
-            }
+
+        instagram.addTextChangedListener {
+            collectAndSaveLinks()
         }
+
+        facebook.addTextChangedListener {
+            collectAndSaveLinks()
+        }
+
+        otherLinks.addTextChangedListener {
+            collectAndSaveLinks()
+        }
+
+
+
 
         return view
     }
 
     private fun setImageButtonClickListener(button: ImageButton) {
         button.setOnClickListener {
+
+
             currentButtonId = button.id
             pickImage.launch("image/*")
         }
     }
 
-    private suspend fun uploadAllImagesToAppwrite() {
-        for ((buttonId, uri) in selectedImages) {
-            val fileName = when (buttonId) {
-                R.id.btnUploadPhoto1 -> "shop_photo_1.jpg"
-                R.id.btnUploadPhoto2 -> "shop_photo_2.jpg"
-                R.id.btnUploadPhoto3 -> "shop_photo_3.jpg"
-                R.id.btnUploadPhoto4 -> "shop_photo_4.jpg"
-                R.id.btnUploadLogo -> "shop_logo.jpg"
-                R.id.btnUploadBanner -> "shop_banner.jpg"
-                R.id.btnUploadBusinessProof -> "business_proof.jpg"
-                R.id.btnUploadIDProof -> "id_proof.jpg"
-                else -> "unknown_file.jpg"
+    private suspend fun uploadImageToAppwrite(buttonId: Int, uri: Uri) {
+        val fileName = when (buttonId) {
+            R.id.btnUploadPhoto1 -> "shop_photo_1.jpg"
+            R.id.btnUploadPhoto2 -> "shop_photo_2.jpg"
+            R.id.btnUploadPhoto3 -> "shop_photo_3.jpg"
+            R.id.btnUploadPhoto4 -> "shop_photo_4.jpg"
+            R.id.btnUploadPhoto5 -> "shop_photo_5.jpg"
+            R.id.btnUploadPhoto6 -> "shop_photo_6.jpg"
+            else -> "unknown_file.jpg"
+        }
+
+        try {
+            // Delete previous file if exists
+            uploadedFileIds[buttonId]?.let { oldFileId ->
+                try {
+                    storage.deleteFile("6792800d001d344a8d58", oldFileId)
+                } catch (e: AppwriteException) {
+                    Toast.makeText(requireContext(), "PLease re-upload this image!", Toast.LENGTH_SHORT).show()
+                }
             }
 
-            try {
-                val file = File(requireContext().cacheDir, fileName).apply {
-                    outputStream().use { output ->
-                        requireContext().contentResolver.openInputStream(uri)?.use { input ->
-                            input.copyTo(output)
-                        }
+            // Create new file
+            val file = File(requireContext().cacheDir, fileName).apply {
+                outputStream().use { output ->
+                    requireContext().contentResolver.openInputStream(uri)?.use { input ->
+                        input.copyTo(output)
                     }
                 }
-
-          val fileResponse=      storage.createFile(
-                    bucketId = "6792800d001d344a8d58",
-                    fileId = ID.unique(),
-                    file = InputFile.fromFile(file)
-                )
-                val fileId= fileResponse.id
-                val fileUrl = "https://cloud.appwrite.io/v1/storage/buckets//files/$fileId/view"
-
-
-
-
-
-
-
-
-                Toast.makeText(requireContext(), "$fileName uploaded successfully!", Toast.LENGTH_SHORT).show()
-            } catch (e: AppwriteException) {
-                Toast.makeText(requireContext(), "Error uploading $fileName: ${e.message}", Toast.LENGTH_LONG).show()
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Unexpected error for $fileName: ${e.message}", Toast.LENGTH_LONG).show()
             }
+            val buckId = "6792800d001d344a8d58"
+
+            val fileResponse = storage.createFile(
+                bucketId = "6792800d001d344a8d58",
+                fileId = ID.unique(),
+                file = InputFile.fromFile(file)
+            )
+
+            val newFileId = fileResponse.id
+            uploadedFileIds[buttonId] = newFileId
+
+            val fileId= fileResponse.id
+            val fileUrl = "https://cloud.appwrite.io/v1/storage/buckets/6792800d001d344a8d58/files/$fileId/view?project=677a4b92001bbd3a3742&mode=admin"
+            collectShopImageLinks(fileUrl)
+
+
+        } catch (e: AppwriteException) {
+            Toast.makeText(requireContext(), "Error uploading $fileName: ${e.message}", Toast.LENGTH_LONG).show()
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Unexpected error for $fileName: ${e.message}", Toast.LENGTH_LONG).show()
         }
+    }
+    private fun collectAndSaveLinks() {
+        val instagramLink = instagram.text.toString()
+        val facebookLink = facebook.text.toString()
+        val otherLink = otherLinks.text.toString()
+
+        viewModel.addSocialMediaLink(instagramLink, facebookLink, otherLink)
+    }
+    private fun collectShopImageLinks(link : String){
+
+        viewModel.addShopImageLinks(link)
+
     }
 }

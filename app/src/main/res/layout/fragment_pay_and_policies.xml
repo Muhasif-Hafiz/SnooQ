@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/Scroll_View_payment"
+    android:scrollbarThumbVertical="@color/black"
     tools:context=".view.ShopRegistration.PayAndPoliciesFragment">
 
     <LinearLayout
@@ -78,6 +80,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextBankName"
+                android:textCursorDrawable="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Bank Name" />
@@ -95,6 +98,7 @@
                 android:id="@+id/editTextAccountNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textCursorDrawable="@color/black"
                 android:hint="Account Number"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -111,6 +115,7 @@
                 android:id="@+id/editTextIFSC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textCursorDrawable="@color/black"
                 android:hint="IFSC Code" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,6 +144,7 @@
                 android:hint="Describe refund/exchange policy (optional)"
                 android:inputType="textMultiLine"
                 android:lines="4"
+                android:textCursorDrawable="@color/black"
                 android:gravity="top" />
         </com.google.android.material.textfield.TextInputLayout>
 

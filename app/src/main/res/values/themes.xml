@@ -13,12 +13,18 @@
 
 
 
-    <style name="CustomTimePickerTheme" parent="Theme.MaterialComponents.DayNight">
-        <item name="colorPrimary">#00E676</item>  <!-- Main color -->
-        <item name="colorAccent">#FFFFFF</item>   <!-- Highlight color -->
-        <item name="android:textColorPrimary">#00E676</item> <!-- Title Text Color -->
-        <item name="android:background">#1E1E1E</item>  <!-- Background Color -->
-    </style>
+
+
+
+        <style name="GreenSwitch" parent="Theme.AppCompat.Light">
+            <!-- Active thumb color & Active track color -->
+            <item name="colorControlActivated">#4CAF50</item>
+            <!-- Inactive thumb color -->
+            <item name="colorSwitchThumbNormal">#FFFFFF</item>
+            <!-- Inactive track color -->
+            <item name="android:colorForeground">#E0E0E0</item>
+        </style>
+
 
 
 </resources>

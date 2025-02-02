@@ -3,12 +3,16 @@ package com.muhasib.snooq.view.ShopRegistration
 import ShopRegistrationViewModel
 import UploadData
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ScrollView
+import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
@@ -22,6 +26,7 @@ class PayAndPoliciesFragment : Fragment() {
     private lateinit var shopRegistrationRepository: ShopRegistrationRepository
 
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +36,9 @@ class PayAndPoliciesFragment : Fragment() {
 
 
         // Initialize the ViewModel and Repository
+        val scrollView: ScrollView = view.findViewById(R.id.Scroll_View_payment)
+        scrollView.setEdgeEffectColor(Color.GREEN)
+        scrollView.isSmoothScrollingEnabled
 
         shopRegistrationViewModel = ViewModelProvider(requireActivity()).get(ShopRegistrationViewModel::class.java)
         shopRegistrationRepository = ShopRegistrationRepository()

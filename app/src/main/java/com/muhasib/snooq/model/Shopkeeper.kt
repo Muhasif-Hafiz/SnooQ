@@ -10,4 +10,3 @@ data class Shopkeeper(
      val paymentInfo: PaymentInfo,
     val shops: List<Shop>
 )
-typealias ShopkeepersCollection = Map<String, Shopkeeper>

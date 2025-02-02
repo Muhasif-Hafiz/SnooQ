@@ -2,27 +2,21 @@ package com.muhasib.snooq
 
 import BaseActivity
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
+
 import android.os.Bundle
 import android.util.Log
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.widget.Button
+
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+
 import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.timepicker.MaterialTimePicker
-import com.google.android.material.timepicker.TimeFormat
-import com.muhasib.snooq.R.id
+
 import com.muhasib.snooq.model.NominatimResponse
 import com.muhasib.snooq.singleton.RetrofitClient
-import org.w3c.dom.Text
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

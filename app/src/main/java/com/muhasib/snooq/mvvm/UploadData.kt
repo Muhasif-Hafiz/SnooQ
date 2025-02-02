@@ -9,7 +9,7 @@ import com.muhasib.snooq.model.PaymentInfo
 import com.muhasib.snooq.model.Product
 import com.muhasib.snooq.model.Shop
 import com.muhasib.snooq.model.Shopkeeper
-import com.muhasib.snooq.model.UserDetails
+
 import com.muhasib.snooq.mvvm.ShopRegistrationRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +29,9 @@ class UploadData(
             val userDetails = shopRegistrationViewModel.userDetailsMap.value ?: hashMapOf()
             val locationDetails = shopRegistrationViewModel.locationDetailsMap.value ?: hashMapOf()
             val paymentDetails = shopRegistrationViewModel.paymentInfoMap.value ?: hashMapOf()
+            val socialMediaLinks = shopRegistrationViewModel.socialMediaLinks.value ?: listOf()
+            val shopImageLinks = shopRegistrationViewModel.shopImageLinks .value ?: listOf()
+
 
             // Create a list of shops for the shopkeeper
             val shops: List<Shop> = listOf(
@@ -85,7 +88,9 @@ class UploadData(
                     subscriptionPlan = "Premium",
                     subscriptionExpiry = "2025-01-01",
                     tags = listOf("organic", "local"),
-                    shopImages = listOf("https://example.com/shop1.jpg", "https://example.com/shop2.jpg")
+                    shopImages =shopImageLinks,
+                    socialMediaLinks = socialMediaLinks
+
                 )
             )
 
@@ -108,7 +113,7 @@ class UploadData(
                     profilePicture = "null", // Assuming no profile picture URL is provided
                     registrationDate = "2024-01-01",
                     paymentInfo = paymentInfo, // Add paymentInfo
-                    shops = shops // Adding the list of shops
+                    shops = shops
                 )
             )
 

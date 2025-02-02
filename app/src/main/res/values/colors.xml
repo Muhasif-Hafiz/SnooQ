@@ -10,4 +10,16 @@
     <color name="focused_hint_color">#FF5722</color> <!-- Orange for focused -->
     <color name="Selected_chip_color">#C8E6C9</color>
 
+    <color name="unique_primary_color">#54EF49</color> <!-- Unique primary color -->
+    <color name="unique_primary_dark_color">#02A51D</color> <!-- Dark primary color -->
+    <color name="unique_control_normal">#FFFFFF</color> <!-- White for text control -->
+    <color name="unique_button_normal">#C2E3A5</color> <!-- Orange color for buttons -->
+    <color name="unique_text_color_primary">#FFFFFF</color> <!-- White for text -->
+    <color name="start_gradient_color">#27E11F</color> <!-- Gradient start color -->
+    <color name="end_gradient_color">#072B17</color> <!-- Gradient end color -->
+
+    <color name="light_green">#A8D5BA</color> <!-- Light green -->
+
+    <color name="transparent_black_percent_20">#33000000</color>
+
 </resources>

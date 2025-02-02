@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <style name="CustomTimePickerTheme" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <!-- Background with Gradient -->
+
+        <!-- Primary and Secondary Colors -->
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/black</item>
+
+        <!-- Control color: AM/PM, hour, and minute text -->
+        <item name="colorControlNormal">@color/black</item>
+
+        <!-- Buttons -->
+        <item name="colorButtonNormal">@color/light_green</item>
+
+        <!-- Time text color -->
+        <item name="android:textColorPrimary">@color/black</item>
+
+        <!-- Highlight/Accent color for selections or other UI elements -->
+        <item name="colorAccent">@color/light_green</item>
+
+        <!-- Background of the popup (dialog window) -->
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

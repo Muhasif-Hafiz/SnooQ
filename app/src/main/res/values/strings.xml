@@ -5,14 +5,16 @@
 
     <string name="enter_the_verification_code_received_on_your_email_address">Enter the verification code received on your Email Address</string>
     <string name="enter_city">Enter your city to help nearby customers find you easily.</string>
+    <string name="add_shop_image">Add at least one shop image to make your shop more appealing to customers.</string>
+    <string name="add_links">Add your Instagram, Facebook, or other platform links for better visibility.</string>
 
 
     <string-array name="steps">
-        <item> Step 1</item>
-        <item> Step 2</item>
-        <item> Step 3</item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
 
-        <item> Step 4 </item>
+        <item> </item>
     </string-array>
 
 </resources>

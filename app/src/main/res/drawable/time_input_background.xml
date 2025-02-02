@@ -1,6 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#FFFFFF"/>
-    <corners android:radius="8dp"/>
-    <stroke android:width="1dp" android:color="#E0E0E0"/>
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Simple Background gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="@color/light_green"
+                android:endColor="@color/white"
+                android:angle="45"/>
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+
+    <!-- Subtle shadow effect with transparency -->
+    <item android:right="1dp" android:left="1dp" android:top="1dp" android:bottom="1dp">
+        <shape>
+            <solid android:color="@color/transparent_black_percent_20"/> <!-- Reduced opacity for subtle shadow -->
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+</layer-list>

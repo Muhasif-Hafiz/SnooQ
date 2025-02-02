@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ShopRegistration.ShopMediaFragment">
+    android:id="@+id/scrollView"
+    android:scrollbarThumbVertical="@color/black">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginBottom="16dp"
         android:padding="16dp">
 
         <!-- Shop Images Section -->
@@ -17,205 +16,224 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Shop Images"
-            android:textColor="@color/PrimarySnooQ"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+            android:textSize="32sp"
+            android:fontFamily="@font/extra_bold_h3"
+            android:textColor="@color/black"
+            android:padding="8dp"
+            android:layout_marginBottom="24dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upload multiple shop photos (interior, exterior)"
-            android:layout_marginBottom="8dp"
-            android:textSize="14sp" />
+            android:text="@string/add_shop_image"
+            android:textSize="18sp"
+            android:textColor="#1D251F"
+            android:layout_marginBottom="24dp"/>
 
-        <!-- Horizontal Layout for ImageButtons -->
+        <!-- Image Grid Container -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginBottom="16dp">
+            android:orientation="vertical">
 
-            <!-- ImageButton 1 -->
-            <ImageButton
-                android:id="@+id/btnUploadPhoto1"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:backgroundTint="#D3D3D3"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_placeholder"
-                android:layout_marginEnd="8dp" />
+            <!-- First Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-            <!-- ImageButton 2 -->
-            <ImageButton
-                android:id="@+id/btnUploadPhoto2"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:backgroundTint="#D3D3D3"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_placeholder"
-                android:layout_marginEnd="8dp" />
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp">
+                    <ImageButton
+                        android:id="@+id/btnUploadPhoto1"
 
-            <!-- ImageButton 3 -->
-            <ImageButton
-                android:id="@+id/btnUploadPhoto3"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:backgroundTint="#D3D3D3"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_placeholder"
-                android:layout_marginEnd="8dp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/image_placeholder_background"
+                        android:src="@drawable/select_image_bg"/>
+                </FrameLayout>
 
-            <!-- ImageButton 4 -->
-            <ImageButton
-                android:id="@+id/btnUploadPhoto4"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:backgroundTint="#D3D3D3"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_placeholder" />
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp">
+                    <ImageButton
+                        android:id="@+id/btnUploadPhoto2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/image_placeholder_background"
+                        android:src="@drawable/select_image_bg"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp">
+                    <ImageButton
+                        android:id="@+id/btnUploadPhoto3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/image_placeholder_background"
+                        android:src="@drawable/select_image_bg"/>
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- Second Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp">
+                    <ImageButton
+                        android:id="@+id/btnUploadPhoto4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/image_placeholder_background"
+                        android:src="@drawable/select_image_bg"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp">
+                    <ImageButton
+                        android:id="@+id/btnUploadPhoto5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/image_placeholder_background"
+                        android:src="@drawable/select_image_bg"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp">
+                    <ImageButton
+                        android:id="@+id/btnUploadPhoto6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/image_placeholder_background"
+                        android:src="@drawable/select_image_bg"/>
+                </FrameLayout>
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Other Sections -->
-        <!-- Shop Logo -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload shop logo"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="14sp" />
-
-        <ImageButton
-            android:id="@+id/btnUploadLogo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:backgroundTint="#D3D3D3"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Shop Banner -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Banner Image (Optional for shop profile page)"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="14sp" />
-
-        <ImageButton
-            android:id="@+id/btnUploadBanner"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:backgroundTint="#D3D3D3"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Verification Documents Section -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Verification Documents"
-            android:textColor="@color/PrimarySnooQ"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Business Registration Proof -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload Business Registration Proof (e.g., GST, trade license, etc.)"
-            android:layout_marginBottom="8dp"
-            android:textSize="14sp" />
-
-        <ImageButton
-            android:id="@+id/btnUploadBusinessProof"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:backgroundTint="#D3D3D3"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder"
-            android:layout_marginBottom="16dp" />
-
-        <!-- ID Proof -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload ID Proof (e.g., Aadhaar, Passport)"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="14sp" />
-
-        <ImageButton
-            android:id="@+id/btnUploadIDProof"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:backgroundTint="#D3D3D3"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder"
-            android:layout_marginBottom="16dp" />
-
-        <Button
-            android:layout_width="240dp"
-            android:id="@+id/btnUploadToAppwrite"
-            android:text="Upload "
-            android:textColor="@color/black"
-            android:backgroundTint="#78C342"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"/>
-
         <!-- Social Media Links Section -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Social Media Links"
-            android:textColor="@color/PrimarySnooQ"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add links to Instagram, Facebook, or other platforms (optional)"
-            android:layout_marginBottom="8dp"
-            android:textSize="14sp" />
-
-        <!-- Instagram Link -->
-        <EditText
-            android:id="@+id/editTextInstagram"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Instagram Link"
-            android:inputType="textUri"
-            android:layout_marginBottom="8dp" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <!-- Facebook Link -->
-        <EditText
-            android:id="@+id/editTextFacebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Facebook Link"
-            android:inputType="textUri"
-            android:layout_marginBottom="8dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Social Media Links"
+                android:textSize="32sp"
+                android:fontFamily="@font/extra_bold_h3"
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"/>
 
-        <!-- Other Platform Link -->
-        <EditText
-            android:id="@+id/editTextOtherPlatform"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Other Platform Link"
-            android:inputType="textUri" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_links"
+                android:textSize="18sp"
+                android:textColor="#1D251F"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Instagram Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/instagram_img"
+                    android:layout_marginEnd="16dp"/>
+
+                <EditText
+                    android:id="@+id/insta_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="Instagram"
+                    android:padding="8dp"
+                    android:textColorHint="#666666"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <!-- Facebook Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/facebook_img"
+                    android:layout_marginEnd="16dp"/>
+
+                <EditText
+                    android:id="@+id/facebook_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="Facebook"
+                    android:padding="8dp"
+                    android:textColorHint="#666666"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <!-- Other Link Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/links_img"
+                    android:layout_marginEnd="16dp"/>
+
+                <EditText
+                    android:id="@+id/other_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="Other"
+                    android:padding="8dp"
+                    android:textColorHint="#666666"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
-
 </ScrollView>

@@ -14,6 +14,26 @@ class ShopRegistrationViewModel : ViewModel() {
 
     private val _locationDetails = MutableLiveData<Map<String, String>>()
     val locationDetails: LiveData<Map<String, String>> = _locationDetails
+    val socialMediaLinks = MutableLiveData<List<String>>()
+    private val _shopImageLinks = MutableLiveData<List<String>>()
+    val shopImageLinks: LiveData<List<String>> = _shopImageLinks
+
+    init {
+        _shopImageLinks.value = emptyList()
+    }
+
+    // Method to add new links to the list
+    fun addShopImageLinks(link: String) {
+        val currentList = _shopImageLinks.value?.toMutableList() ?: mutableListOf()
+        currentList.add(link)  // Add the new link to the list
+        _shopImageLinks.value = currentList  // Update LiveData
+    }
+    fun addSocialMediaLink(instagram: String, facebook: String, other: String) {
+        socialMediaLinks.value = listOf(instagram, facebook, other)
+    }
+   // , link2 :String, link3 :String, link4 :String, link5 :String, link6 : String
+
+
 
 
     fun validateFields(): Pair<Boolean, List<String>> {
@@ -49,13 +69,7 @@ class ShopRegistrationViewModel : ViewModel() {
             "ifscCode" to "IFSC Code",
             "refundPolicy" to "Refund Policy"
         ))
-//        validateFieldsForMap(mediaFiles.value, missingFields, listOf(
-//
-//
-//             "shopLogo" to "Shop Logo"
-//
-//
-//        ))
+
 
 
 

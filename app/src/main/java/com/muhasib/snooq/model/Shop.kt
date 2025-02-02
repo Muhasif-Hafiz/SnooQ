@@ -22,5 +22,6 @@ data class Shop(
     val subscriptionPlan: String,
     val subscriptionExpiry: String,
     val tags: List<String>,
-    val shopImages: List<String>
+    val shopImages: List<String>,
+    val socialMediaLinks : List<String>
 )

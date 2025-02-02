@@ -12,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.button.MaterialButton
 import com.muhasib.snooq.R
 
 import com.shuhart.stepview.StepView
@@ -22,8 +23,8 @@ class ShopRegistrationActivity : BaseActivity() {
 
     private lateinit var stepView: StepView
     private lateinit var viewPager: ViewPager2
-    private lateinit var nextButton: Button
-    private lateinit var backButton: Button
+    private lateinit var nextButton: MaterialButton
+    private lateinit var backButton: MaterialButton
     private var currentStep = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

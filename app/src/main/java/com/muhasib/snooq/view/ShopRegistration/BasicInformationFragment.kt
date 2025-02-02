@@ -1,6 +1,9 @@
 package com.muhasib.snooq.view.ShopRegistration
 
 import ShopRegistrationViewModel
+import android.annotation.SuppressLint
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 
 import androidx.fragment.app.Fragment
@@ -9,8 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.ScrollView
 
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -40,6 +45,8 @@ class BasicInformationFragment : Fragment() {
     private lateinit var viewModel: ShopRegistrationViewModel
     private lateinit var client: Client
 
+    @SuppressLint("MissingInflatedId")
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +57,11 @@ class BasicInformationFragment : Fragment() {
 
         // Initialize ViewModel
         viewModel = ViewModelProvider(requireActivity())[ShopRegistrationViewModel::class.java]
+
+        val scrollView: ScrollView = view.findViewById(R.id.scroll_view)
+        scrollView.setEdgeEffectColor(Color.GREEN)
+        scrollView.isSmoothScrollingEnabled
+
 
         // Bind Views
         shopName = view.findViewById(R.id.editTextShopName)

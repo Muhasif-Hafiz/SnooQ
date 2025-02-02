@@ -8,14 +8,15 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Geocoder
 import android.location.Location
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.os.Handler
+
 import android.os.Looper
-import android.text.Editable
-import android.text.TextWatcher
+
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -26,17 +27,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.Switch
 import android.widget.TextView
-
-import android.widget.TimePicker
-import androidx.cardview.widget.CardView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.FragmentManager
-
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
-
 import com.bumptech.glide.Glide
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
@@ -54,20 +53,12 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.muhasib.snooq.R
-import com.muhasib.snooq.constants.ApiKeys
 import com.muhasib.snooq.model.NominatimResponse
 import com.muhasib.snooq.singleton.RetrofitClient
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
-import java.net.URL
-import java.net.URLEncoder
 import java.util.Locale
 
 class LocationFragment : Fragment() {
@@ -78,7 +69,7 @@ class LocationFragment : Fragment() {
     private lateinit var locationRequest: LocationRequest
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
-    private lateinit var deliverSwitch: Switch
+    private lateinit var deliverSwitch: SwitchCompat
     private lateinit var layoutDeliveryRange: TextInputLayout
     private lateinit var editTextDeliveryRange: TextInputEditText
     private lateinit var chipGroup: ChipGroup
@@ -98,6 +89,7 @@ class LocationFragment : Fragment() {
         const val LOCATION_PERMISSION_CODE = 100
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     @SuppressLint("SuspiciousIndentation", "MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -105,9 +97,13 @@ class LocationFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_location, container, false)
 
-        //Initialize view Model
+
         viewModel = ViewModelProvider(requireActivity())[ShopRegistrationViewModel::class.java]
 
+
+        val scrollView: ScrollView = view.findViewById(R.id.scrollView)
+        scrollView.setEdgeEffectColor(Color.GREEN)
+        scrollView.isSmoothScrollingEnabled
         // Bind views
         locationSubmitButton = view.findViewById(R.id.btnSubmitLocation)
         editTextAddress = view.findViewById(R.id.editCity)
@@ -128,22 +124,17 @@ class LocationFragment : Fragment() {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-      //  locationPickButton.setOnClickListener { checkLocationPermission() }
-
-     //   goToLocationButton.setOnClickListener { moveToGoogleMaps() }
 
 
         locationSubmitButton.setOnClickListener {
-
-
 
             val location = editTextAddress.text.toString()
 
             (activity as BaseActivity).showLocationProgressDialog()
             getLatLngFromAddress(location)
 
-
         }
+        locationImageView.setOnClickListener { moveToGoogleMaps() }
 
 
 
@@ -167,62 +158,7 @@ class LocationFragment : Fragment() {
                 viewModel.updateLocationDetails("DeliveryAvailable", "false")
             }
         }
-//////////////////////////
-//        val handler = Handler(Looper.getMainLooper())
-//        val delay = 1000L
-//        var lastAddress: String? = null
-//
-//        editTextAddress.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(s: Editable?) {
-//                val address = s.toString()
-//
-//                // Remove any previous pending API calls to avoid multiple requests
-//                handler.removeCallbacksAndMessages(null)
-//
-//                // Only proceed if the address has changed and no request is in progress
-//                if (address != lastAddress) {
-//
-//                    // Start the progress bar only after a delay (indicating user has finished typing)
-//                    handler.postDelayed({
-//
-//
-//
-//                        // Perform the API call after the delay
-//                        val apiKey = ApiKeys.mapsApi
-//                        getLatLngFromAddress(address, apiKey) { lat, lng ->
-//                            // Update the location details in the view model
-//                            viewModel.updateLocationDetails("fullAddress", address)
-//
-//                            // Set the address text
-//                            editTextAddress.setText(address)
-//
-//                            // Load the static map
-//                            loadStaticMap(lat, lng)
-//
-//
-//
-//
-//                            lastAddress = address
-//                        }
-//                    }, delay)  // Set the delay time
-//                }
-//            }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-//        })
-///////////////////////////////
-        // Set listeners for opening and closing hours
-//        timePickerOpening.setOnTimeChangedListener { _, hourOfDay, minute ->
-//            viewModel.updateLocationDetails("openingHour", hourOfDay.toString())
-//            viewModel.updateLocationDetails("openingMinute", minute.toString())
-//        }
-//
-//        timePickerClosing.setOnTimeChangedListener { _, hourOfDay, minute ->
-//            viewModel.updateLocationDetails("closingHour", hourOfDay.toString())
-//            viewModel.updateLocationDetails("closingMinute", minute.toString())
-//        }
+
 
         val checkedDaysList = arrayListOf<String>()
         chipGroup.setOnCheckedStateChangeListener { _, checkedIds ->
@@ -236,10 +172,6 @@ class LocationFragment : Fragment() {
             }
         }
 
-        action(checkedDaysList)
-
-
-
         btnOpening.setOnClickListener {
             showTimePickerOpening()
         }
@@ -248,15 +180,6 @@ class LocationFragment : Fragment() {
             showTimePickerClosing()
         }
 
-
-
-
-
-
-
-
-
-
         return view
     }
     @SuppressLint("SuspiciousIndentation")
@@ -264,6 +187,7 @@ class LocationFragment : Fragment() {
         val timePicker = MaterialTimePicker.Builder()
             .setTimeFormat(TimeFormat.CLOCK_12H)
             .setHour(12)
+            .setTheme(R.style.CustomTimePickerTheme)
             .setMinute(0)
             .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
             .setTitleText( "Choose Opening Time" )
@@ -298,6 +222,8 @@ class LocationFragment : Fragment() {
             .setHour(12)
             .setMinute(0)
             .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
+
+            .setTheme(R.style.CustomTimePickerTheme)
             .setTitleText( "Choose Closing Time" )
             .build()
 
@@ -320,18 +246,6 @@ class LocationFragment : Fragment() {
 
 
 
-        }
-    }
-
-
-
-
-    // Chip handling function
-    fun action(list: ArrayList<String>) {
-        if (list.isEmpty()) {
-            Toast.makeText(requireContext(), "No Day selected", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(requireContext(), "$list", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -471,88 +385,44 @@ class LocationFragment : Fragment() {
     }
 
 
-
-
-
-    //
-
-//    fun getLatLngFromAddress(address: String, apiKey: String, callback: (lat: Double, lng: Double) -> Unit) {
-//        val url = "https://maps.gomaps.pro/maps/api/geocode/json?address=${URLEncoder.encode(address, "UTF-8")}&key=${apiKey}"
-//
-//        // Create a background thread to handle the API call (using a coroutine or async task is preferred)
-//        GlobalScope.launch(Dispatchers.IO) {
-//            try {
-//                val response = URL(url).readText()
-//                val jsonResponse = JSONObject(response)
-//                val results = jsonResponse.getJSONArray("results")
-//
-//                if (results.length() > 0) {
-//                    val location = results.getJSONObject(0).getJSONObject("geometry").getJSONObject("location")
-//                    val lat = location.getDouble("lat")
-//                    val lng = location.getDouble("lng")
-//
-//                    // Call the callback to pass back the latitude and longitude to the main thread
-//                    withContext(Dispatchers.Main) {
-//                        callback(lat, lng)
-//                    }
-//                } else {
-//                    // Handle the case where no results are found
-//                    withContext(Dispatchers.Main) {
-//                        // Optional: Show an error message or handle the case where no address is found
-//                        Log.e("Geocoding", "No results found for address: $address")
-//                    }
-//                }
-//            } catch (e: Exception) {
-//                // Handle any errors that occur during the network call
-//                withContext(Dispatchers.Main) {
-//                    Log.e("Geocoding", "Error: ${e.localizedMessage}")
-//                }
-//            }
-//        }
-//    }
-
     fun getLatLngFromAddress(address: String) {
         val call = RetrofitClient.instance.getLocation(address)
 
         call.enqueue(object : Callback<List<NominatimResponse>> {
             override fun onResponse(call: Call<List<NominatimResponse>>, response: Response<List<NominatimResponse>>) {
                 if (response.isSuccessful) {
-                    response.body()?.firstOrNull()?.let { location ->
+                    val locations = response.body()
 
+                    if (!locations.isNullOrEmpty()) {
+                        val location = locations.first()
                         val latitude = location.latitude.toDoubleOrNull() ?: 0.0
                         val longitude = location.longitude.toDoubleOrNull() ?: 0.0
 
                         // Load static map with location
                         loadStaticMap(latitude, longitude, 10, locationImageView)
 
-
-
+                        // Update UI elements
                         editTextAddress.setText(location.displayName)
+                        viewModel.updateLocationDetails("fullAddress", location.displayName)
+                    } else {
+                        editTextAddress.text?.clear()
 
-                        viewModel.updateLocationDetails("fullAddress" , editTextAddress.text.toString())
-
-
-
-
-
-
-
-
-
-
-                    } ?: Log.e("Geocoding", "No results found")
+                        Toast.makeText(requireContext(), "Couldn't find such city", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
+                    Toast.makeText(requireContext(), "Please enter a valid city name", Toast.LENGTH_SHORT).show()
                     Log.e("Geocoding", "Error: ${response.errorBody()?.string()}")
                 }
+                (activity as BaseActivity).hideLocationProgressbar()
             }
 
             override fun onFailure(call: Call<List<NominatimResponse>>, t: Throwable) {
-                Log.e("Geocoding", "Request failed: ${t.message}")
+                Toast.makeText(requireContext(), "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
+                (activity as BaseActivity).hideLocationProgressbar()
+                Log.e("Geocoding", "Failure: ${t.message}", t)
             }
         })
     }
-
-
     fun loadStaticMap(latitude: Double, longitude: Double, zoom: Int, imageView: ImageView) {
         // Construct the static map URL with lang set to English
         val staticMapUrl = "https://static-maps.yandex.ru/1.x/?ll=$longitude,$latitude&z=$zoom&size=650,450&l=map&pt=$longitude,$latitude,pm2rdm&lang=en"

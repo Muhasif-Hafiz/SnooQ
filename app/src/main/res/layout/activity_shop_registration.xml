@@ -4,23 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:background="@drawable/background_without_shade"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.ShopRegistration.ShopRegistrationActivity">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/centeredImage"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/creating_shop_img"
+        android:contentDescription="Centered Image"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"/>
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/stepview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-
-        <com.shuhart.stepview.StepView
-            android:id="@+id/stepview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            app:sv_selectedCircleColor="#3AEA5F"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:sv_selectedCircleColor="#3AEA5F"
         app:sv_selectedTextColor="#000000"
         app:sv_stepLineWidth="2dp"
         app:sv_stepPadding="4dp"
@@ -36,39 +38,62 @@
         app:sv_doneStepMarkColor="#FFFFFF"
         app:sv_stepNumberTextSize="12sp"
         app:sv_animationType="Line"
+
         app:sv_typeface="@font/bold_h2"/>
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-        <!-- ViewPager2 for managing content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center">
 
-        <!-- Navigation Buttons -->
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="Back"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            app:cornerRadius="25dp"
+            app:icon="@drawable/ic_arrow_back"
+            app:iconGravity="start"
+            app:iconTint="#FFFFFF"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/PrimarySnooQ"
+            android:stateListAnimator="@null"
+            android:elevation="8dp"
+            android:visibility="visible"/>
 
-            <Button
-                android:id="@+id/backButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Back"
-                android:backgroundTint="@color/PrimarySnooQ"
-                android:visibility="gone" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            app:cornerRadius="25dp"
+            app:icon="@drawable/ic_arrow_forward"
+            app:iconGravity="end"
+            app:iconTint="#FFFFFF"
+            android:backgroundTint="@color/PrimarySnooQ"
+            android:stateListAnimator="@null"
+            android:elevation="8dp"/>
 
-            <Button
-                android:id="@+id/nextButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/PrimarySnooQ"
-                android:layout_weight="1"
-                android:text="Next" />
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

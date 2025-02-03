@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:gravity="start"
+    android:scrollbars="vertical"
+    android:background="@android:color/white"
+    android:elevation="4dp"
+    tools:context=".view.ShopRegistration.PrivacyPolicyFragment">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Privacy Policy "
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp"
+        android:gravity="center" />
+
+    <!-- Terms and Conditions Paragraphs -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spacing="8dp">
+
+            <!-- Demo Paragraph 1 -->
+            <TextView
+                android:id="@+id/para1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome to our app! These Terms and Conditions outline the rules and regulations for the use of our service."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:lineSpacingExtra="4dp" />
+
+            <!-- Demo Paragraph 2 -->
+            <TextView
+                android:id="@+id/para2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="By accessing or using our service, you agree to comply with these terms. Please read them carefully before using our services."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:lineSpacingExtra="4dp" />
+
+            <!-- Demo Paragraph 3 -->
+            <TextView
+                android:id="@+id/para3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="We reserve the right to update or change these Terms at any time without prior notice. Your continued use of our service signifies acceptance of those changes."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:lineSpacingExtra="4dp" />
+
+            <!-- Demo Paragraph 4 -->
+            <TextView
+                android:id="@+id/para4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="For any questions regarding these Terms, please contact us at support@ourapp.com."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Accept Button -->
+    <Button
+        android:id="@+id/accept_button_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I Accept"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/black"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

@@ -3,6 +3,7 @@ package com.muhasib.snooq.view.ShopRegistration
 import ShopRegistrationViewModel
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Color.BLACK
 import android.os.Build
 import android.os.Bundle
 
@@ -71,10 +72,11 @@ class BasicInformationFragment : Fragment() {
         emailAddress = view.findViewById(R.id.editTextEmailAddress)
         shopDescription = view.findViewById(R.id.editTextShopDescription)
 
-        // Categories for AutoComplete
+
         val categories = listOf("Service based", "Product based", "General")
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, categories)
         category.setAdapter(adapter)
+        category.dropDownAnchor
 
         category.setOnItemClickListener { parent, view, position, id ->
             val selectedCategory = parent.getItemAtPosition(position).toString()
@@ -97,15 +99,15 @@ class BasicInformationFragment : Fragment() {
         shopDescription.addTextChangedListener {
             viewModel.updateUserDetails("shopDescription", it.toString())
         }
-//
+
         lifecycleScope.launch {
             try {
-                // Fetch the email asynchronously
-                val email: String? = fetchUserEmail() // Ensure this returns a String
+
+                val email: String? = fetchUserEmail()
 
 
 
-                // Ensure email is valid before updating Firestore
+
                 if (!email.isNullOrBlank() && isAdded) {
                     withContext(Dispatchers.Main) {
                         viewModel.updateUserDetails("emailAddress", email)

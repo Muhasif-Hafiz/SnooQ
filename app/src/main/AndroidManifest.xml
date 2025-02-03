@@ -20,16 +20,16 @@
         android:theme="@style/Theme.SnooQ"
         tools:targetApi="31">
         <activity
-            android:name=".TestingLocationActivity"
-
+            android:name=".view.ShopActivity"
             android:exported="false"
-
-            />
+            android:theme="@style/Theme.SnooQ" />
+        <activity
+            android:name=".TestingLocationActivity"
+            android:exported="false" />
         <activity
             android:name=".view.ShopRegistration.ShopRegistrationActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".view.Home.HomeActivity"
             android:exported="false" /> <!-- Main Launcher Activity -->

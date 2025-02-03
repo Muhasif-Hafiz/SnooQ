@@ -69,6 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+
             android:scrollbarThumbVertical="@color/black"
             app:boxStrokeColor="@color/PrimarySnooQ"
             app:hintTextColor="@color/PrimarySnooQ"
@@ -79,12 +80,15 @@
                 android:id="@+id/editCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="top"
+                android:gravity="top|start"
+
+                android:drawableStart="@drawable/shop_city"
                 android:textCursorDrawable="@color/black"
                 android:hint="City name"
                 android:inputType="textMultiLine"
                 android:lines="3"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:drawablePadding="8dp"  />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -135,15 +139,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Opening Time"
-                android:textSize="18sp"
                 android:textColor="#1D251F"
-                android:layout_marginBottom="8dp"/>
+                android:textSize="18sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
-                android:background="@drawable/time_input_background"
+
                 android:padding="12dp"
                 android:layout_marginBottom="16dp">
 
@@ -195,7 +199,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
-                android:background="@drawable/time_input_background"
+
                 android:padding="12dp"
                 android:layout_marginBottom="16dp">
 
@@ -247,7 +251,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Opening Days"
+                android:text="Closing Days"
                 android:textColor="@color/black"
                 android:layout_marginBottom="8dp"
                 android:textStyle="bold"
@@ -261,85 +265,163 @@
 
                 <!-- Days Chips -->
                 <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/chip_text"
                     android:layout_height="wrap_content"
                     android:text="Sunday"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/PrimarySnooQ"
-                    app:chipStrokeWidth="1dp"
-                    android:textSize="14sp" />
+                    android:layout_margin="4dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp"
+
+                    android:textSize="14sp"
+                    app:chipCornerRadius="10dp"
+                    app:chipBackgroundColor="@color/chip_background" />
 
                 <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/chip_text"
                     android:layout_height="wrap_content"
                     android:text="Monday"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/PrimarySnooQ"
-                    app:chipStrokeWidth="1dp"
-                    android:textSize="14sp" />
+                    android:layout_margin="4dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp"
+
+                    android:textSize="14sp"
+                    app:chipCornerRadius="10dp"
+                    app:chipBackgroundColor="@color/chip_background" />
 
                 <com.google.android.material.chip.Chip
 
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/chip_text"
                     android:layout_height="wrap_content"
                     android:text="Tuesday"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/PrimarySnooQ"
-                    app:chipStrokeWidth="1dp"
-                    android:textSize="14sp" />
+                    android:layout_margin="4dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp"
+
+                    android:textSize="14sp"
+                    app:chipCornerRadius="10dp"
+                    app:chipBackgroundColor="@color/chip_background" />
 
                 <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/chip_text"
                     android:layout_height="wrap_content"
                     android:text="Wednesday"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/PrimarySnooQ"
-                    app:chipStrokeWidth="1dp"
-                    android:textSize="14sp" />
+                    android:layout_margin="4dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp"
+
+                    android:textSize="14sp"
+                    app:chipCornerRadius="10dp"
+                    app:chipBackgroundColor="@color/chip_background" />
 
                 <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/chip_text"
                     android:layout_height="wrap_content"
                     android:text="Thursday"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/PrimarySnooQ"
-                    app:chipStrokeWidth="1dp"
-                    android:textSize="14sp" />
+                    android:layout_margin="4dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp"
+
+                    android:textSize="14sp"
+                    app:chipCornerRadius="10dp"
+                    app:chipBackgroundColor="@color/chip_background" />
 
                 <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/chip_text"
                     android:layout_height="wrap_content"
                     android:text="Friday"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/PrimarySnooQ"
-                    app:chipStrokeWidth="1dp"
-                    android:textSize="14sp" />
+                    android:layout_margin="4dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp"
+
+                    android:textSize="14sp"
+                    app:chipCornerRadius="10dp"
+                    app:chipBackgroundColor="@color/chip_background" />
 
                 <com.google.android.material.chip.Chip
 
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/chip_text"
                     android:layout_height="wrap_content"
                     android:text="Saturday"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/PrimarySnooQ"
-                    app:chipStrokeWidth="1dp"
-                    android:textSize="14sp" />
+                    android:layout_margin="4dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp"
+
+                    android:textSize="14sp"
+                    app:chipCornerRadius="10dp"
+                    app:chipBackgroundColor="@color/chip_background" />
                 <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/chip_text"
                     android:layout_height="wrap_content"
-                    android:text="All Days"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/PrimarySnooQ"
-                    app:chipStrokeWidth="1dp"
-                    android:textSize="14sp" />
+                    android:text="All days"
+                    android:layout_margin="4dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp"
+
+                    android:textSize="14sp"
+                    app:chipCornerRadius="10dp"
+                    app:chipBackgroundColor="@color/chip_background" />
             </com.google.android.material.chip.ChipGroup>
         </LinearLayout>
 

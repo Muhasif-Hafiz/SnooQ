@@ -63,7 +63,7 @@ class ShopRegistrationViewModel : ViewModel() {
 
         // Validate payment info from paymentInfoMap
         validateFieldsForMap(paymentInfoMap.value, missingFields, listOf(
-            //    "paymentMethod" to "Payment Method",
+               "paymentMethod" to "Payment Method",
             "bankName" to "Bank Name",
             "accountNumber" to "Account Number",
             "ifscCode" to "IFSC Code",
@@ -85,7 +85,7 @@ class ShopRegistrationViewModel : ViewModel() {
         }
     }
 
-    // Generic function to update a field in a specific HashMap (avoids redundancy)
+
     fun updateDetails(fieldMap: MutableLiveData<HashMap<String, String>>, field: String, value: String) {
         val updatedMap = fieldMap.value ?: hashMapOf()
         updatedMap[field] = value

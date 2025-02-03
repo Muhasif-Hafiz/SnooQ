@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/Scroll_View_payment"
     android:scrollbarThumbVertical="@color/black"
     tools:context=".view.ShopRegistration.PayAndPoliciesFragment">
@@ -12,18 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="16dp">
+        android:padding="16dp"
+        >
 
         <!-- Payment Methods -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Payment Methods"
-            android:textColor="@color/PrimarySnooQ"
+            android:text="Payment Methods "
+            android:textSize="32sp"
             android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+            android:fontFamily="@font/extra_bold_h3"
+            android:textColor="@color/black"
+            android:layout_marginBottom="24dp"
+            android:paddingStart="8dp" />
 
+
+        <!-- Bank Account Details -->
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroupPaymentMethods"
             android:layout_width="wrap_content"
@@ -32,41 +37,96 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipCash"
+
+                android:textColor="@color/chip_text"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cash"
-                app:chipBackgroundColor="@color/white" />
+                android:layout_margin="4dp"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp"
+
+                android:textSize="14sp"
+                app:chipCornerRadius="10dp"
+
+                app:chipBackgroundColor="@color/chip_background" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipUPI"
+                android:textColor="@color/chip_text"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:text="UPI"
-                app:chipBackgroundColor="@color/white" />
+                android:layout_margin="4dp"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp"
+
+                android:textSize="14sp"
+                app:chipCornerRadius="10dp"
+                app:chipBackgroundColor="@color/chip_background" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipCards"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
+                android:textColor="@color/chip_text"
                 android:layout_height="wrap_content"
                 android:text="Cards"
-                app:chipBackgroundColor="@color/white" />
+                android:layout_margin="4dp"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp"
+
+                android:textSize="14sp"
+                app:chipCornerRadius="10dp"
+                app:chipBackgroundColor="@color/chip_background" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipBankTransfer"
+                android:id="@+id/chipNetBanking"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
+                android:textColor="@color/chip_text"
                 android:layout_height="wrap_content"
-                android:text="Bank Transfer"
-                app:chipBackgroundColor="@color/white" />
+                android:text="Net Banking"
+                android:layout_margin="4dp"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp"
+
+                android:textSize="14sp"
+                app:chipCornerRadius="10dp"
+                app:chipBackgroundColor="@color/chip_background" />
         </com.google.android.material.chip.ChipGroup>
 
-        <!-- Bank Account Details -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bank Account Details"
-            android:textColor="@color/PrimarySnooQ"
+            android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="24sp"
+            android:fontFamily="@font/extra_bold_h3"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp" />
 
@@ -74,6 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxStrokeColor="@color/PrimarySnooQ"
+            app:startIconDrawable="@drawable/bank_name"
             app:hintTextColor="@color/PrimarySnooQ"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginBottom="8dp">
@@ -91,6 +152,7 @@
             android:layout_height="wrap_content"
             app:boxStrokeColor="@color/PrimarySnooQ"
             app:hintTextColor="@color/PrimarySnooQ"
+            app:startIconDrawable="@drawable/account_number_icon"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginBottom="8dp">
 
@@ -108,6 +170,7 @@
             android:layout_height="wrap_content"
             app:boxStrokeColor="@color/PrimarySnooQ"
             app:hintTextColor="@color/PrimarySnooQ"
+            app:startIconDrawable="@drawable/ifsc_code_icon"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginBottom="16dp">
 
@@ -124,9 +187,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Refund/Return Policy"
-            android:textColor="@color/PrimarySnooQ"
+            android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="24sp"
             android:layout_marginBottom="8dp" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -153,36 +216,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Terms and Conditions"
-            android:textColor="@color/PrimarySnooQ"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_marginBottom="8dp" />
 
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkBoxTerms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="I agree to the platform's terms and conditions"
+            android:textColor="@color/black"
+            app:buttonTint="@color/PrimarySnooQ"
             android:layout_marginBottom="8dp" />
 
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkBoxPrivacy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="I accept the privacy policy" />
-
-        <Button
-            android:layout_width="250dp"
-
-            android:layout_gravity="center"
-            android:text="Upload Data"
-            android:id="@+id/uploadData"
-            android:layout_height="match_parent">
+            android:text="I accept the privacy policy"
+            android:textColor="@color/black"
+            app:buttonTint="@color/PrimarySnooQ" />
 
 
-
-
-        </Button>
     </LinearLayout>
 
 </ScrollView>

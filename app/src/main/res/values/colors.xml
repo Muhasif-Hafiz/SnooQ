@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name = "background"> #FFFFFF</color>
@@ -17,9 +17,13 @@
     <color name="unique_text_color_primary">#FFFFFF</color> <!-- White for text -->
     <color name="start_gradient_color">#27E11F</color> <!-- Gradient start color -->
     <color name="end_gradient_color">#072B17</color> <!-- Gradient end color -->
+    <color name="soft_blue">#80C9FF</color>  <!-- Soft Blue color -->
 
     <color name="light_green">#A8D5BA</color> <!-- Light green -->
 
     <color name="transparent_black_percent_20">#33000000</color>
+
+
+
 
 </resources>

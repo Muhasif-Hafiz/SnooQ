@@ -20,9 +20,9 @@ class UploadData(
     private val lifecycleOwner: LifecycleOwner,
     private val shopRegistrationViewModel: ShopRegistrationViewModel,
     private val shopRegistrationRepository: ShopRegistrationRepository
-) {
+) : BaseActivity() {
 
-    fun uploadData() {
+    fun uploadData(onResult: (Boolean) -> Unit) {
         val (isValid, missingFields) = shopRegistrationViewModel.validateFields()
 
         if (isValid) {
@@ -30,11 +30,9 @@ class UploadData(
             val locationDetails = shopRegistrationViewModel.locationDetailsMap.value ?: hashMapOf()
             val paymentDetails = shopRegistrationViewModel.paymentInfoMap.value ?: hashMapOf()
             val socialMediaLinks = shopRegistrationViewModel.socialMediaLinks.value ?: listOf()
-            val shopImageLinks = shopRegistrationViewModel.shopImageLinks .value ?: listOf()
+            val shopImageLinks = shopRegistrationViewModel.shopImageLinks.value ?: listOf()
 
-
-            // Create a list of shops for the shopkeeper
-            val shops: List<Shop> = listOf(
+            val shops = listOf(
                 Shop(
                     shopId = "shop_id_001",
                     shopName = userDetails["shopName"].toString(),
@@ -88,13 +86,11 @@ class UploadData(
                     subscriptionPlan = "Premium",
                     subscriptionExpiry = "2025-01-01",
                     tags = listOf("organic", "local"),
-                    shopImages =shopImageLinks,
+                    shopImages = shopImageLinks,
                     socialMediaLinks = socialMediaLinks
-
                 )
             )
 
-            // Create PaymentInfo object
             val paymentInfo = PaymentInfo(
                 paymentMethod = paymentDetails["paymentMethod"].toString(),
                 bankName = paymentDetails["bankName"].toString(),
@@ -103,36 +99,49 @@ class UploadData(
                 refundPolicy = paymentDetails["refundPolicy"].toString()
             )
 
-            // Create Shopkeeper data with bank details
             val shopkeepers: HashMap<String, Shopkeeper> = hashMapOf(
                 "shopkeeper_id_123" to Shopkeeper(
                     shopkeeperId = "shopkeeper_id_123",
                     name = userDetails["ownerName"].toString(),
                     email = userDetails["emailAddress"].toString(),
                     phoneNumber = userDetails["contactNumber"].toString(),
-                    profilePicture = "null", // Assuming no profile picture URL is provided
+                    profilePicture = "null",
                     registrationDate = "2024-01-01",
-                    paymentInfo = paymentInfo, // Add paymentInfo
+                    paymentInfo = paymentInfo,
                     shops = shops
                 )
             )
 
-            // Upload the structured data
-            lifecycleOwner.lifecycleScope.launch {
-                val result = withContext(Dispatchers.IO) {
-                    shopRegistrationRepository.uploadShopDetails(shopkeepers)
-                }
+            if (lifecycleOwner is androidx.lifecycle.LifecycleOwner) {
+                lifecycleOwner.lifecycleScope.launch {
+                    val result = withContext(Dispatchers.IO) {
+                        shopRegistrationRepository.uploadShopDetails(shopkeepers)
+                    }
 
-                // Show success or failure message
-                if (result) {
-                    Toast.makeText(context, "Uploaded Successfully", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Upload Failed", Toast.LENGTH_SHORT).show()
+                    // Show Toast on UI Thread
+                    withContext(Dispatchers.Main) {
+
+
+
+                        Toast.makeText(context, if (result) "Shop Created!" else "Failed", Toast.LENGTH_SHORT).show()
+                    }
+
+
+
+                    onResult(result) // Return the result via callback
                 }
             }
         } else {
             val missingFieldsMessage = "The following fields are missing: ${missingFields.joinToString(", ")}"
+
+
             Toast.makeText(context, missingFieldsMessage, Toast.LENGTH_LONG).show()
+            onResult(false) // Return false if validation fails
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        finish()
     }
 }

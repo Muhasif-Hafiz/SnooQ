@@ -6,25 +6,21 @@
     </style>
 
     <style name="Theme.SnooQ" parent="Base.Theme.SnooQ" />
+
     <style name="CustomSnackbar" parent="Widget.Design.Snackbar">
         <item name="backgroundTint">@color/SnakBarColor</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
 
 
-
-
-
-
-        <style name="GreenSwitch" parent="Theme.AppCompat.Light">
-            <!-- Active thumb color & Active track color -->
-            <item name="colorControlActivated">#4CAF50</item>
-            <!-- Inactive thumb color -->
-            <item name="colorSwitchThumbNormal">#FFFFFF</item>
-            <!-- Inactive track color -->
-            <item name="android:colorForeground">#E0E0E0</item>
-        </style>
-
+    <style name="GreenSwitch" parent="Theme.AppCompat.Light">
+        <!-- Active thumb color & Active track color -->
+        <item name="colorControlActivated">#4CAF50</item>
+        <!-- Inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#FFFFFF</item>
+        <!-- Inactive track color -->
+        <item name="android:colorForeground">#E0E0E0</item>
+    </style>
 
 
 </resources>

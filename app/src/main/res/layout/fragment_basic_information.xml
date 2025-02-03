@@ -35,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
+            app:startIconDrawable="@drawable/shop_name"
             app:boxStrokeColor="@color/PrimarySnooQ"
             app:hintTextColor="@color/PrimarySnooQ"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -42,6 +43,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextShopName"
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@color/black"
                 android:hint="Shop Name"
@@ -53,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
+            app:startIconDrawable="@drawable/shop_categoty"
             app:boxStrokeColor="@color/PrimarySnooQ"
             app:hintTextColor="@color/PrimarySnooQ"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
@@ -61,6 +64,9 @@
                 android:id="@+id/autoCompleteCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:popupBackground="@color/white"
+                android:dropDownSelector="#D0F8D0"
                 android:textCursorDrawable="@color/black"
                 android:hint="Category"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -70,6 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
+            app:startIconDrawable="@drawable/shop_owner"
             app:boxStrokeColor="@color/PrimarySnooQ"
             app:hintTextColor="@color/PrimarySnooQ"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -88,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
+            app:startIconDrawable="@drawable/contact_number"
             app:boxStrokeColor="@color/PrimarySnooQ"
             app:hintTextColor="@color/PrimarySnooQ"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -105,6 +113,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/shop_email"
             android:layout_marginBottom="24dp"
             app:boxStrokeColor="@color/PrimarySnooQ"
             app:hintTextColor="@color/PrimarySnooQ"
@@ -115,6 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email Address"
+
                 android:inputType="textEmailAddress"
                 android:focusable="false"
                 android:textCursorDrawable="@color/black"
@@ -128,6 +138,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
+
+
             app:boxStrokeColor="@color/PrimarySnooQ"
             app:hintTextColor="@color/PrimarySnooQ"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">

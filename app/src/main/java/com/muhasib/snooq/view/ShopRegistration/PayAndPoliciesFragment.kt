@@ -55,9 +55,9 @@ class PayAndPoliciesFragment : Fragment() {
 
         val scrollView: ScrollView = view.findViewById(R.id.Scroll_View_payment)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { // API 31+
+
             scrollView.setEdgeEffectColor(Color.GREEN)
-        }
+
 
         shopRegistrationViewModel =
             ViewModelProvider(requireActivity()).get(ShopRegistrationViewModel::class.java)

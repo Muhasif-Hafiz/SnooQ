@@ -22,6 +22,7 @@
     <color name="light_green">#A8D5BA</color> <!-- Light green -->
 
     <color name="transparent_black_percent_20">#33000000</color>
+    <color name="colorDarkSemiTransparent">#C6000000 </color>
 
 
 

@@ -20,6 +20,7 @@ import com.google.android.material.button.MaterialButton
 import com.muhasib.snooq.R
 import com.muhasib.snooq.TestingLocationActivity
 import com.muhasib.snooq.view.MainActivity
+import com.muhasib.snooq.view.ShopProfile.ShopActivity
 import com.muhasib.snooq.view.ShopRegistration.ShopRegistrationActivity
 import com.shrikanthravi.customnavigationdrawer2.data.MenuItem
 import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer
@@ -43,6 +44,10 @@ class HomeActivity : BaseActivity() {
         shop_btn.setOnClickListener { navigateToShopRegistration() }
 
 
+        val btn : MaterialButton= findViewById(R.id.ShopActivity)
+        btn.setOnClickListener{
+            startActivity(Intent(this@HomeActivity, ShopActivity::class.java))
+        }
 
 
 

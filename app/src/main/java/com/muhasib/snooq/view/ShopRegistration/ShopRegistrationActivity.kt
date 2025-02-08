@@ -14,7 +14,6 @@ import android.os.Bundle
 
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.ViewModelProvider
 
@@ -24,7 +23,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.button.MaterialButton
 import com.muhasib.snooq.R
 import com.muhasib.snooq.mvvm.ShopRegistrationRepository
-import com.muhasib.snooq.view.ShopActivity
+import com.muhasib.snooq.view.ShopProfile.ShopActivity
 
 import com.shuhart.stepview.StepView
 

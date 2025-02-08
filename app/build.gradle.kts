@@ -4,6 +4,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     kotlin("plugin.serialization") version "2.0.21"
     id("com.google.gms.google-services")
+   // id("kotlin-android-extensions")
 
 
 }
@@ -113,6 +114,14 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    //Material Design
+    implementation ("com.google.android.material:material:1.10.0")
+
+    // Pallete
+    implementation("androidx.palette:palette-ktx:1.0.0")
+
+    // Circular Image view
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
 
 }

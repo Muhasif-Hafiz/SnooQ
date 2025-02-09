@@ -37,7 +37,7 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
+                android:id="@+id/profile_image_shop_Activity"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:layout_gravity="bottom"
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="10dp"
-            android:padding="16dp">
+            android:padding="8dp">
 
 
 
@@ -89,35 +89,51 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp"
+
                 android:paddingTop="72dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical">
 
-                    <TextView
-                        android:id="@+id/shop_name_shop_Activity"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Muhasif Hafiz"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="8dp"
-                        android:src="@drawable/ic_placeholder" />
+                        <TextView
+                            android:id="@+id/shop_name_shop_Activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Muhasif Hafiz"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/shop_owner_name_shop_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="muhasib_07"
+                            android:textColor="?android:textColorSecondary" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_call_shop_Activity"
+                        android:layout_width="110dp"
+                        android:layout_height="50dp"
+                        android:text="Call"
+                        app:icon="@drawable/ic_call"
+                        android:backgroundTint="@color/black"
+                        app:cornerRadius="10dp"
+                        android:layout_marginStart="8dp"/>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/shop_owner_name_shop_activity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="muhasib_07"
-                    android:textColor="?android:textColorSecondary" />
+
 
                 <TextView
                     android:id="@+id/shop_description_shop_Activity"
@@ -173,6 +189,7 @@
                                />
 
                             <TextView
+                                android:id="@+id/text_open_time_shop_Activity"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="$3.00"
@@ -184,7 +201,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="rate per min"
+                                android:text="we are open"
                                 android:textSize="14sp"
                                 android:textColor="#666666"/>
                         </LinearLayout>
@@ -211,6 +228,7 @@
                                 />
 
                             <TextView
+                                android:id="@+id/closed_days_shop_Activity"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="5 mins"
@@ -222,7 +240,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="min talk time"
+                                android:text="closed days"
                                 android:textSize="14sp"
                                 android:textColor="#666666"/>
                         </LinearLayout>
@@ -249,6 +267,7 @@
                                />
 
                             <TextView
+                                android:id="@+id/closing_time_shop_Activity"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="36"
@@ -260,7 +279,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="sessions"
+                                android:text="we are closed"
                                 android:textSize="14sp"
                                 android:textColor="#666666"/>
                         </LinearLayout>
@@ -271,14 +290,84 @@
                 </LinearLayout>
 
 
-                <com.google.android.material.button.MaterialButton
+
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:padding="12dp"
-                    android:text="Subscribe 30 rs/mo"
-                    android:textSize="16sp"
-                    app:cornerRadius="8dp" />
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/shop_city"
+                                    android:tint="@color/PrimarySnooQ"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Location"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginStart="8dp"/>
+
+
+                            </LinearLayout>
+
+                            <ImageButton
+                                android:id="@+id/btn_edit_location_shop_Activity"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/ic_edit"
+
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:padding="8dp"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/shop_address_shop_Activity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Add Your current location"
+                            android:textSize="16sp"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_directions_shop_Activity"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Get Directions"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            app:icon="@drawable/ic_arrow_forward"
+                            app:iconTint="@color/PrimarySnooQ" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+
+
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -115,7 +115,7 @@ class UploadData(
             if (lifecycleOwner is androidx.lifecycle.LifecycleOwner) {
                 lifecycleOwner.lifecycleScope.launch {
                     val result = withContext(Dispatchers.IO) {
-                        shopRegistrationRepository.uploadShopDetails(shopkeepers)
+                        shopRegistrationRepository.uploadShopDetails(context, shopkeepers)
                     }
 
                     // Show Toast on UI Thread
@@ -140,8 +140,5 @@ class UploadData(
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        finish()
-    }
+
 }

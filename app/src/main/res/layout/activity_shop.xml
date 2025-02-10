@@ -16,10 +16,11 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:fitsSystemWindows="true"
-            app:titleEnabled="false"
             app:contentScrim="@color/PrimarySnooQ"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
 
             <ImageView
                 android:id="@+id/banner_image"
@@ -27,13 +28,13 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_1"
-                app:layout_collapseMode="parallax"/>
+                app:layout_collapseMode="parallax" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_gravity="bottom"
-                android:background="@drawable/title_background"/>
+                android:background="@drawable/title_background" />
 
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -57,14 +58,13 @@
                 app:layout_collapseMode="pin">
 
 
-
                 <ImageButton
                     android:id="@+id/btn_menu"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="end"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/three_dots"/>
+                    android:src="@drawable/three_dots" />
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

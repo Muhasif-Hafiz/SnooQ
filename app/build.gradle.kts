@@ -123,5 +123,13 @@ dependencies {
     // Circular Image view
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    //U Crop Dependency
+    implementation ("com.github.yalantis:ucrop:2.2.10")
+    // coil
+    implementation("io.coil-kt:coil:0.13.0")
+
+    // image cropper canHub
+    implementation("com.vanniktech:android-image-cropper:4.6.0")
+
 
 }

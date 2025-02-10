@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modern_bottom_sheet_background"
+        android:padding="24dp">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/profile_animation"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:lottie_fileName="select_image.json"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Your Profile Picture"
+            android:fontFamily="@font/bold_h1"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/profile_animation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/camera_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toBottomOf="@id/title_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/gallery_card"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/PrimarySnooQ"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_camera_outlined"
+                    android:layout_gravity="center"
+                    app:tint="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Camera"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/gallery_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@id/title_text"
+            app:layout_constraintStart_toEndOf="@id/camera_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/PrimarySnooQ"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_gallery_outlined"
+                    android:layout_gravity="center"
+                    app:tint="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gallery"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

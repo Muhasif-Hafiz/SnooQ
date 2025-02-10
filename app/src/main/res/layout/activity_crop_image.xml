@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.ShopProfile.CropImageActivity">
+
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_vertical">
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:src="@drawable/ic_arow_back"
+            android:padding="5dp"
+            android:id="@+id/img_back_crop_Activity"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Crop Image"
+            android:textSize="15sp"
+            android:fontFamily="@font/bold_h1"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/shop_email"
+            android:id="@+id/img_check_crop_Activity"/>
+
+        
+    </LinearLayout>
+
+    <!-- Image Cropper fill the remaining available height -->
+    <com.canhub.cropper.CropImageView
+        android:id="@+id/cropImageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+
+</LinearLayout>

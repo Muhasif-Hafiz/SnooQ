@@ -1,5 +1,6 @@
 package com.muhasib.snooq.view.ShopProfile
 
+import BaseActivity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -21,7 +22,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 
-class CropImageActivity : AppCompatActivity() {
+class CropImageActivity : BaseActivity() {
 
     private lateinit var binding: ActivityCropImageBinding
     private lateinit var client: Client
@@ -60,8 +61,12 @@ class CropImageActivity : AppCompatActivity() {
             }
 
             // Show progress bar
+
+
             binding.progressBar.visibility = View.VISIBLE
             binding.imgCheckCropActivity.isEnabled = false
+
+
 
             val croppedImageFile = saveBitmapToFile(bitmap)
             lifecycleScope.launch {

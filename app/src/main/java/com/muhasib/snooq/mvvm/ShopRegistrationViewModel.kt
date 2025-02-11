@@ -31,7 +31,7 @@ class ShopRegistrationViewModel : ViewModel() {
     fun addSocialMediaLink(instagram: String, facebook: String, other: String) {
         socialMediaLinks.value = listOf(instagram, facebook, other)
     }
-   // , link2 :String, link3 :String, link4 :String, link5 :String, link6 : String
+
 
 
 

@@ -1,54 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/img_1"
     tools:context=".view.ShopProfile.CropImageActivity">
 
-    
-    <LinearLayout
+    <!-- Minimal Semi-Transparent Header -->
+    <View
+        android:id="@+id/header_bg"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_vertical">
-        
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           android:src="@drawable/ic_arow_back"
-            android:padding="5dp"
-            android:id="@+id/img_back_crop_Activity"/>
+        android:layout_height="56dp"
+        android:background="#33000000"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Crop Image"
-            android:textSize="15sp"
-            android:fontFamily="@font/bold_h1"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"/>
+    <!-- Back Button -->
+    <ImageButton
+        android:id="@+id/img_back_crop_Activity"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="12dp"
+        android:src="@drawable/ic_arow_back"
+        android:tint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@id/header_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:src="@drawable/shop_email"
-            android:id="@+id/img_check_crop_Activity"/>
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crop your image."
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/extra_bold_h3"
+        app:layout_constraintBottom_toBottomOf="@id/header_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        
-    </LinearLayout>
+    <!-- Confirm Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/img_check_crop_Activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/crop_image"
+        android:tint="@color/black"
 
-    <!-- Image Cropper fill the remaining available height -->
+        app:tint="@android:color/white"
+        app:backgroundTint="@color/light_green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- CropImageView with Loading Overlay -->
     <com.canhub.cropper.CropImageView
         android:id="@+id/cropImageView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_bg" />
 
+    <!-- Minimal Loading Indicator -->
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:trackThickness="2dp" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,7 +63,6 @@ class CropBannerActivity : AppCompatActivity() {
                 return
             }
 
-            // Show progress bar
 
 
             binding.progressBarBanner.visibility = View.VISIBLE

@@ -30,6 +30,7 @@ class CropImageActivity : BaseActivity() {
 
     companion object {
         const val CROP_IMAGE_KEY = "uri"
+        const val  PREVIOS_PROFILE_KEY ="prev_profile"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,11 +46,21 @@ class CropImageActivity : BaseActivity() {
         binding.imgBackCropActivity.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         val uri = intent.getStringExtra(CROP_IMAGE_KEY)
+        val previousImage = intent.getStringExtra(PREVIOS_PROFILE_KEY)
+
         if (!uri.isNullOrEmpty()) {
             binding.cropImageView.setImageUriAsync(Uri.parse(uri))
         }
 
-        binding.imgCheckCropActivity.setOnClickListener { saveCrop() }
+        binding.imgCheckCropActivity.setOnClickListener {
+
+            if(!previousImage.isNullOrEmpty()){
+                saveCropWithPrevios(previousImage)
+            }else{
+                saveCrop()
+            }
+
+        }
     }
 
     private fun saveCrop() {
@@ -70,6 +81,32 @@ class CropImageActivity : BaseActivity() {
 
             val croppedImageFile = saveBitmapToFile(bitmap)
             lifecycleScope.launch {
+                uploadImageToAppwrite(croppedImageFile)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun saveCropWithPrevios(imageUrl : String) {
+        try {
+            val bitmap = binding.cropImageView.getCroppedImage()
+            if (bitmap == null) {
+                Log.e("CropImageActivity", "Failed to get cropped image.")
+                return
+            }
+
+            // Show progress bar
+
+
+            binding.progressBar.visibility = View.VISIBLE
+            binding.imgCheckCropActivity.isEnabled = false
+
+
+
+            val croppedImageFile = saveBitmapToFile(bitmap)
+            lifecycleScope.launch {
+                deletePreviosImage(imageUrl)
                 uploadImageToAppwrite(croppedImageFile)
             }
         } catch (e: Exception) {
@@ -147,5 +184,26 @@ class CropImageActivity : BaseActivity() {
         val sharedPreferences: SharedPreferences =
             context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         return sharedPreferences.getString("SHOP_ID", "") ?: ""
+    }
+    suspend fun deletePreviosImage(fileUrl : String){
+
+        val bucketId = "6792800d001d344a8d58"
+        val fileId = extractFileIdFromUrl(fileUrl) // Extract fileId from URL
+
+        if (fileId.isEmpty()) {
+            Log.e("CropImageActivity", "Invalid file URL: $fileUrl")
+            return
+        }
+
+        try {
+            storage.deleteFile(bucketId, fileId)
+            Log.d("CropImageActivity", "Existing image deleted successfully: $fileId")
+        } catch (e: Exception) {
+            Log.e("CropImageActivity", "Failed to delete existing image: ${e.message}")
+        }
+
+    }
+    private fun extractFileIdFromUrl(fileUrl: String): String {
+        return fileUrl.substringAfterLast("/files/").substringBefore("/view")
     }
 }

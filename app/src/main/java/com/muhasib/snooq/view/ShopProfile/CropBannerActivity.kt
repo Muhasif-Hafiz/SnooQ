@@ -35,7 +35,9 @@ class CropBannerActivity : AppCompatActivity() {
 
     companion object {
         const val CROP_BANNER_KEY = "uri"
+        const val GET_PREVIOUS_BANNER_KEY ="prev_uri"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCropBannerBinding.inflate(layoutInflater)
@@ -47,13 +49,48 @@ class CropBannerActivity : AppCompatActivity() {
 
         binding.imgBackCropBannerActivity.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         val uri = intent.getStringExtra(CropBannerActivity.CROP_BANNER_KEY)
+        val previousImageUri = intent.getStringExtra(CropBannerActivity.GET_PREVIOUS_BANNER_KEY)
 
         if (!uri.isNullOrEmpty()) {
             binding.cropBannerImageView.setImageUriAsync(Uri.parse(uri))
 
-            binding.imgCheckCropBannerActivity.setOnClickListener { saveCrop() }
+            binding.imgCheckCropBannerActivity.setOnClickListener {
+
+
+                if(!previousImageUri.isNullOrEmpty()){
+                    saveCropWithUri(previousImageUri)
+                }else{
+                    saveCrop()
+                }
+
+            }
         }
 
+    }
+    private fun saveCropWithUri(prev_uri : String) {
+        try {
+            val bitmap = binding.cropBannerImageView.getCroppedImage()
+            if (bitmap == null) {
+                Log.e("CropBannerImageActivity", "Failed to get cropped image.")
+                return
+            }
+
+
+
+            binding.progressBarBanner.visibility = View.VISIBLE
+            binding.imgCheckCropBannerActivity.isEnabled = false
+
+
+
+            val croppedImageFile = saveBitmapToFile(bitmap)
+
+            lifecycleScope.launch {
+                deletePreviousBannerImage(prev_uri)
+                uploadImageToAppwrite(croppedImageFile)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
     private fun saveCrop() {
         try {
@@ -147,6 +184,26 @@ class CropBannerActivity : AppCompatActivity() {
         val sharedPreferences: SharedPreferences =
             context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         return sharedPreferences.getString("SHOP_ID", "") ?: ""
+    }
+    suspend fun deletePreviousBannerImage(fileUrl: String) {
+        val bucketId = "6792800d001d344a8d58"
+        val fileId = extractFileIdFromUrl(fileUrl) // Extract fileId from URL
+
+        if (fileId.isEmpty()) {
+            Log.e("CropImageActivity", "Invalid file URL: $fileUrl")
+            return
+        }
+
+        try {
+            storage.deleteFile(bucketId, fileId)
+            Log.d("CropImageActivity", "Existing image deleted successfully: $fileId")
+        } catch (e: Exception) {
+            Log.e("CropImageActivity", "Failed to delete existing image: ${e.message}")
+        }
+    }
+
+    private fun extractFileIdFromUrl(fileUrl: String): String {
+        return fileUrl.substringAfterLast("/files/").substringBefore("/view")
     }
 
 

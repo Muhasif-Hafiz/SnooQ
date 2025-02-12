@@ -81,6 +81,10 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
         binding.bannerImage.setOnClickListener {
 
+
+
+
+
             showBannerOptions()
 
         }
@@ -90,8 +94,11 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK && result.data != null) {
                 val uri = result.data?.data
+                val previousProfilePicture = viewModel.getProfileImageUrlFromPrefs()
                 val intent = Intent(requireContext(), CropImageActivity::class.java)
+
                 intent.putExtra(CropImageActivity.CROP_IMAGE_KEY, uri.toString())
+                intent.putExtra(CropImageActivity.PREVIOS_PROFILE_KEY, previousProfilePicture)
                 getCroppedImage.launch(intent)
             }
         }
@@ -100,8 +107,10 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK && result.data != null) {
                 val uri = result.data?.data
+                val previousBannerImage = viewModel.getBannerImageUrlFromPrefs()
                 val intent = Intent(requireContext(), CropBannerActivity::class.java)
                 intent.putExtra(CropBannerActivity.CROP_BANNER_KEY, uri.toString())
+                intent.putExtra(CropBannerActivity.GET_PREVIOUS_BANNER_KEY, previousBannerImage)
                 getCroppedImageBanner.launch(intent)
             }
         }
@@ -267,6 +276,8 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
         val btnUpdateBanner = view.findViewById<LinearLayout>(R.id.upload_background_option)
         val btnViewBackground = view.findViewById<LinearLayout>(R.id.view_background_option)
+
+
 
         btnUpdateBanner.setOnClickListener {
 

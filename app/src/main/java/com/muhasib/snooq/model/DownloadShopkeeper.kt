@@ -8,6 +8,7 @@ data class DownloadShopkeeper(
     val address: String = "",
     val openingTime: String = "",
     val closingTime: String = "",
-    val profileImageUrl: String = ""
+    val profileImageUrl: String = "",
+    val  bannerImageUrl : String =""
 
 )

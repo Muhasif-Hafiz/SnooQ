@@ -1,6 +1,6 @@
 package com.muhasib.snooq.view.ShopProfile
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -49,19 +49,40 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         storage = Storage(client)
 
         val cachedImageUrl = viewModel.getProfileImageUrlFromPrefs()
+        val cachedBannerUrl = viewModel.getBannerImageUrlFromPrefs()
+        if (cachedBannerUrl != null) {
+            setBannerPicture(cachedBannerUrl, binding.bannerImage)
+        }
 
         if (!cachedImageUrl.isNullOrEmpty()) {
+
             setProfilePicture(cachedImageUrl, binding.profileImageShopActivity)
             observeShopData()
         } else {
             Log.d("ShopFragment", "No cached image found, trying to fetch from Firestore...")
             observeShopData()
         }
+        if (!cachedBannerUrl.isNullOrEmpty()) {
+
+            setBannerPicture(cachedBannerUrl, binding.bannerImage)
+            observeShopData()
+
+        } else {
+            Log.d("ShopFragment", "No cached image found, trying to fetch from Firestore...")
+            observeShopData()
+        }
+
 
         binding.profileImageShopActivity.setOnClickListener {
 
 
-            showOptions()
+            showProfileOptions()
+        }
+
+        binding.bannerImage.setOnClickListener {
+
+            showBannerOptions()
+
         }
     }
 
@@ -75,6 +96,17 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
             }
         }
 
+    private val pickImageBanner =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == AppCompatActivity.RESULT_OK && result.data != null) {
+                val uri = result.data?.data
+                val intent = Intent(requireContext(), CropBannerActivity::class.java)
+                intent.putExtra(CropBannerActivity.CROP_BANNER_KEY, uri.toString())
+                getCroppedImageBanner.launch(intent)
+            }
+        }
+
+
     private val getCroppedImage =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK && result.data != null) {
@@ -82,6 +114,16 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
                 if (imageUrl != null) {
                     loadProfileImage(imageUrl)
                     viewModel.saveProfileImageUrlToPrefs(imageUrl)
+                }
+            }
+        }
+    private val getCroppedImageBanner =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == AppCompatActivity.RESULT_OK && result.data != null) {
+                val imageUrl = result.data!!.getStringExtra("banner_url")
+                if (imageUrl != null) {
+                    loadBannerImage(imageUrl)
+                    viewModel.saveBannerImageUrlToPrefs(imageUrl)
                 }
             }
         }
@@ -99,6 +141,20 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         }
     }
 
+    private fun setBannerPicture(imageUrl: String, imageView: ImageView) {
+        Log.d("Banner_Image", "Loading Image: $imageUrl")
+
+        imageView.apply {
+            visibility = ImageView.VISIBLE
+            Glide.with(this@ShopkeeperProfileFragment)
+                .load(imageUrl)
+                .placeholder(R.drawable.ic_profile_picture)
+                .error(R.drawable.ic_error)
+                .into(this)
+        }
+
+    }
+
     private fun observeShopData() {
         viewModel.shopData.observe(viewLifecycleOwner) { shop ->
             binding.shopNameShopActivity.text = shop.shopName
@@ -109,8 +165,13 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
             binding.closingTimeShopActivity.text = shop.closingTime
 
             val profileImageUrl = shop.profileImageUrl ?: viewModel.getProfileImageUrlFromPrefs()
+            val bannerImage = shop.bannerImageUrl ?: viewModel.getBannerImageUrlFromPrefs()
             if (!profileImageUrl.isNullOrEmpty()) {
                 loadProfileImage(profileImageUrl)
+            }
+
+            if (!bannerImage.isNullOrEmpty()) {
+                loadBannerImage(bannerImage)
             }
         }
     }
@@ -124,21 +185,33 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
             .into(binding.profileImageShopActivity)
     }
 
+    private fun loadBannerImage(imageUrl: String) {
+        Log.d("Banner_Image", "$imageUrl")
+        Glide.with(this)
+            .load(imageUrl)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .placeholder(R.drawable.ic_profile_picture)
+            .error(R.drawable.ic_error)
+            .into(binding.bannerImage)
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-    private fun showOptions(){
+
+    private fun showProfileOptions() {
+
 
         val dialog = BottomSheetDialog(requireContext())
 
         val view = layoutInflater.inflate(R.layout.bottom_sheet_update_profile, null)
 
-        val btnUpload= view.findViewById<LinearLayout>(R.id.upload_photo_option)
-        val btnViewProfile =  view.findViewById<LinearLayout>(R.id.view_photo_option)
+        val btnUpload = view.findViewById<LinearLayout>(R.id.upload_profile_option)
+        val btnViewProfile = view.findViewById<LinearLayout>(R.id.view_photo_option)
 
         btnUpload.setOnClickListener {
-
 
 
             if (isAdded) {
@@ -166,11 +239,11 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
         }
 
-         btnViewProfile.setOnClickListener {
+        btnViewProfile.setOnClickListener {
 
-             Toast.makeText(requireContext(),"Soon", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Soon", Toast.LENGTH_SHORT).show()
 
-         }
+        }
 
 
 
@@ -182,4 +255,56 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
         dialog.show()
     }
+
+
+    @SuppressLint("MissingInflatedId")
+    private fun showBannerOptions() {
+        Log.d("ShopFragment", "Banner  bottom sheet clicked")
+
+        val dialogBanner = BottomSheetDialog(requireContext())
+
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_banner, null)
+
+        val btnUpdateBanner = view.findViewById<LinearLayout>(R.id.upload_background_option)
+        val btnViewBackground = view.findViewById<LinearLayout>(R.id.view_background_option)
+
+        btnUpdateBanner.setOnClickListener {
+
+            if (isAdded) {
+                Log.d("ShopFragment", "Profile image clicked")
+
+                val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    Intent(MediaStore.ACTION_PICK_IMAGES)
+                } else {
+                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                }
+
+                try {
+                    pickImageBanner.launch(intent)
+                    Log.d("ShopFragment", "pickImage launched successfully")
+                } catch (e: Exception) {
+                    Log.e("ShopFragment", "Error launching image picker", e)
+                    Toast.makeText(
+                        requireContext(),
+                        "Failed to open image picker",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                dialogBanner.dismiss()
+            }
+
+
+        }
+
+        dialogBanner.setCancelable(true)
+
+
+        dialogBanner.setContentView(view)
+
+
+        dialogBanner.show()
+
+    }
+
+
 }

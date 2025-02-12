@@ -25,6 +25,12 @@ class shopViewModel(application: Application) : AndroidViewModel(application) {
     fun saveProfileImageUrlToPrefs(imageUrl: String) {
         repository.saveProfileImageUrlToPrefs(imageUrl)
     }
+    fun getBannerImageUrlFromPrefs() : String? {
+        return repository.getBannerImageUrlFromPrefs()
+    }
+    fun saveBannerImageUrlToPrefs( imageUrl : String){
+        repository.saveBannerImageUrlToPrefs(imageUrl)
+    }
 
 
 }

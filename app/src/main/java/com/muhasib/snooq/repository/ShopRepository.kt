@@ -14,6 +14,8 @@ class ShopRepository(private val context: Context) {
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
+    private val sharedPreferencesBanner : SharedPreferences = context.getSharedPreferences("MyPrefsBanner", Context.MODE_PRIVATE)
+
     fun fetchShopData(shopId: String): LiveData<DownloadShopkeeper> {
         val shopLiveData = MutableLiveData<DownloadShopkeeper>()
 
@@ -38,7 +40,10 @@ class ShopRepository(private val context: Context) {
                                 ?: "N/A",
                             closingTime = (shopData["location"] as? Map<*, *>)?.get("closingTime") as? String
                                 ?: "N/A",
-                            profileImageUrl = shopData["profileImage"] as? String ?: ""
+                            profileImageUrl = shopData["profileImage"] as? String ?: "",
+                            bannerImageUrl = shopData["bannerImage"] as? String ?: ""
+
+
                         )
 
                         shopLiveData.value = shop
@@ -47,6 +52,12 @@ class ShopRepository(private val context: Context) {
                         } else {
                             // Optionally log that the profileImageUrl is empty and skip overwriting the cached URL
                             Log.d("ShopRepository", "Firestore returned an empty profile image URL; not updating SharedPreferences.")
+                        }
+
+                        if (shop.bannerImageUrl.isNotEmpty()){
+                            saveBannerImageUrlToPrefs(shop.bannerImageUrl)
+                        } else{
+                            Log.d("ShopRepository", "Firestore returned an empty profile Banner URL; not updating SharedPreferences.")
                         }
                     }
                 }
@@ -65,6 +76,13 @@ class ShopRepository(private val context: Context) {
     }
     fun getProfileImageUrlFromPrefs(): String? {
         return sharedPreferences.getString("PROFILE_IMAGE_URL", "")
+    }
+
+    fun saveBannerImageUrlToPrefs(imageUrl: String){
+        sharedPreferencesBanner.edit().putString("BANNER_IMAGE_URL", imageUrl).apply()
+    }
+    fun getBannerImageUrlFromPrefs() : String? {
+        return sharedPreferencesBanner.getString("BANNER_IMAGE_URL", "")
     }
 
 

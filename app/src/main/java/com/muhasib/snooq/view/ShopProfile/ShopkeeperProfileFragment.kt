@@ -57,20 +57,15 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         if (!cachedImageUrl.isNullOrEmpty()) {
 
             setProfilePicture(cachedImageUrl, binding.profileImageShopActivity)
-            observeShopData()
-        } else {
-            Log.d("ShopFragment", "No cached image found, trying to fetch from Firestore...")
-            observeShopData()
+
         }
         if (!cachedBannerUrl.isNullOrEmpty()) {
 
             setBannerPicture(cachedBannerUrl, binding.bannerImage)
-            observeShopData()
 
-        } else {
-            Log.d("ShopFragment", "No cached image found, trying to fetch from Firestore...")
-            observeShopData()
+
         }
+        observeShopData()
 
 
         binding.profileImageShopActivity.setOnClickListener {
@@ -80,10 +75,6 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         }
 
         binding.bannerImage.setOnClickListener {
-
-
-
-
 
             showBannerOptions()
 
@@ -165,6 +156,8 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
     }
 
     private fun observeShopData() {
+
+        Log.d("Observer", "Retrieving data-Haziq is a simp")
         viewModel.shopData.observe(viewLifecycleOwner) { shop ->
             binding.shopNameShopActivity.text = shop.shopName
             binding.shopOwnerNameShopActivity.text = shop.shopkeeperName
@@ -249,8 +242,13 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         }
 
         btnViewProfile.setOnClickListener {
+            dialog.dismiss()
 
-            Toast.makeText(requireContext(), "Soon", Toast.LENGTH_SHORT).show()
+            val viewImageFragment = ViewImageFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, viewImageFragment)
+                .addToBackStack(null)
+                .commit()
 
         }
 
@@ -306,6 +304,19 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
 
         }
+
+        btnViewBackground.setOnClickListener {
+
+            dialogBanner.dismiss()
+
+            val viewImageFragment = ViewImageFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ViewBannerImageFragment())
+                .addToBackStack(null)
+                .commit()
+
+        }
+
 
         dialogBanner.setCancelable(true)
 

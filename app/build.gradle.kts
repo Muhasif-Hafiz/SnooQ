@@ -131,5 +131,7 @@ dependencies {
     // image cropper canHub
     implementation("com.vanniktech:android-image-cropper:4.6.0")
 
+    implementation("com.github.chrisbanes:PhotoView:2.3.0")
+
 
 }

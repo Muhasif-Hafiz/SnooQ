@@ -3,6 +3,9 @@
     <style name="Base.Theme.SnooQ" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
     </style>
 
     <style name="Theme.SnooQ" parent="Base.Theme.SnooQ" />
@@ -20,6 +23,16 @@
         <item name="colorSwitchThumbNormal">#FFFFFF</item>
         <!-- Inactive track color -->
         <item name="android:colorForeground">#E0E0E0</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_background</item>
     </style>
 
 

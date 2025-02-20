@@ -280,6 +280,22 @@
                     </LinearLayout>
 
 
+                    <androidx.recyclerview.widget.RecyclerView
+
+                        android:id="@+id/carousel_recycler_view"
+                        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+                        android:layout_width="match_parent"
+                        tools:listitem="@layout/caraosel_layout"
+
+
+
+                        android:layout_height="300dp"
+                        android:clipChildren="false"
+
+                        android:clipToPadding="false" />
+
+
+
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
@@ -289,6 +305,12 @@
                         app:cardElevation="3dp"
                         android:layout_marginStart="1dp"
                         android:layout_marginEnd="1dp">
+
+
+
+
+
+
 
                         <LinearLayout
                             android:layout_width="match_parent"

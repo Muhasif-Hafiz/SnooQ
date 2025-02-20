@@ -18,10 +18,12 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.bottomsheet.BottomSheetDialog
-
+import com.muhasib.snooq.adapters.CarouselAdapter
 import com.muhasib.snooq.R
 
+
 import com.muhasib.snooq.databinding.FragmentShopkeeperProfileBinding
+import com.muhasib.snooq.model.CarouselModel
 import com.muhasib.snooq.singleton.AppWriteSingleton
 import com.muhasib.snooq.viewModel.shopViewModel
 import io.appwrite.Client
@@ -34,6 +36,8 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
     private lateinit var client: Client
     private lateinit var storage: Storage
     private val viewModel: shopViewModel by viewModels()
+    private val list = ArrayList<CarouselModel>()
+    private val adapter = CarouselAdapter(list)
 
     @RequiresExtension(extension = Build.VERSION_CODES.R, version = 2)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,6 +83,24 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
             showBannerOptions()
 
         }
+
+        // carousel  code is here
+
+        binding.apply {
+
+            carouselRecyclerView.adapter = adapter
+
+            list.add(CarouselModel(R.drawable.test, "facebook"))
+            list.add(CarouselModel(R.drawable.test, "instagram"))
+            list.add(CarouselModel(R.drawable.test, "snooQ"))
+            list.add(CarouselModel(R.drawable.test, "facebook"))
+            list.add(CarouselModel(R.drawable.test, "instagram"))
+            list.add(CarouselModel(R.drawable.test, "snooQ"))
+            list.add(CarouselModel(R.drawable.test, "facebook"))
+            list.add(CarouselModel(R.drawable.test, "instagram"))
+            list.add(CarouselModel(R.drawable.test, "snooQ"))
+        }
+
     }
 
     private val pickImage =

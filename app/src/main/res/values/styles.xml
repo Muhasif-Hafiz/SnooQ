@@ -25,16 +25,10 @@
         <item name="android:windowBackground">@color/white</item>
     </style>
 
-
-
-
-
-
-
-
-
-
-
+    <style name="CustomShapeAppearance" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
 
 
 

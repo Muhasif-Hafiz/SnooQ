@@ -10,15 +10,16 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.button.MaterialButton
 import com.muhasib.snooq.R
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 class ThirdViewFragment : Fragment() {
 
-    private lateinit var dotsIndicator: DotsIndicator
+   // private lateinit var dotsIndicator: DotsIndicator
     private lateinit var viewPager: ViewPager2
     private lateinit var skipText: TextView
-    private lateinit var register: Button
+    private lateinit var register: MaterialButton
 
     companion object {
         private const val ONBOARDING_PREF = "onBoarding"
@@ -32,9 +33,9 @@ class ThirdViewFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_third_view, container, false)
 
         // Initialize views
-        dotsIndicator = view.findViewById(R.id.dotsIndicator)
-        register = view.findViewById(R.id.registerButton)
-        skipText = view.findViewById(R.id.skipText)
+       // dotsIndicator = view.findViewById(R.id.dotsIndicator)
+        register = view.findViewById(R.id.StartBtn)
+        skipText = view.findViewById(R.id.logintxt)
 
 
         if (isAdded) {
@@ -44,7 +45,7 @@ class ThirdViewFragment : Fragment() {
             return view
         }
 
-        dotsIndicator.attachTo(viewPager)
+       // dotsIndicator.attachTo(viewPager)
 
         // Handle the register button click
         register.setOnClickListener {

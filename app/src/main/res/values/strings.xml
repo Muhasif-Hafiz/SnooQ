@@ -58,5 +58,12 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="snooq">SnooQ</string>
+    <string name="scan">Scan</string>
+    <string name="your_shoppi">
+Your shopping\nassistant in a QR code
+</string>
+    <string name="shop">Shop</string>
+    <string name="already_a_user_log_in">Already a user? Log in</string>
 
 </resources>

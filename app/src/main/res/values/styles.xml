@@ -23,6 +23,30 @@
 
         <!-- Background of the popup (dialog window) -->
         <item name="android:windowBackground">@color/white</item>
+
+    </style>
+
+    <!-- styles.xml -->
+    <style name="snooq">
+        <item name="android:textSize">64sp</item>
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="scan">
+        <item name="android:textSize">46sp</item>
+        <item name="android:textColor">#F6F8F7</item>
+    </style>
+
+    <style name="your_shoppi">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#F6F8F7</item>
+    </style>
+
+    <!-- styles.xml -->
+    <style name="already_a_u">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#F6F8F7</item>
     </style>
 
 

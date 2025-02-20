@@ -1,73 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@drawable/img_1"
     tools:context=".view.onBoarding.screens.SecondViewFragment">
 
+
+<LinearLayout
+        android:id="@+id/frame_3"
+        android:layout_width="173dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/snooq_main_2"
+            android:layout_width="59dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/logo_black" />
+
+        <TextView
+            android:id="@+id/snooq_"
+            android:layout_width="115dp"
+            android:layout_height="93dp"
+            android:fontFamily="@font/dongle_bold"
+            android:gravity="top"
+            android:text="@string/snooq"
+            android:textAppearance="@style/snooq" />
+    </LinearLayout>
+
     <ImageView
-        android:layout_marginBottom="25dp"
-        android:layout_width="216dp"
-        android:layout_marginTop="170dp"
-        android:layout_height="195dp"
-        android:layout_gravity="center"
-        android:src="@drawable/shoppingbagicon"
-        android:contentDescription="Scan image" />
+        android:id="@+id/image_shopping"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/shopimg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frame_3" />
 
-    <!-- "Scan" Text -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Shop"
-        android:textStyle="bold"
-        android:textSize="48sp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:fontFamily="@font/bold_h1"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="-46dp"
+        android:background="@drawable/ellipse_21"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_shopping">
 
-    <!-- "Scan and hop into your favorite shop." Text -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Browse stock, \n shop with ease."
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:fontFamily="@font/bold_h1"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center" />
-    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-        android:id="@+id/dotsIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_gravity="center"
-        app:dotsColor="@android:color/darker_gray"
-        app:dotsCornerRadius="8dp"
-        app:dotsSize="8dp"
-        app:dotsSpacing="4dp"
-        app:dotsWidthFactor="2.5"
-        app:selectedDotColor="#3AEA5F" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/Next2ViewPager"
-        android:layout_width="64dp"
-        android:layout_gravity="center"
-        android:layout_height="64dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#3AEA5F"
-        android:padding="12dp"
-        app:icon="@drawable/baseline_arrow_forward_24"
-        app:iconSize="45dp"
-        android:textAllCaps="false"
-        app:cornerRadius="24dp"
-        />
+        <TextView
+            android:id="@+id/shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="top"
+            android:text="@string/shop"
+            android:textAppearance="@style/scan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/your_shoppi_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_horizontal|top"
+            android:text="Browse stock\nshop with ease"
+            android:textAppearance="@style/your_shoppi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shop" />
+
+        <LinearLayout
+            android:id="@+id/threeDots"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/your_shoppi_2">
+
+            <View
+                android:id="@+id/ellipse_3"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/ellipse_4" />
+
+            <View
+                android:id="@+id/ellipse_4"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/ellipse_2" />
+
+            <View
+                android:id="@+id/ellipse_5"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/ellipse_4" />
+        </LinearLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Next2ViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="40dp"
+            android:backgroundTint="#3AEA5F"
+            android:fontFamily="@font/inter_medium"
+            android:text="Next"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:cornerRadius="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/threeDots" />
+
+        <TextView
+            android:id="@+id/skip2ViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/skip_bottom_background"
+            android:fontFamily="@font/inter_medium"
+            android:gravity="center"
+            android:text="Skip"
+            android:textAllCaps="false"
+            android:textColor="#C6D2C8"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Next2ViewPager" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

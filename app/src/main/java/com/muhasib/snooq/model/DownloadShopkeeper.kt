@@ -9,6 +9,7 @@ data class DownloadShopkeeper(
     val openingTime: String = "",
     val closingTime: String = "",
     val profileImageUrl: String = "",
-    val  bannerImageUrl : String =""
+    val  bannerImageUrl : String ="",
+    val shopImages : ArrayList<String>
 
 )

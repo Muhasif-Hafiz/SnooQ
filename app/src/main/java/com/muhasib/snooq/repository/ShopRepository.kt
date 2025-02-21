@@ -30,6 +30,7 @@ class ShopRepository(private val context: Context) {
 
                     if (!shopsList.isNullOrEmpty()) {
                         val shopData = shopsList[0]
+                        val shopImages = (shopData["shopImages"] as? List<String>) ?: emptyList()
                         val shop = DownloadShopkeeper(
                             shopkeeperName = shopkeeperName,
                             shopkeeperEmail = shopkeeperEmail,
@@ -41,7 +42,9 @@ class ShopRepository(private val context: Context) {
                             closingTime = (shopData["location"] as? Map<*, *>)?.get("closingTime") as? String
                                 ?: "N/A",
                             profileImageUrl = shopData["profileImage"] as? String ?: "",
-                            bannerImageUrl = shopData["bannerImage"] as? String ?: ""
+                            bannerImageUrl = shopData["bannerImage"] as? String ?: "",
+                            shopImages = ArrayList(shopImages)
+
 
 
                         )

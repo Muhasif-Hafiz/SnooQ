@@ -2,10 +2,12 @@ package com.muhasib.snooq.view.ShopRegistration
 
 import ShopRegistrationViewModel
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +30,8 @@ import io.appwrite.models.InputFile
 import io.appwrite.services.Storage
 import kotlinx.coroutines.launch
 import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 
 class ShopMediaFragment : Fragment() {
 
@@ -146,45 +150,48 @@ class ShopMediaFragment : Fragment() {
         }
 
         try {
+            val compressedFile = compressImage(uri)
+
             // Delete previous file if exists
             uploadedFileIds[buttonId]?.let { oldFileId ->
                 try {
                     storage.deleteFile("6792800d001d344a8d58", oldFileId)
                 } catch (e: AppwriteException) {
-                    Toast.makeText(requireContext(), "PLease re-upload this image!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Please re-upload this image!", Toast.LENGTH_SHORT).show()
                 }
             }
-
-            // Create new file
-            val file = File(requireContext().cacheDir, fileName).apply {
-                outputStream().use { output ->
-                    requireContext().contentResolver.openInputStream(uri)?.use { input ->
-                        input.copyTo(output)
-                    }
-                }
-            }
-            val buckId = "6792800d001d344a8d58"
 
             val fileResponse = storage.createFile(
                 bucketId = "6792800d001d344a8d58",
                 fileId = ID.unique(),
-                file = InputFile.fromFile(file)
+                file = InputFile.fromFile(compressedFile)
             )
 
-            val newFileId = fileResponse.id
-            uploadedFileIds[buttonId] = newFileId
-
-            val fileId= fileResponse.id
+            val fileId = fileResponse.id
             val fileUrl = "https://cloud.appwrite.io/v1/storage/buckets/6792800d001d344a8d58/files/$fileId/view?project=677a4b92001bbd3a3742&mode=admin"
             collectShopImageLinks(fileUrl)
 
+            // Save file ID on success
+            uploadedFileIds[buttonId] = fileId
 
         } catch (e: AppwriteException) {
             Toast.makeText(requireContext(), "Error uploading $fileName: ${e.message}", Toast.LENGTH_LONG).show()
+
+            // Remove image from ImageButton on failure
+            activity?.runOnUiThread {
+                view?.findViewById<ImageButton>(buttonId)?.setImageResource(R.drawable.ic_failed)
+            }
+
         } catch (e: Exception) {
             Toast.makeText(requireContext(), "Unexpected error for $fileName: ${e.message}", Toast.LENGTH_LONG).show()
+
+            // Remove image from ImageButton on failure
+            activity?.runOnUiThread {
+                view?.findViewById<ImageButton>(buttonId)?.setImageResource(R.drawable.ic_failed)
+            }
         }
     }
+
     private fun collectAndSaveLinks() {
         val instagramLink = instagram.text.toString()
         val facebookLink = facebook.text.toString()
@@ -196,5 +203,14 @@ class ShopMediaFragment : Fragment() {
 
         viewModel.addShopImageLinks(link)
 
+    }
+    private fun compressImage(uri: Uri): File {
+        val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
+        val file = File(context?.cacheDir, "compressed_${System.currentTimeMillis()}.jpg")
+        val outputStream: OutputStream = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream) // 50% quality
+        outputStream.flush()
+        outputStream.close()
+        return file
     }
 }

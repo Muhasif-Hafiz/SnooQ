@@ -15,6 +15,7 @@ import androidx.annotation.RequiresExtension
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -37,7 +38,9 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
     private lateinit var storage: Storage
     private val viewModel: shopViewModel by viewModels()
     private val list = ArrayList<CarouselModel>()
+  private var images = ArrayList<String>()
     private val adapter = CarouselAdapter(list)
+
 
     @RequiresExtension(extension = Build.VERSION_CODES.R, version = 2)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,6 +73,10 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
         }
         observeShopData()
+        fetchShopImages()
+
+
+
 
 
         binding.profileImageShopActivity.setOnClickListener {
@@ -90,15 +97,15 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
             carouselRecyclerView.adapter = adapter
 
-            list.add(CarouselModel(R.drawable.test, "facebook"))
-            list.add(CarouselModel(R.drawable.test, "instagram"))
-            list.add(CarouselModel(R.drawable.test, "snooQ"))
-            list.add(CarouselModel(R.drawable.test, "facebook"))
-            list.add(CarouselModel(R.drawable.test, "instagram"))
-            list.add(CarouselModel(R.drawable.test, "snooQ"))
-            list.add(CarouselModel(R.drawable.test, "facebook"))
-            list.add(CarouselModel(R.drawable.test, "instagram"))
-            list.add(CarouselModel(R.drawable.test, "snooQ"))
+            // looping through the images ArrayList<String> to carousel
+
+            for(url in images){
+                binding.closedDaysShopActivity.text=url
+                Log.d("ImagesAdded", url)
+                list.add(CarouselModel(imageUrl = url))
+            }
+
+
         }
 
     }
@@ -211,6 +218,7 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
     private fun loadBannerImage(imageUrl: String) {
         Log.d("Banner_Image", "$imageUrl")
+
         Glide.with(this)
             .load(imageUrl)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -348,6 +356,29 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
         dialogBanner.show()
 
+    }
+    private fun  fetchShopImages () {
+
+
+        viewModel.shopData.observe(viewLifecycleOwner){ img ->
+
+            images=img.shopImages
+
+         //   Toast.makeText(requireContext(), img.shopImages.toString(), Toast.LENGTH_LONG).show()
+            list.clear()
+
+            // Loop through the images and add to the carousel list
+            for (url in images) {
+                Log.d("ImagesAdded", url)
+                list.add(CarouselModel(imageUrl = url))
+            }
+
+            // Notify the adapter that the data has changed
+            adapter.notifyDataSetChanged()
+
+
+
+        }
     }
 
 

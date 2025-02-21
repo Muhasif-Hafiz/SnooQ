@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.muhasib.snooq.R
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
@@ -12,7 +14,9 @@ import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 class FirstViewFragment : Fragment() {
     private lateinit var next: Button
     private lateinit var viewpager: ViewPager2
-    private lateinit var dotsIndicator: DotsIndicator
+    private lateinit var skipBtn:TextView
+   // private lateinit var dotsIndicator: DotsIndicator
+
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -24,14 +28,15 @@ class FirstViewFragment : Fragment() {
 
         // Initialize views
         next = view.findViewById(R.id.Next1ViewPager)
+        skipBtn=view.findViewById(R.id.skip1ViewPager)
 
         // Use 'activity?.findViewById' instead of 'requireActivity()' for safety
         viewpager = activity?.findViewById(R.id.viewPager) ?: return view
 
-        dotsIndicator = view.findViewById(R.id.dotsIndicator)
+      /*  dotsIndicator = view.findViewById(R.id.dotsIndicator)
 
         // Attach the dots indicator to the view pager
-        dotsIndicator.attachTo(viewpager)
+        dotsIndicator.attachTo(viewpager)*/
 
         next.setOnClickListener {
             // Ensure viewpager is valid and then navigate
@@ -42,6 +47,12 @@ class FirstViewFragment : Fragment() {
             }
         }
 
+        skipBtn.setOnClickListener {
+            if (isAdded) {
+                findNavController().navigate(R.id.action_viewpagerfragment_to_signInFragment)
+            }
+        }
         return view
     }
 }
+

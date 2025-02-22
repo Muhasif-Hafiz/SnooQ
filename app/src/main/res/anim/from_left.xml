@@ -6,7 +6,7 @@
     <translate
         android:fromXDelta="-100%"
         android:toXDelta="0%"
-        android:duration="600" />
+        android:duration="400" />
 
     <!-- Subtle scale-up for a soft zoom effect -->
     <scale
@@ -16,12 +16,12 @@
         android:toYScale="1.0"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:duration="600" />
+        android:duration="400" />
 
     <!-- Gradual fade-in for a seamless appearance -->
     <alpha
         android:fromAlpha="0.0"
         android:toAlpha="1.0"
-        android:duration="600" />
+        android:duration="400" />
 
 </set>

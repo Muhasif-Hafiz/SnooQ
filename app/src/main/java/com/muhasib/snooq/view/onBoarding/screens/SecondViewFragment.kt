@@ -9,12 +9,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.button.MaterialButton
 import com.muhasib.snooq.R
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 class SecondViewFragment : Fragment() {
 
-    private lateinit var next2: Button
+    private lateinit var next2: MaterialButton
     private lateinit var viewpager: ViewPager2
     private lateinit var skipBtn2 : TextView
 /*

@@ -75,14 +75,4 @@
         android:name="com.muhasib.snooq.view.Home.HomeActivity"
         android:label="activity_home"
         tools:layout="@layout/activity_home" />
-    <activity
-        android:id="@+id/shopActivity"
-        android:name="com.muhasib.snooq.view.ShopProfile.ShopActivity"
-        android:label="activity_shop"
-        tools:layout="@layout/activity_shop" />
-    <fragment
-        android:id="@+id/viewImageFragment"
-        android:name="com.muhasib.snooq.view.ShopProfile.ViewImageFragment"
-        android:label="fragment_view_image"
-        tools:layout="@layout/fragment_view_image" />
 </navigation>

@@ -8,11 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.button.MaterialButton
 import com.muhasib.snooq.R
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 class FirstViewFragment : Fragment() {
-    private lateinit var next: Button
+    private lateinit var next: MaterialButton
     private lateinit var viewpager: ViewPager2
     private lateinit var skipBtn:TextView
    // private lateinit var dotsIndicator: DotsIndicator

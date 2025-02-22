@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shop_nav_graph"
+    app:startDestination="@id/shopkeeperProfileFragment2">
+
+    <fragment
+        android:id="@+id/shopkeeperProfileFragment2"
+        android:name="com.muhasib.snooq.view.ShopProfile.ShopkeeperProfileFragment"
+        android:label="fragment_shopkeeper_profile"
+        tools:layout="@layout/fragment_shopkeeper_profile" >
+        <action
+            android:id="@+id/action_shopkeeperProfileFragment2_to_stockFragment2"
+            app:destination="@id/stockFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockFragment2"
+        android:name="com.muhasib.snooq.view.ShopProfile.StockFragment"
+        android:label="fragment_stock"
+        tools:layout="@layout/fragment_stock" >
+        <action
+            android:id="@+id/action_stockFragment2_to_shopkeeperProfileFragment2"
+            app:destination="@id/shopkeeperProfileFragment2"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+    </fragment>
+</navigation>

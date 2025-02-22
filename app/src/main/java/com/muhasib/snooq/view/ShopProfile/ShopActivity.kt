@@ -9,10 +9,10 @@ class ShopActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ShopkeeperProfileFragment())
-                .commit()
-        }
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.fragment_container, ShopkeeperProfileFragment())
+//                .commit()
+//        }
     }
 }

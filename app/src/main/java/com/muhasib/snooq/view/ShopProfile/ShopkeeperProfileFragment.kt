@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -74,6 +75,9 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         }
         observeShopData()
         fetchShopImages()
+        binding.btnStock.setOnClickListener{
+            findNavController().navigate(R.id.action_shopkeeperProfileFragment2_to_stockFragment2)
+        }
 
 
 
@@ -100,7 +104,7 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
             // looping through the images ArrayList<String> to carousel
 
             for(url in images){
-                binding.closedDaysShopActivity.text=url
+
                 Log.d("ImagesAdded", url)
                 list.add(CarouselModel(imageUrl = url))
             }

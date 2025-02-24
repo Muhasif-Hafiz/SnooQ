@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/shopkeeperProfileFragment2"
-        android:name="com.muhasib.snooq.view.ShopProfile.ShopkeeperProfileFragment"
+        android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.ShopkeeperProfileFragment"
         android:label="fragment_shopkeeper_profile"
         tools:layout="@layout/fragment_shopkeeper_profile" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/stockFragment2"
-        android:name="com.muhasib.snooq.view.ShopProfile.StockFragment"
+        android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.StockFragment"
         android:label="fragment_stock"
         tools:layout="@layout/fragment_stock" >
         <action
@@ -26,5 +26,17 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
+        <action
+            android:id="@+id/action_stockFragment2_to_productListingFragment"
+            app:destination="@id/productListingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productListingFragment"
+        android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.ProductListingFragment"
+        android:label="fragment_product_listing"
+        tools:layout="@layout/fragment_product_listing" >
+        <action
+            android:id="@+id/action_productListingFragment_to_stockFragment2"
+            app:destination="@id/stockFragment2" />
     </fragment>
 </navigation>

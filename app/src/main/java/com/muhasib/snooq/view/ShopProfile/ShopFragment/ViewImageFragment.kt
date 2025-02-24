@@ -1,4 +1,4 @@
-package com.muhasib.snooq.view.ShopProfile
+package com.muhasib.snooq.view.ShopProfile.ShopFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.muhasib.snooq.view.ShopProfile
+package com.muhasib.snooq.view.ShopProfile.ShopFragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -15,7 +15,6 @@ import androidx.annotation.RequiresExtension
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -27,6 +26,8 @@ import com.muhasib.snooq.R
 import com.muhasib.snooq.databinding.FragmentShopkeeperProfileBinding
 import com.muhasib.snooq.model.CarouselModel
 import com.muhasib.snooq.singleton.AppWriteSingleton
+import com.muhasib.snooq.view.ShopProfile.CropBannerActivity
+import com.muhasib.snooq.view.ShopProfile.CropImageActivity
 import com.muhasib.snooq.viewModel.shopViewModel
 import io.appwrite.Client
 import io.appwrite.services.Storage

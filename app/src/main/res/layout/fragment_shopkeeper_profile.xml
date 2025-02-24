@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ShopProfile.ShopkeeperProfileFragment">
+    tools:context=".view.ShopProfile.ShopFragment.ShopkeeperProfileFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
 
-    tools:context=".view.ShopProfile.ViewBannerImageFragment">
+    tools:context=".view.ShopProfile.ShopFragment.ViewBannerImageFragment">
 
 
     <com.github.chrisbanes.photoview.PhotoView

@@ -6,35 +6,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import com.muhasib.snooq.R
+import com.muhasib.snooq.adapters.StockAdapter
 import com.muhasib.snooq.databinding.FragmentStockBinding
-
 
 class StockFragment : Fragment() {
 
-    private  var  _binding : FragmentStockBinding? = null
-    private val  binding get() = _binding!!
+    private var _binding: FragmentStockBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
+        _binding = FragmentStockBinding.inflate(inflater, container, false)
 
-        val view =  inflater.inflate(R.layout.fragment_stock, container, false)
+        // Initialize adapter properly
 
-        _binding= FragmentStockBinding.bind(view)
 
         binding.btnAddProduct.setOnClickListener {
-
             findNavController().navigate(R.id.action_stockFragment2_to_productListingFragment)
-
-
         }
 
 
 
-        return view
+
+        return binding.root
     }
+
 
 }

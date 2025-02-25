@@ -63,6 +63,7 @@ class CropBannerActivity : AppCompatActivity() {
                     saveCrop()
                 }
 
+
             }
         }
 

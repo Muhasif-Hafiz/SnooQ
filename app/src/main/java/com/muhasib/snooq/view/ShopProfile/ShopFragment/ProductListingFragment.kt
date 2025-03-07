@@ -128,7 +128,7 @@ class ProductListingFragment : Fragment() {
             .setItems(options) { _, which ->
                 when (which) {
                     0 -> requestCameraPermission()  // Take Photo
-                    1 -> pickImageFromGallery()     // Choose from Gallery
+                    1 -> pickImageFromGallery()
                 }
             }
             .show()

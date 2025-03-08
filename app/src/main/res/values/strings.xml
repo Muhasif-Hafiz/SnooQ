@@ -65,5 +65,6 @@ Your shopping\nassistant in a QR code
 </string>
     <string name="shop">Shop</string>
     <string name="already_a_user_log_in">Already a user? Log in</string>
+    <string name="add_products_photos">Add Products Photos</string>
 
 </resources>

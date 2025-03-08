@@ -54,6 +54,12 @@
         <item name="cornerSize">24dp</item>
     </style>
 
+    <!-- styles.xml -->
+    <style name="add_product">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">#F6F8F7</item>
+    </style>
+
 
 
 </resources>

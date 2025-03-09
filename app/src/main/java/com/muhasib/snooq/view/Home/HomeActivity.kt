@@ -1,29 +1,20 @@
 package com.muhasib.snooq.view.Home
 
-import AppWriteViewModel
+import com.muhasib.snooq.mvvm.ViewModel.AppWriteViewModel
 import BaseActivity
-import android.animation.ArgbEvaluator
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.ImageButton
-import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.WindowCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 
 import com.muhasib.snooq.R
-import com.muhasib.snooq.TestingLocationActivity
 import com.muhasib.snooq.view.MainActivity
 import com.muhasib.snooq.view.ShopProfile.ShopActivity
 import com.muhasib.snooq.view.ShopRegistration.ShopRegistrationActivity
-import com.shrikanthravi.customnavigationdrawer2.data.MenuItem
-import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

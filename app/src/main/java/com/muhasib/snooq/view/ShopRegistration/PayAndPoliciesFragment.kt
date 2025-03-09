@@ -1,7 +1,6 @@
 package com.muhasib.snooq.view.ShopRegistration
 
-import ShopRegistrationViewModel
-import UploadData
+import com.muhasib.snooq.mvvm.ViewModel.ShopRegistrationViewModel
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
@@ -17,20 +16,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ScrollView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.muhasib.snooq.R
-import com.muhasib.snooq.mvvm.ShopRegistrationRepository
+import com.muhasib.snooq.mvvm.Repository.ShopRegistrationRepository
 
 class PayAndPoliciesFragment : Fragment() {
 

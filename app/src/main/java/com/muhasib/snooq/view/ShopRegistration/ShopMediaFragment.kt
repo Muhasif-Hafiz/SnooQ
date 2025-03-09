@@ -1,6 +1,6 @@
 package com.muhasib.snooq.view.ShopRegistration
 
-import ShopRegistrationViewModel
+import com.muhasib.snooq.mvvm.ViewModel.ShopRegistrationViewModel
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.Color

@@ -1,8 +1,9 @@
-package com.muhasib.snooq.mvvm
+package com.muhasib.snooq.mvvm.Repository
 
 import android.content.Context
+import android.util.Log
+import com.muhasib.snooq.Base.MySharedPreferences
 import com.muhasib.snooq.constants.userDetail
-import com.muhasib.snooq.constants.userDetail.Companion.USER_ID
 import com.muhasib.snooq.singleton.AppWriteSingleton
 import io.appwrite.Client
 import io.appwrite.ID
@@ -12,6 +13,7 @@ class AppWriteRepository(val context: Context) {
 
   private val _client = AppWriteSingleton.getClient(context)
   val client: Client get() = _client
+  private lateinit var  sharedPrefences : MySharedPreferences
 
   suspend fun sendEmail(userEmail: String) {
     val account = Account(client)
@@ -22,9 +24,13 @@ class AppWriteRepository(val context: Context) {
         userId = ID.unique(), // Generates a unique user ID
         email = userEmail
       )
+      sharedPrefences = MySharedPreferences(context)
 
       // Save the userId
       userDetail.USER_ID = sessionToken.userId
+      sharedPrefences.setToken(sessionToken.userId)
+      Log.d("userId", sessionToken.userId)
+
       val expire = sessionToken.expire // You may want to handle the expiration
 
     } catch (e: Exception) {
@@ -46,6 +52,7 @@ class AppWriteRepository(val context: Context) {
           secret = secretCode
 
         )
+        Log.d("userId", userId)
         true
       } else {
         throw IllegalStateException("User ID is null.")

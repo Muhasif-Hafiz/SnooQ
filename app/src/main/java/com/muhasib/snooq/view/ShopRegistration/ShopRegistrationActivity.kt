@@ -1,7 +1,7 @@
 package com.muhasib.snooq.view.ShopRegistration
 
 import BaseActivity
-import ShopRegistrationViewModel
+import com.muhasib.snooq.mvvm.ViewModel.ShopRegistrationViewModel
 import UploadData
 import android.app.AlertDialog
 import android.content.Intent
@@ -22,7 +22,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.button.MaterialButton
 import com.muhasib.snooq.R
-import com.muhasib.snooq.mvvm.ShopRegistrationRepository
+import com.muhasib.snooq.mvvm.Repository.ShopRegistrationRepository
 import com.muhasib.snooq.view.ShopProfile.ShopActivity
 
 import com.shuhart.stepview.StepView

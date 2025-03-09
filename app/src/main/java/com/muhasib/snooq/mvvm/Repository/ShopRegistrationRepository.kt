@@ -1,8 +1,9 @@
-package com.muhasib.snooq.mvvm
+package com.muhasib.snooq.mvvm.Repository
 
 import android.content.Context
-import android.content.SharedPreferences
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
+import com.muhasib.snooq.Base.MySharedPreferences
 
 import com.muhasib.snooq.model.Shopkeeper
 
@@ -16,16 +17,19 @@ class ShopRegistrationRepository{
 
 
     private val firestore = FirebaseFirestore.getInstance()
+    private lateinit var sharedPreferences: MySharedPreferences
 
     // Upload shop details to the database
     suspend fun uploadShopDetails(context: Context,shopDetails: HashMap<String, Shopkeeper>): Boolean {
         return try {
             val collectionRef = firestore.collection("shops")
+            sharedPreferences= MySharedPreferences(context)
 
 
             val documentRef = collectionRef.document()
             documentRef.set(shopDetails).await()
             saveShopId(context, documentRef.id)
+            sharedPreferences.setShopId(documentRef.id)
 
 
 
@@ -38,8 +42,11 @@ class ShopRegistrationRepository{
         }
     }
     fun saveShopId(context: Context, shopId: String) {
-        val sharedPreferences: SharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        sharedPreferences.edit().putString("SHOP_ID", shopId).apply()
+
+        sharedPreferences= MySharedPreferences(context)
+        sharedPreferences.setShopId(shopId)
+        Log.d("UserIdShopkeeper",shopId)
+        Log.d("UserIdShopkeeper", sharedPreferences.getShopId())
     }
 
 }

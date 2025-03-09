@@ -1,6 +1,6 @@
 package com.muhasib.snooq.singleton
 
-import com.muhasib.snooq.mvvm.NominatimService
+import com.muhasib.snooq.mvvm.ApiService.NominatimService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

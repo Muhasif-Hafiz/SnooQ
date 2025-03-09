@@ -1,4 +1,5 @@
-import android.net.Uri
+package com.muhasib.snooq.mvvm.ViewModel
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

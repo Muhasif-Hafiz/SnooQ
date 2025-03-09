@@ -1,7 +1,6 @@
 package com.muhasib.snooq.view.Registration
 
-import AppWriteViewModel
-import BaseActivity
+import com.muhasib.snooq.mvvm.ViewModel.AppWriteViewModel
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

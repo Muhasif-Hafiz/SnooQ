@@ -1,4 +1,4 @@
-package com.muhasib.snooq.viewModel
+package com.muhasib.snooq.mvvm.ViewModel
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.muhasib.snooq.repository.ProductListingRepository
+import com.muhasib.snooq.mvvm.Repository.ProductListingRepository
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 

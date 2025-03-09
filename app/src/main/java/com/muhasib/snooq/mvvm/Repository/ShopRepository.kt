@@ -1,4 +1,4 @@
-package com.muhasib.snooq.repository
+package com.muhasib.snooq.mvvm.Repository
 
 import android.content.Context
 import android.content.SharedPreferences

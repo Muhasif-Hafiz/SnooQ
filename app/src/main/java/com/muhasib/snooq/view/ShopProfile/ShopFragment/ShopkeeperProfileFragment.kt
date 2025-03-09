@@ -28,7 +28,7 @@ import com.muhasib.snooq.model.CarouselModel
 import com.muhasib.snooq.singleton.AppWriteSingleton
 import com.muhasib.snooq.view.ShopProfile.CropBannerActivity
 import com.muhasib.snooq.view.ShopProfile.CropImageActivity
-import com.muhasib.snooq.viewModel.shopViewModel
+import com.muhasib.snooq.mvvm.ViewModel.shopViewModel
 import io.appwrite.Client
 import io.appwrite.services.Storage
 

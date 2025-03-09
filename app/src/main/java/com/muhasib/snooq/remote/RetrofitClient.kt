@@ -1,6 +1,6 @@
 package com.muhasib.snooq.remote
 
-import com.muhasib.snooq.api.RemoveBgApi
+import com.muhasib.snooq.mvvm.ApiService.RemoveBgApi
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit

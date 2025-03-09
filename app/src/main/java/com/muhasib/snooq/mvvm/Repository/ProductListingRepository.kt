@@ -1,6 +1,6 @@
-package com.muhasib.snooq.repository
+package com.muhasib.snooq.mvvm.Repository
 
-import com.muhasib.snooq.api.RemoveBgApi
+import com.muhasib.snooq.mvvm.ApiService.RemoveBgApi
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Response

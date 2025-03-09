@@ -10,7 +10,8 @@ import com.muhasib.snooq.model.Product
 import com.muhasib.snooq.model.Shop
 import com.muhasib.snooq.model.Shopkeeper
 
-import com.muhasib.snooq.mvvm.ShopRegistrationRepository
+import com.muhasib.snooq.mvvm.Repository.ShopRegistrationRepository
+import com.muhasib.snooq.mvvm.ViewModel.ShopRegistrationViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -68,10 +69,20 @@ class UploadData(
                             description = "1L of fresh milk",
                             price = 2.5,
                             stockQuantity = 50,
-                            imageUrl = "https://example.com/milk.jpg",
-                            category = "Dairy"
+                            imageUrl1 = "https://example.com/milk.jpg",
+                            imageUrl2 = "https://example.com/milk.jpg",
+                            imageUrl3 = "https://example.com/milk.jpg",
+                            imageUrl4 = "https://example.com/milk.jpg",
+                            category = "Dairy",
+                            subCategory = "and",
+                            size = "jcbj",
+                            color = "dwd",
+                            isDeliveryAvailable = true,
+                            shopId = TODO(),
+                            discountedPrice = TODO()
                         )
-                    ),
+                    )
+                    ,
                     qrCode = "https://example.com/qrcode/shop_001",
                     customerReviews = listOf(
                         CustomerReview(
@@ -112,7 +123,7 @@ class UploadData(
                 )
             )
 
-            if (lifecycleOwner is androidx.lifecycle.LifecycleOwner) {
+            if (lifecycleOwner is LifecycleOwner) {
                 lifecycleOwner.lifecycleScope.launch {
                     val result = withContext(Dispatchers.IO) {
                         shopRegistrationRepository.uploadShopDetails(context, shopkeepers)
@@ -120,8 +131,6 @@ class UploadData(
 
                     // Show Toast on UI Thread
                     withContext(Dispatchers.Main) {
-
-
 
                         Toast.makeText(context, if (result) "Shop Created!" else "Failed", Toast.LENGTH_SHORT).show()
                     }

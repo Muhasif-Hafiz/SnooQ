@@ -1,4 +1,4 @@
-package com.muhasib.snooq.mvvm
+package com.muhasib.snooq.mvvm.ApiService
 
 import retrofit2.Call
 import com.muhasib.snooq.model.NominatimResponse

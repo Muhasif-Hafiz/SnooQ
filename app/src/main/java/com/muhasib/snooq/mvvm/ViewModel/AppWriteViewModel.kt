@@ -1,8 +1,10 @@
+package com.muhasib.snooq.mvvm.ViewModel
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.muhasib.snooq.mvvm.AppWriteRepository
+import com.muhasib.snooq.mvvm.Repository.AppWriteRepository
 import kotlinx.coroutines.launch
 
 class AppWriteViewModel(private val appWriteRepository: AppWriteRepository) : ViewModel() {

@@ -1,4 +1,4 @@
-package com.muhasib.snooq.api
+package com.muhasib.snooq.mvvm.ApiService
 
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody

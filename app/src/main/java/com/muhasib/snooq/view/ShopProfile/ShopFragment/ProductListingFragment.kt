@@ -11,7 +11,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,15 +20,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
+import com.muhasib.snooq.Base.MySharedPreferences
 import com.muhasib.snooq.R
-import com.muhasib.snooq.adapters.StockAdapter
 import com.muhasib.snooq.databinding.FragmentProductListingBinding
 import com.muhasib.snooq.remote.RetrofitClient
-import com.muhasib.snooq.repository.ProductListingRepository
-import com.muhasib.snooq.viewModel.ProductListingViewModel
-import com.muhasib.snooq.viewModel.ProductListingViewModelFactory
+import com.muhasib.snooq.mvvm.Repository.ProductListingRepository
+import com.muhasib.snooq.mvvm.ViewModel.ProductListingViewModel
+import com.muhasib.snooq.mvvm.ViewModel.ProductListingViewModelFactory
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -45,9 +42,7 @@ class ProductListingFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_CAMERA_PERMISSION = 2
     private val REQUEST_GALLERY_PICK = 3
-    private lateinit var adapter: StockAdapter
-
-
+    private lateinit var  sharedPreferences: MySharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,17 +52,17 @@ class ProductListingFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_product_listing, container, false)
         _binding = FragmentProductListingBinding.bind(view)
 
-        // Create ViewModel instance
+
+        sharedPreferences = MySharedPreferences(requireContext())
         val factory = ProductListingViewModelFactory(ProductListingRepository(RetrofitClient.instance))
         viewModel = ViewModelProvider(this, factory).get(ProductListingViewModel::class.java)
 
-        binding.btnPickImage.setOnClickListener {
+        binding.pickImageButton.setOnClickListener {
             showImageSourceDialog()
         }
 
-        // Observe the processed image from ViewModel
         viewModel.processedImage.observe(viewLifecycleOwner, Observer { bitmap ->
-            binding.imageViewProduct.setImageBitmap(bitmap)
+            binding.ProductImage1.setImageBitmap(bitmap)
         })
 
         // Observe the loading state
@@ -80,40 +75,8 @@ class ProductListingFragment : Fragment() {
             }
         })
 
-        // Observe error state
-        viewModel.error.observe(viewLifecycleOwner, Observer { error ->
-            Log.e("Error", error)
-        })
-        /// Tab layout Managerment
-        adapter = StockAdapter(childFragmentManager, lifecycle)
-        binding.TabLayoutStock.addTab(binding.TabLayoutStock.newTab().setText("Upload Photos"))
-        binding.TabLayoutStock.addTab(binding.TabLayoutStock.newTab().setText("Scan Product"))
 
-        binding.ViewPager2Stock.adapter = adapter
 
-        binding.TabLayoutStock.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            override fun onTabSelected(p0: TabLayout.Tab?) {
-
-                if (p0 != null) {
-                    binding.ViewPager2Stock.currentItem = p0.position
-                }
-            }
-
-            override fun onTabUnselected(p0: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabReselected(p0: TabLayout.Tab?) {
-
-            }
-
-        })
-        binding.ViewPager2Stock.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                binding.TabLayoutStock.selectTab(binding.TabLayoutStock.getTabAt(position))
-            }
-        })
 
 
 
@@ -127,7 +90,7 @@ class ProductListingFragment : Fragment() {
             .setTitle("Select Image Source")
             .setItems(options) { _, which ->
                 when (which) {
-                    0 -> requestCameraPermission()  // Take Photo
+                    0 -> requestCameraPermission()
                     1 -> pickImageFromGallery()
                 }
             }

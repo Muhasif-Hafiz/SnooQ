@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.PhotoView
 import com.muhasib.snooq.R
-import com.muhasib.snooq.viewModel.shopViewModel
+import com.muhasib.snooq.mvvm.ViewModel.shopViewModel
 
 class ViewImageFragment : Fragment() {
 

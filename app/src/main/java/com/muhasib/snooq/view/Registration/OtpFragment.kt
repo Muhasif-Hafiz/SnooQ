@@ -1,6 +1,6 @@
 package com.muhasib.snooq.view.Registration
 
-import AppWriteViewModel
+import com.muhasib.snooq.mvvm.ViewModel.AppWriteViewModel
 import BaseActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -129,6 +129,8 @@ class OtpFragment : Fragment() {
 
     private fun handleLogin() {
         val secretCode = otpInputs.joinToString(separator = "") { it.text.toString().trim() }
+
+
 
         if (secretCode.length != 6 || secretCode.any { !it.isDigit() }) {
             (activity as BaseActivity).showCustomSnackbar("Invalid OTP. Please enter a 6-digit code.")

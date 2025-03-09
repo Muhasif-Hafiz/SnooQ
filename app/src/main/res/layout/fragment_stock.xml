@@ -6,11 +6,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.ShopProfile.ShopFragment.StockFragment">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
+        <!-- Tab Layout at the top -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/TabLayout_Stock"
             android:layout_width="0dp"
@@ -24,46 +24,77 @@
             app:tabIndicator="@drawable/tab_indicator"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- ViewPager2 below TabLayout -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/ViewPager2_Stock"
             android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:flow_horizontalBias="0.5"
             app:layout_constraintTop_toBottomOf="@id/TabLayout_Stock"
+            app:layout_constraintBottom_toTopOf="@id/product_container" />
 
-            android:layout_height="0dp"/>
+        <!-- Product layout (moved to top area) -->
+        <LinearLayout
+            android:id="@+id/product_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center"
+            android:padding="16dp"
+            android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/img_product"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:contentDescription="Product Image"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <Button
+                android:id="@+id/btn_add_product"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/black"
+                android:text="Add Product" />
+        </LinearLayout>
+
+        <!-- Custom FAB with proper positioning -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/custom_fab"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:backgroundTint="#7948BB"
+            app:cardCornerRadius="29dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/account_number_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold_h2"
+                    android:text="Free chat"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:gravity="center"
-        android:orientation="vertical">
-
-
-        <ImageView
-            android:id="@+id/img_product"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:contentDescription="Sample Image"
-            android:src="@drawable/ic_launcher_foreground" />
-
-        <Button
-            android:id="@+id/btn_add_product"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/black"
-            android:text="Click Me" />
-
-    </LinearLayout>
-
 </FrameLayout>

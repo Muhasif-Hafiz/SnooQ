@@ -1,7 +1,7 @@
 package com.muhasib.snooq.view.ShopRegistration
 
 import BaseActivity
-import ShopRegistrationViewModel
+import com.muhasib.snooq.mvvm.ViewModel.ShopRegistrationViewModel
 import android.Manifest
 import android.annotation.SuppressLint
 
@@ -28,13 +28,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ScrollView
-import android.widget.Switch
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.gms.common.api.ApiException

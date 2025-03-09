@@ -61,11 +61,11 @@ class StockFragment : Fragment() {
     private fun handleChat(chatType: Int) {
         binding.customFab.visibility = View.VISIBLE
 
-        if (navController.currentDestination?.id != R.id.uploadPhotosFragment) {
+        if (navController.currentDestination?.id != R.id.productListingFragment) {
             val bundle = Bundle().apply {
                 putString("chatType", chatType.toString()) // Replace "chatType" with your fragment's argument name
             }
-            navController.navigate(R.id.uploadPhotosFragment, bundle)
+            navController.navigate(R.id.productListingFragment, bundle)
         }
     }
 }

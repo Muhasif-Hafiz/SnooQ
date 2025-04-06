@@ -10,4 +10,5 @@ class ProductListingRepository(private val apiService: RemoveBgApi) {
     suspend fun removeBackground(part: MultipartBody.Part): Response<ResponseBody> {
         return apiService.removeBg(part)
     }
+
 }

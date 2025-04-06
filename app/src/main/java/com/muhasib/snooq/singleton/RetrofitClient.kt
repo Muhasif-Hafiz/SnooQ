@@ -25,7 +25,7 @@ object RetrofitClient {
     val instance: NominatimService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(client)  // Use the client with the interceptor
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(NominatimService::class.java)

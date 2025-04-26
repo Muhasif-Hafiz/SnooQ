@@ -74,6 +74,7 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
 
         }
+
         observeShopData()
         fetchShopImages()
         binding.btnStock.setOnClickListener{
@@ -101,8 +102,6 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         binding.apply {
 
             carouselRecyclerView.adapter = adapter
-
-            // looping through the images ArrayList<String> to carousel
 
             for(url in images){
 

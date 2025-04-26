@@ -49,6 +49,8 @@ class ShopRepository(private val context: Context) {
 
                         )
 
+                        Log.d("ShopRepository", "Fetched shop data: $shop")
+
                         shopLiveData.value = shop
                         if (shop.profileImageUrl.isNotEmpty()) {
                             saveProfileImageUrlToPrefs(shop.profileImageUrl)

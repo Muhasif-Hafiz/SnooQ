@@ -98,8 +98,6 @@ class ShopMediaFragment : Fragment() {
 
 
         viewModel = ViewModelProvider(requireActivity())[ShopRegistrationViewModel::class.java]
-
-        // Set click listeners for ImageButtons
         setImageButtonClickListener(btnUploadPhoto1)
         setImageButtonClickListener(btnUploadPhoto2)
         setImageButtonClickListener(btnUploadPhoto3)

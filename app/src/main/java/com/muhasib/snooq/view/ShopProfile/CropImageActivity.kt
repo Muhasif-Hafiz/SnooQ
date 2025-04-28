@@ -12,6 +12,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.firestore.FirebaseFirestore
+import com.muhasib.snooq.Base.MySharedPreferences
 import com.muhasib.snooq.databinding.ActivityCropImageBinding
 import com.muhasib.snooq.singleton.AppWriteSingleton
 import io.appwrite.Client
@@ -53,13 +54,11 @@ class CropImageActivity : BaseActivity() {
         }
 
         binding.imgCheckCropActivity.setOnClickListener {
-
             if(!previousImage.isNullOrEmpty()){
                 saveCropWithPrevios(previousImage)
             }else{
                 saveCrop()
             }
-
         }
     }
 
@@ -71,7 +70,6 @@ class CropImageActivity : BaseActivity() {
                 return
             }
 
-            // Show progress bar
 
 
             binding.progressBar.visibility = View.VISIBLE
@@ -150,7 +148,7 @@ class CropImageActivity : BaseActivity() {
     }
 
     private fun saveImageUrlToFirestore(fileUrl: String) {
-        val shopId = getShopId(this)
+        val shopId = MySharedPreferences(this).getShopId()
 
         if (shopId.isEmpty()) {
             Log.e("CropImageActivity", "Shop ID is null or empty. Cannot update Firestore.")
@@ -167,7 +165,6 @@ class CropImageActivity : BaseActivity() {
                 }
                 setResult(RESULT_OK, intent)
 
-                // Hide progress bar
                 binding.progressBar.visibility = View.GONE
                 binding.imgCheckCropActivity.isEnabled = true
 

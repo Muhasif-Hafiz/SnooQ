@@ -16,19 +16,19 @@
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="280dp"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
-
             android:background="@color/white"
-            android:fitsSystemWindows="true">
+
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
+                android:backgroundTint="@color/white"
                 android:fitsSystemWindows="true"
                 app:contentScrim="@color/PrimarySnooQ"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                android:backgroundTint="@color/white"
 
                 app:titleEnabled="false">
 
@@ -82,337 +82,313 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/shop_name_shop_Activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Muhasif Hafiz"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/shop_owner_name_shop_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="muhasib_07"
+                            android:textColor="?android:textColorSecondary" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnStock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/soft_blue"
+                        android:fontFamily="@font/extra_bold_h3"
+                        android:text="Stock"
+                        android:textSize="16dp" />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/shop_description_shop_Activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="I will inspire 10 million people to do what they love the best they can!"
+                    android:textSize="16sp" />
+
+
+                <RatingBar
+                    android:id="@+id/rating_Bar_shop_Activity"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:numStars="5"
+                    android:rating="5" />
+
+                <TextView
+                    android:id="@+id/rating_text_shop_Activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="26 reviews" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="14dp">
+                    android:padding="10dp">
 
+                    <!-- Metrics Row -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:orientation="horizontal">
 
+                        <!-- Rate per min -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="1.3"
+                            android:gravity="center"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/shop_name_shop_Activity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Muhasif Hafiz"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_placeholder" />
 
                             <TextView
-                                android:id="@+id/shop_owner_name_shop_activity"
+                                android:id="@+id/text_open_time_shop_Activity"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="muhasib_07"
-                                android:textColor="?android:textColorSecondary" />
+                                android:text="$3.00"
+                                android:textColor="#000000"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="we are open"
+                                android:textColor="#666666"
+                                android:textSize="14sp" />
                         </LinearLayout>
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnStock"
-                            android:layout_width="wrap_content"
+                        <!-- Divider 1 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginVertical="8dp"
+                            android:background="#E0E0E0" />
+
+                        <!-- Min talk time -->
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Stock"
-                            android:backgroundTint="@color/soft_blue"
-                            android:fontFamily="@font/extra_bold_h3"
-                            android:textSize="16dp"
-                            />
+                            android:layout_weight="1.3"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_menu_about_us" />
 
+                            <TextView
+                                android:id="@+id/closed_days_shop_Activity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="5 mins"
+                                android:textColor="#000000"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="closed days"
+                                android:textColor="#666666"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- Divider 2 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginVertical="8dp"
+                            android:background="#E0E0E0" />
+
+                        <!-- Sessions -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.3"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_sections" />
+
+                            <TextView
+                                android:id="@+id/closing_time_shop_Activity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="36"
+                                android:textColor="#000000"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="we are closed"
+                                android:textColor="#666666"
+                                android:textSize="14sp" />
+                        </LinearLayout>
                     </LinearLayout>
 
 
-
-                    <TextView
-                        android:id="@+id/shop_description_shop_Activity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="I will inspire 10 million people to do what they love the best they can!"
-                        android:textSize="16sp" />
+                </LinearLayout>
 
 
+                <androidx.recyclerview.widget.RecyclerView
 
-                    <RatingBar
-                        android:id="@+id/rating_Bar_shop_Activity"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:numStars="5"
-                        android:rating="5" />
+                    android:id="@+id/carousel_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:clipChildren="false"
 
-                    <TextView
-                        android:id="@+id/rating_text_shop_Activity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="26 reviews" />
+
+                    android:clipToPadding="false"
+                    app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+
+                    tools:listitem="@layout/caraosel_layout" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="1dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="3dp">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        android:padding="16dp">
 
-                        <!-- Metrics Row -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-                            <!-- Rate per min -->
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1.3"
-                                android:orientation="vertical"
-                                android:gravity="center">
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
 
                                 <ImageView
                                     android:layout_width="24dp"
                                     android:layout_height="24dp"
-                                    android:src="@drawable/ic_placeholder"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/text_open_time_shop_Activity"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="$3.00"
-                                    android:textSize="16sp"
-                                    android:textColor="#000000"
-                                    android:textStyle="bold"
-                                    android:layout_marginTop="4dp"/>
+                                    android:src="@drawable/shop_city"
+                                    android:tint="@color/PrimarySnooQ" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="we are open"
-                                    android:textSize="14sp"
-                                    android:textColor="#666666"/>
+                                    android:layout_marginStart="8dp"
+                                    android:text="Location"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+
                             </LinearLayout>
 
-                            <!-- Divider 1 -->
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="match_parent"
-                                android:background="#E0E0E0"
-                                android:layout_marginVertical="8dp"/>
+                            <ImageButton
+                                android:id="@+id/btn_edit_location_shop_Activity"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
 
-                            <!-- Min talk time -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.3"
-                                android:orientation="vertical"
-                                android:gravity="center">
-
-                                <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
-                                    android:src="@drawable/ic_menu_about_us"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/closed_days_shop_Activity"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="5 mins"
-                                    android:textSize="16sp"
-                                    android:textColor="#000000"
-                                    android:textStyle="bold"
-                                    android:layout_marginTop="4dp"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="closed days"
-                                    android:textSize="14sp"
-                                    android:textColor="#666666"/>
-                            </LinearLayout>
-
-                            <!-- Divider 2 -->
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="match_parent"
-                                android:background="#E0E0E0"
-                                android:layout_marginVertical="8dp"/>
-
-                            <!-- Sessions -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.3"
-                                android:orientation="vertical"
-                                android:gravity="center">
-
-                                <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
-                                    android:src="@drawable/ic_sections"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/closing_time_shop_Activity"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="36"
-                                    android:textSize="16sp"
-                                    android:textColor="#000000"
-                                    android:textStyle="bold"
-                                    android:layout_marginTop="4dp"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="we are closed"
-                                    android:textSize="14sp"
-                                    android:textColor="#666666"/>
-                            </LinearLayout>
+                                android:padding="8dp"
+                                android:src="@drawable/ic_edit" />
                         </LinearLayout>
 
-
-
-                    </LinearLayout>
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-
-                        android:id="@+id/carousel_recycler_view"
-                        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
-                        android:layout_width="match_parent"
-                        tools:listitem="@layout/caraosel_layout"
-
-
-
-
-                        android:layout_height="300dp"
-                        android:clipChildren="false"
-
-                        android:clipToPadding="false" />
-
-
-
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="3dp"
-                        android:layout_marginStart="1dp"
-                        android:layout_marginEnd="1dp">
-
-
-
-
-
-
-
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/shop_address_shop_Activity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                            android:layout_marginTop="8dp"
+                            android:text="Add Your current location"
+                            android:textSize="16sp" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:gravity="center_vertical">
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-
-                                    <ImageView
-                                        android:layout_width="24dp"
-                                        android:layout_height="24dp"
-                                        android:src="@drawable/shop_city"
-                                        android:tint="@color/PrimarySnooQ"/>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Location"
-                                        android:textSize="18sp"
-                                        android:textStyle="bold"
-                                        android:layout_marginStart="8dp"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_directions_shop_Activity"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Get Directions"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            app:icon="@drawable/ic_arrow_forward"
+                            app:iconTint="@color/PrimarySnooQ" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
 
-                                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Highlights"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-                                <ImageButton
-                                    android:id="@+id/btn_edit_location_shop_Activity"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:src="@drawable/ic_edit"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_media"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp" />
 
-                                    android:background="?attr/selectableItemBackgroundBorderless"
-                                    android:padding="8dp"/>
-                            </LinearLayout>
-
-                            <TextView
-                                android:id="@+id/shop_address_shop_Activity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Add Your current location"
-                                android:textSize="16sp"/>
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btn_directions_shop_Activity"
-                                style="@style/Widget.MaterialComponents.Button.TextButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Get Directions"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                app:icon="@drawable/ic_arrow_forward"
-                                app:iconTint="@color/PrimarySnooQ" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:text="Highlights"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_media"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp" />
-
-                </LinearLayout>
+            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
 </FrameLayout>

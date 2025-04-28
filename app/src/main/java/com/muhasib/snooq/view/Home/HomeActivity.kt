@@ -20,27 +20,25 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : BaseActivity() {
 
-    private lateinit var  shop_btn :  ImageButton
-    private lateinit var   three_dots : ImageButton
-    private val appWriteViewModel : AppWriteViewModel by viewModel()
+//    private lateinit var  shop_btn :  ImageButton
+//    private lateinit var   three_dots : ImageButton
+//    private val appWriteViewModel : AppWriteViewModel by viewModel()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false) // Enable edge-to-edge
+
         setContentView(R.layout.activity_home)
 
-        shop_btn = findViewById(R.id.shop_icon)
-        three_dots=findViewById(R.id.menu_icon)
-        shop_btn.setOnClickListener { navigateToShopRegistration() }
-
-
-        val btn : MaterialButton= findViewById(R.id.ShopActivity)
-        btn.setOnClickListener{
-            startActivity(Intent(this@HomeActivity, ShopActivity::class.java))
-        }
-
-
+//        shop_btn = findViewById(R.id.shop_icon)
+//        three_dots=findViewById(R.id.menu_icon)
+//        shop_btn.setOnClickListener { navigateToShopRegistration() }
+//
+//
+//        val btn : MaterialButton= findViewById(R.id.ShopActivity)
+//        btn.setOnClickListener{
+//            startActivity(Intent(this@HomeActivity, ShopActivity::class.java))
+//        }
 
 
         }
@@ -64,37 +62,34 @@ class HomeActivity : BaseActivity() {
         val cancelButton = view.findViewById<MaterialButton>(R.id.cancelButton)
         val logoutButton = view.findViewById<MaterialButton>(R.id.logoutButton)
 
-        // Show the bottom sheet dialog
-        bottomSheetDialog.show()
 
-        // Cancel button click listener
+        bottomSheetDialog.show()
         cancelButton.setOnClickListener {
-            bottomSheetDialog.dismiss()  // Dismiss the bottom sheet without doing anything
+            bottomSheetDialog.dismiss()
         }
 
         // Logout button click listener
-        logoutButton.setOnClickListener {
-            // Call the logout function here
-            appWriteViewModel.LogoutUserSession()
-
-            // Observe the logout result from the ViewModel
-            appWriteViewModel.logoutResult.observe(this, Observer { result ->
-                result.fold(
-                    onSuccess = {
-                        // If successful, navigate to MainActivity and finish the current activity
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish() // Finish the current activity to prevent returning to it
-                    },
-                    onFailure = { exception ->
-                        // Show an error message in case of failure
-                        showCustomSnackbar("Please Check Your Network Connection!")
-                    }
-                )
-            })
-
-
-            bottomSheetDialog.dismiss()
-        }
+//        logoutButton.setOnClickListener {
+//
+//            appWriteViewModel.LogoutUserSession()
+//
+//
+//            appWriteViewModel.logoutResult.observe(this, Observer { result ->
+//                result.fold(
+//                    onSuccess = {
+//
+//                        startActivity(Intent(this, MainActivity::class.java))
+//                        finish()
+//                    },
+//                    onFailure = { exception ->
+//                        showCustomSnackbar("Please Check Your Network Connection!")
+//                    }
+//                )
+//            })
+//
+//
+//            bottomSheetDialog.dismiss()
+//        }
     }
 
 

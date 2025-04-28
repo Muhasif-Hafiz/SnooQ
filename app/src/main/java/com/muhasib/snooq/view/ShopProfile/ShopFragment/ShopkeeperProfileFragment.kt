@@ -81,13 +81,7 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
             findNavController().navigate(R.id.action_shopkeeperProfileFragment2_to_stockFragment2)
         }
 
-
-
-
-
         binding.profileImageShopActivity.setOnClickListener {
-
-
             showProfileOptions()
         }
 
@@ -367,8 +361,6 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         viewModel.shopData.observe(viewLifecycleOwner){ img ->
 
             images=img.shopImages
-
-         //   Toast.makeText(requireContext(), img.shopImages.toString(), Toast.LENGTH_LONG).show()
             list.clear()
 
             // Loop through the images and add to the carousel list
@@ -384,6 +376,4 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
         }
     }
-
-
 }

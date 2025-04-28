@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.firestore.FirebaseFirestore
+import com.muhasib.snooq.Base.MySharedPreferences
 import com.muhasib.snooq.R
 import com.muhasib.snooq.databinding.ActivityCropBannerBinding
 import com.muhasib.snooq.databinding.ActivityCropImageBinding
@@ -151,7 +152,7 @@ class CropBannerActivity : AppCompatActivity() {
         }
     }
     private fun saveBannerImageUrlToFirestore(fileUrl: String) {
-        val shopId = getShopId(this)
+        val shopId = MySharedPreferences(this).getShopId()
 
         if (shopId.isEmpty()) {
             Log.e("CropImageActivity", "Shop ID is null or empty. Cannot update Firestore.")

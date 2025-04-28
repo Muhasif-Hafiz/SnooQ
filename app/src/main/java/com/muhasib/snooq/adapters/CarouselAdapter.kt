@@ -2,6 +2,7 @@ package com.muhasib.snooq.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,8 +14,12 @@ import com.google.android.material.animation.AnimationUtils.lerp
 import com.muhasib.snooq.R
 import com.muhasib.snooq.databinding.CaraoselLayoutBinding
 import com.muhasib.snooq.model.CarouselModel
+import com.muhasib.snooq.view.ShopProfile.ShopFragment.ViewBannerImageFragment
 
-class CarouselAdapter(val list : ArrayList<CarouselModel>) : RecyclerView.Adapter<CarouselAdapter.ItemViewHolder> (){
+class CarouselAdapter(
+    val list: ArrayList<CarouselModel>,
+  private val  onItemClickListener: (CarouselModel) -> Unit)
+    : RecyclerView.Adapter<CarouselAdapter.ItemViewHolder> (){
 
 
     inner  class ItemViewHolder( val binding : CaraoselLayoutBinding) : RecyclerView.ViewHolder(binding.root){
@@ -41,6 +46,9 @@ class CarouselAdapter(val list : ArrayList<CarouselModel>) : RecyclerView.Adapte
                     carouselTextView.alpha =lerp(1F, 0F, 0F, 80F, maskRect.left)
                 }
 
+                binding.root.setOnClickListener {
+                    onItemClickListener(model)
+                }
 
 
             }

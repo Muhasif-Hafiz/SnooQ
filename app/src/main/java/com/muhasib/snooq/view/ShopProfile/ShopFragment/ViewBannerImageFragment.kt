@@ -17,6 +17,7 @@ import com.muhasib.snooq.mvvm.ViewModel.shopViewModel
 class ViewBannerImageFragment : Fragment() {
 
     private val viewModel: shopViewModel by viewModels()
+    private var imageUrl: String? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(

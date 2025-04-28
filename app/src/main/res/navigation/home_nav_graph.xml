@@ -9,6 +9,14 @@
         android:name="com.muhasib.snooq.view.Home.HomeFragment"
         android:label="Home" />
 
+    <fragment
+        android:id="@+id/viewProfileFragment"
+        android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.ViewImageFragment"
+        android:label="Profile" >
+
+    </fragment>
+
+
 
 
 </navigation>

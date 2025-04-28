@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.muhasib.snooq.Base.MySharedPreferences
 import com.muhasib.snooq.model.DownloadShopkeeper
 
 class ShopRepository(private val context: Context) {
@@ -16,6 +17,7 @@ class ShopRepository(private val context: Context) {
 
     private val sharedPreferencesBanner : SharedPreferences = context.getSharedPreferences("MyPrefsBanner", Context.MODE_PRIVATE)
 
+    val prefs = MySharedPreferences(context)
     fun fetchShopData(shopId: String): LiveData<DownloadShopkeeper> {
         val shopLiveData = MutableLiveData<DownloadShopkeeper>()
 
@@ -77,17 +79,20 @@ class ShopRepository(private val context: Context) {
         return sharedPreferences.getString("SHOP_ID", null)
     }
     fun saveProfileImageUrlToPrefs(imageUrl: String) {
-        sharedPreferences.edit().putString("PROFILE_IMAGE_URL", imageUrl).apply()
+       // sharedPreferences.edit().putString("PROFILE_IMAGE_URL", imageUrl).apply()
+        prefs.setProfileImageUrl(imageUrl)
+
     }
     fun getProfileImageUrlFromPrefs(): String? {
-        return sharedPreferences.getString("PROFILE_IMAGE_URL", "")
+     //   return sharedPreferences.getString("PROFILE_IMAGE_URL", "")
+        return prefs.getProfileImageUrl()
     }
 
     fun saveBannerImageUrlToPrefs(imageUrl: String){
-        sharedPreferencesBanner.edit().putString("BANNER_IMAGE_URL", imageUrl).apply()
+       prefs.setBannerImageUrl(imageUrl)
     }
     fun getBannerImageUrlFromPrefs() : String? {
-        return sharedPreferencesBanner.getString("BANNER_IMAGE_URL", "")
+        return prefs.getBannerImageUrl()
     }
 
 

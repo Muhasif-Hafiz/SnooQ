@@ -35,4 +35,22 @@ class MySharedPreferences(context : Context){
     fun getShopId() : String {
         return sharedPreferences.getString(SHOPID,"")!!
     }
+    fun clear(){
+        editor.clear()
+        editor.apply()
+
+    }
+    fun setProfileImageUrl(imageUrl: String) {
+        editor.putString("PROFILE_IMAGE_URL", imageUrl).apply()
+    }
+    fun getProfileImageUrl(): String? {
+        return sharedPreferences.getString("PROFILE_IMAGE_URL", null)
+    }
+    fun setBannerImageUrl(imageUrl: String) {
+        editor.putString("BANNER_IMAGE_URL", imageUrl).apply()
+    }
+    fun getBannerImageUrl(): String? {
+        return sharedPreferences.getString("BANNER_IMAGE_URL", null)
+
+    }
 }

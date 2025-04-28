@@ -135,38 +135,23 @@
                     android:id="@+id/shop_description_shop_Activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxLines="5"
                     android:layout_marginTop="16dp"
                     android:text="I will inspire 10 million people to do what they love the best they can!"
                     android:textSize="16sp" />
-
-
-                <RatingBar
-                    android:id="@+id/rating_Bar_shop_Activity"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:numStars="5"
-                    android:rating="5" />
-
-                <TextView
-                    android:id="@+id/rating_text_shop_Activity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="26 reviews" />
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+
                     android:padding="10dp">
 
                     <!-- Metrics Row -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:orientation="horizontal">
 
                         <!-- Rate per min -->
@@ -275,8 +260,18 @@
                                 android:textColor="#666666"
                                 android:textSize="14sp" />
                         </LinearLayout>
+
+
                     </LinearLayout>
 
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="Shop Images"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -378,15 +373,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="Highlights"
+                    android:text="Ratings and Reviews "
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_media"
-                    android:layout_width="match_parent"
+                <RatingBar
+                    android:id="@+id/rating_Bar_shop_Activity"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginTop="16dp"
+                    android:numStars="5"
+                    android:rating="5" />
+
+                <TextView
+                    android:id="@+id/rating_text_shop_Activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="26 reviews" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

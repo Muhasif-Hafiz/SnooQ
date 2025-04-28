@@ -24,8 +24,8 @@ class ViewImageFragment : Fragment() {
         val photoView: PhotoView = view.findViewById(R.id.photoView)
         val closeButton: ImageView = view.findViewById(R.id.closeButton)
 
-        // Retrieve the image URL from ViewModel
-        val imageUrl = viewModel.getProfileImageUrlFromPrefs()
+
+        val imageUrl =  arguments?.getString("image_url")
 
 
         if (!imageUrl.isNullOrEmpty()) {

@@ -41,7 +41,20 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
     private val viewModel: shopViewModel by viewModels()
     private val list = ArrayList<CarouselModel>()
   private var images = ArrayList<String>()
-    private val adapter = CarouselAdapter(list)
+    private val adapter = CarouselAdapter(list, onItemClickListener = { carouselModel ->
+
+        val bundle = Bundle()
+        bundle.putString("image_url", carouselModel.imageUrl)  // pass the clicked image url
+
+        val fragment = ViewImageFragment()
+        fragment.arguments = bundle
+
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    })
+
 
 
     @RequiresExtension(extension = Build.VERSION_CODES.R, version = 2)
@@ -272,7 +285,11 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         btnViewProfile.setOnClickListener {
             dialog.dismiss()
 
+            val bundle = Bundle()
+            bundle.putString("image_url", viewModel.getProfileImageUrlFromPrefs())
+            Log.d("ShopFragment", "Profile image clicked")
             val viewImageFragment = ViewImageFragment()
+            viewImageFragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, viewImageFragment)
                 .addToBackStack(null)
@@ -308,7 +325,6 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         btnUpdateBanner.setOnClickListener {
 
             if (isAdded) {
-                Log.d("ShopFragment", "Profile image clicked")
 
                 val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     Intent(MediaStore.ACTION_PICK_IMAGES)
@@ -318,9 +334,8 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
                 try {
                     pickImageBanner.launch(intent)
-                    Log.d("ShopFragment", "pickImage launched successfully")
+
                 } catch (e: Exception) {
-                    Log.e("ShopFragment", "Error launching image picker", e)
                     Toast.makeText(
                         requireContext(),
                         "Failed to open image picker",
@@ -337,13 +352,19 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
             dialogBanner.dismiss()
 
-            val viewImageFragment = ViewImageFragment()
+            val fragment = ViewBannerImageFragment()
+
+            val bundle = Bundle()
+            bundle.putString("image_url", viewModel.getBannerImageUrlFromPrefs())
+
+            fragment.arguments = bundle
+
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ViewBannerImageFragment())
+                .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit()
-
         }
+
 
 
         dialogBanner.setCancelable(true)

@@ -7,16 +7,21 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.muhasib.snooq.view.Home.HomeFragment"
-        android:label="Home" />
+        android:label="Home" >
+
+        <action
+            android:id="@+id/action_homeFragment_to_shopkeeperProfileFragment"
+            app:destination="@id/shopkeeperProfileFragment2"/>
+    </fragment>
 
     <fragment
         android:id="@+id/viewProfileFragment"
         android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.ViewImageFragment"
         android:label="Profile" >
-
     </fragment>
 
-
-
-
+    <fragment
+        android:id="@+id/shopkeeperProfileFragment2"
+        android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.ShopkeeperProfileFragment"
+        android:label="fragment_shopkeeper"/>
 </navigation>

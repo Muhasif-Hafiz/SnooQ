@@ -2,6 +2,7 @@ package com.muhasib.snooq.view.ShopProfile.ShopFragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -29,6 +30,7 @@ import com.muhasib.snooq.singleton.AppWriteSingleton
 import com.muhasib.snooq.view.ShopProfile.CropBannerActivity
 import com.muhasib.snooq.view.ShopProfile.CropImageActivity
 import com.muhasib.snooq.mvvm.ViewModel.shopViewModel
+import com.muhasib.snooq.view.Home.HomeActivity
 import io.appwrite.Client
 import io.appwrite.services.Storage
 
@@ -40,6 +42,8 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
     private lateinit var storage: Storage
     private val viewModel: shopViewModel by viewModels()
     private val list = ArrayList<CarouselModel>()
+
+
   private var images = ArrayList<String>()
     private val adapter = CarouselAdapter(list, onItemClickListener = { carouselModel ->
 
@@ -67,40 +71,29 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
         (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        toolbar.setNavigationOnClickListener { onBackPress() }
+
         client = AppWriteSingleton.getClient(requireContext())
         storage = Storage(client)
 
         val cachedImageUrl = viewModel.getProfileImageUrlFromPrefs()
         val cachedBannerUrl = viewModel.getBannerImageUrlFromPrefs()
-        if (cachedBannerUrl != null) {
-            setBannerPicture(cachedBannerUrl, binding.bannerImage)
-        }
-
-        if (!cachedImageUrl.isNullOrEmpty()) {
-
-            setProfilePicture(cachedImageUrl, binding.profileImageShopActivity)
-
-        }
-        if (!cachedBannerUrl.isNullOrEmpty()) {
-
-            setBannerPicture(cachedBannerUrl, binding.bannerImage)
 
 
-        }
+        if (cachedBannerUrl != null) { setBannerPicture(cachedBannerUrl, binding.bannerImage) }
+        if (!cachedImageUrl.isNullOrEmpty()) { setProfilePicture(cachedImageUrl, binding.profileImageShopActivity) }
+        if (!cachedBannerUrl.isNullOrEmpty()) { setBannerPicture(cachedBannerUrl, binding.bannerImage) }
 
         observeShopData()
         fetchShopImages()
+        binding.shimmerViewContainer.stopShimmer()
+        binding.profileImageShopActivity.setOnClickListener { showProfileOptions() }
+        binding.bannerImage.setOnClickListener { showBannerOptions() }
+        binding.btnDirections.setOnClickListener { showGoogleMaps() }
+        binding.btnStock.text = "My QR Code"
         binding.btnStock.setOnClickListener{
-            findNavController().navigate(R.id.action_shopkeeperProfileFragment2_to_stockFragment2)
-        }
-
-        binding.profileImageShopActivity.setOnClickListener {
-            showProfileOptions()
-        }
-
-        binding.bannerImage.setOnClickListener {
-
-            showBannerOptions()
+//            findNavController().navigate(R.id.action_shopkeeperProfileFragment2_to_stockFragment2)
+            Toast.makeText(requireContext(), "Coming soon :)", Toast.LENGTH_SHORT).show()
 
         }
 
@@ -115,9 +108,8 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
                 Log.d("ImagesAdded", url)
                 list.add(CarouselModel(imageUrl = url))
             }
-
-
         }
+
 
     }
 
@@ -197,25 +189,32 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
 
     private fun observeShopData() {
 
-        Log.d("Observer", "Retrieving data-Haziq is a simp")
         viewModel.shopData.observe(viewLifecycleOwner) { shop ->
+
+
             binding.shopNameShopActivity.text = shop.shopName
+            binding.toolbar.title =shop.shopName
             binding.shopOwnerNameShopActivity.text = shop.shopkeeperName
             binding.shopDescriptionShopActivity.text = shop.shopDescription
             binding.shopAddressShopActivity.text = shop.address
             binding.textOpenTimeShopActivity.text = shop.openingTime
             binding.closingTimeShopActivity.text = shop.closingTime
 
-            val profileImageUrl = shop.profileImageUrl ?: viewModel.getProfileImageUrlFromPrefs()
-            val bannerImage = shop.bannerImageUrl ?: viewModel.getBannerImageUrlFromPrefs()
-            if (!profileImageUrl.isNullOrEmpty()) {
-                loadProfileImage(profileImageUrl)
-            }
+            binding.textClosedDays.text = "Sunday"
 
-            if (!bannerImage.isNullOrEmpty()) {
-                loadBannerImage(bannerImage)
-            }
+            val profileImageUrl = shop.profileImageUrl
+            val bannerImage = shop.bannerImageUrl
+
+            if (profileImageUrl.isNotEmpty()) { loadProfileImage(profileImageUrl) }
+            if (bannerImage.isNotEmpty()) { loadBannerImage(bannerImage) }
+            binding.toolbar.title =shop.shopName
+
+            binding.shimmerViewContainer.stopShimmer()
+            binding.shimmerViewContainer.visibility = View.GONE
+            binding.contentView.visibility = View.VISIBLE
         }
+
+
     }
 
     private fun loadProfileImage(imageUrl: String) {
@@ -393,8 +392,34 @@ class ShopkeeperProfileFragment : Fragment(R.layout.fragment_shopkeeper_profile)
             // Notify the adapter that the data has changed
             adapter.notifyDataSetChanged()
 
-
-
         }
     }
+    private fun onBackPress(){
+        val action = ShopkeeperProfileFragmentDirections.actionShopkeeperProfileFragmentToHomeFragment()
+     findNavController().navigate(action)
+
+        //findNavController().popBackStack()
+
+    }
+    private fun showGoogleMaps() {
+        val location = binding.shopAddressShopActivity.text.toString()
+        Log.d("Location", location)
+
+        val gmmIntentUri = Uri.parse("geo:0,0?q=${Uri.encode(location)}")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+
+        // Try to open in Google Maps app
+        if (mapIntent.resolveActivity(requireContext().packageManager) != null) {
+            startActivity(mapIntent)
+        } else {
+            // Fallback: open in browser
+            val webIntent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://www.google.com/maps/search/?api=1&query=${Uri.encode(location)}")
+            )
+            startActivity(webIntent)
+        }
+    }
+
 }

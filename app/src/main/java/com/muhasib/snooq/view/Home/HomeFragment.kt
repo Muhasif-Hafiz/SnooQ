@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -144,25 +145,25 @@ class HomeFragment : Fragment() {
 
 
     private fun onDashboardItemClick(item: DashboardItem) {
-        Toast.makeText(requireContext(), "${item.title} clicked", Toast.LENGTH_SHORT).show()
+
         when (item.id) {
             1 -> {
                 navigateToMyProfile()
             }
 
-            2 -> { /* Navigate to Scholarships */
+            2 -> {
             }
 
-            3 -> { /* Navigate to Repayments */
+            3 -> {
             }
 
-            4 -> { /* Navigate to Clearance */
+            4 -> {
             }
 
-            5 -> { /* Navigate to Refunds */
+            5 -> {
             }
 
-            6 -> { /* Navigate to Contact us */
+            6 -> {
             }
         }
     }
@@ -173,6 +174,9 @@ class HomeFragment : Fragment() {
     }
     private fun navigateToMyProfile(){
         startActivity(Intent(requireContext(), ShopActivity::class.java))
+
+//        val action = HomeFragmentDirections.actionHomeFragmentToShopkeeperProfileFragment()
+//        findNavController().navigate(action)
     }
     // Add this to your Activity or Fragment
     private fun setupToggleSwitch() {

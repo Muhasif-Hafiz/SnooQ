@@ -135,4 +135,7 @@ dependencies {
     implementation("com.github.chrisbanes:PhotoView:2.3.0")
 
 
+    //Shimmer Effect
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
+
 }

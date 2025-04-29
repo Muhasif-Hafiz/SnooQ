@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_shopkeeperProfileFragment2_to_stockFragment2"
             app:destination="@id/stockFragment2" />
+        <action
+            android:id="@+id/action_shopkeeperProfileFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"/>
+
     </fragment>
     <fragment
         android:id="@+id/stockFragment2"
@@ -47,4 +51,10 @@
         android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.UploadPhotosFragment"
         android:label="fragment_upload_photos"
         tools:layout="@layout/fragment_upload_photos" />
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.muhasib.snooq.view.Home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home"/>
 </navigation>

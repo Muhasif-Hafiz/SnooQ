@@ -6,10 +6,168 @@
     android:layout_height="match_parent"
     tools:context=".view.ShopProfile.ShopFragment.ShopkeeperProfileFragment">
 
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Banner Placeholder -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/gray_light"/>
+
+            <!-- Description Placeholder -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <!-- Profile Image Placeholder -->
+
+                <View
+                    android:id="@+id/profile_placeholder"
+                    android:layout_width="118dp"
+                    android:layout_height="118dp"
+
+                    android:background="@drawable/circle_shimmer_bg"
+                    android:backgroundTint="@color/gray_light" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <!-- Name Placeholder -->
+                    <View
+                        android:layout_width="200dp"
+                        android:layout_height="24dp"
+                        android:background="@color/gray_light" />
+
+                    <!-- Username Placeholder -->
+                    <View
+                        android:layout_width="150dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/gray_light" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="16dp"
+                android:background="@color/gray_light"/>
+
+            <!-- Metrics Placeholders -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:background="@color/gray_light"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@color/gray_light"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:background="@color/gray_light"/>
+            </LinearLayout>
+
+            <!-- Shop Images Title Placeholder -->
+            <View
+                android:layout_width="150dp"
+                android:layout_height="24dp"
+                android:layout_margin="16dp"
+                android:background="@color/gray_light"/>
+
+            <!-- Carousel Placeholder -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="16dp"
+                android:background="@color/gray_light"/>
+
+            <!-- Location Card Placeholder -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="16dp"
+                android:background="@color/gray_light"/>
+
+            <!-- Ratings Title Placeholder -->
+            <View
+                android:layout_width="150dp"
+                android:layout_height="24dp"
+                android:layout_margin="16dp"
+                android:background="@color/gray_light"/>
+
+            <!-- Rating Bar Placeholder -->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_margin="16dp"
+                android:background="@color/gray_light"/>
+
+            <!-- Reviews Count Placeholder -->
+            <View
+                android:layout_width="100dp"
+                android:layout_height="18dp"
+                android:layout_margin="16dp"
+                android:background="@color/gray_light"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <!---Original From here  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:id="@+id/contentView"
+        android:visibility="gone"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -24,13 +182,10 @@
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:backgroundTint="@color/white"
                 android:fitsSystemWindows="true"
-                app:contentScrim="@color/PrimarySnooQ"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-
-                app:titleEnabled="false">
+                app:contentScrim="@color/unique_button_normal"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"                app:titleEnabled="false">
 
 
                 <ImageView
@@ -51,7 +206,7 @@
 
                     android:layout_marginBottom="0dp"
                     android:src="@drawable/ic_profile_picture"
-                    app:civ_border_color="#86E1AA"
+                    app:civ_border_color="#B9F0D2"
                     app:civ_border_width="2dp"
                     app:layout_anchor="@id/appbar"
                     app:layout_anchorGravity="bottom|start|end"
@@ -61,8 +216,8 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
+                    app:navigationIcon="@drawable/ic_arow_back"
                     app:layout_collapseMode="pin">
-
 
                     <ImageButton
                         android:id="@+id/btn_menu"
@@ -165,7 +320,7 @@
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
-                                android:src="@drawable/ic_placeholder" />
+                                android:src="@drawable/ic_open" />
 
                             <TextView
                                 android:id="@+id/text_open_time_shop_Activity"
@@ -203,7 +358,7 @@
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
-                                android:src="@drawable/ic_menu_about_us" />
+                                android:src="@drawable/ic_store_close" />
 
                             <TextView
                                 android:id="@+id/closed_days_shop_Activity"
@@ -216,6 +371,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/text_closed_days"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="closed days"
@@ -241,7 +397,7 @@
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
-                                android:src="@drawable/ic_sections" />
+                                android:src="@drawable/ic_close" />
 
                             <TextView
                                 android:id="@+id/closing_time_shop_Activity"
@@ -355,7 +511,7 @@
                             android:textSize="16sp" />
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_directions_shop_Activity"
+                            android:id="@+id/btn_directions"
                             style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

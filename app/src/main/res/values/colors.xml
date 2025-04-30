@@ -26,6 +26,29 @@
     <color name="gray_light">#E0E0E0</color>
 
 
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- Background Colors -->
+
+    <color name="cardBackground">#FFFFFF</color>
+
+    <!-- Text Colors -->
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+
+    <!-- Stats Cards -->
+    <color name="statCard1">#6200EE</color>
+    <color name="statCard2">#FF4081</color>
+
+    <!-- Chip colors -->
+    <color name="chipSelectedBackground">#6200EE</color>
+    <color name="chipUnselectedBackground">#E0E0E0</color>
+    <color name="chipSelectedText">#FFFFFF</color>
+    <color name="chipUnselectedText">#212121</color>
+
+
 
 
 </resources>

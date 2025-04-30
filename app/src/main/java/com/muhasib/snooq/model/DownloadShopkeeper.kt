@@ -11,5 +11,4 @@ data class DownloadShopkeeper(
     val profileImageUrl: String = "",
     val  bannerImageUrl : String ="",
     val shopImages : ArrayList<String>
-
 )

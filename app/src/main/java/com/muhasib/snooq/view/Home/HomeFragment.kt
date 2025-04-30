@@ -152,6 +152,7 @@ class HomeFragment : Fragment() {
             }
 
             2 -> {
+                navigateToCatalog()
             }
 
             3 -> {
@@ -218,4 +219,8 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun navigateToCatalog(){
+
+        findNavController().navigate(R.id.action_homeFragment_to_stockFragment)
+    }
 }

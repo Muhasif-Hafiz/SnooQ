@@ -10,42 +10,35 @@
         android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.ShopkeeperProfileFragment"
         android:label="fragment_shopkeeper_profile"
         tools:layout="@layout/fragment_shopkeeper_profile" >
-        <action
-            android:id="@+id/action_shopkeeperProfileFragment2_to_stockFragment2"
-            app:destination="@id/stockFragment2" />
+<!--        <action-->
+<!--            android:id="@+id/action_shopkeeperProfileFragment2_to_stockFragment2"-->
+<!--            app:destination="@id/stockFragment" />-->
         <action
             android:id="@+id/action_shopkeeperProfileFragment_to_HomeFragment"
             app:destination="@id/HomeFragment"/>
 
     </fragment>
-    <fragment
-        android:id="@+id/stockFragment2"
-        android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.StockFragment"
-        android:label="fragment_stock"
-        tools:layout="@layout/fragment_stock" >
-        <action
-            android:id="@+id/action_stockFragment2_to_shopkeeperProfileFragment2"
-            app:destination="@id/shopkeeperProfileFragment2"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
-        <action
-            android:id="@+id/action_stockFragment2_to_productListingFragment"
-            app:destination="@id/productListingFragment" />
-        <action
-            android:id="@+id/action_stockFragment2_to_uploadPhotosFragment"
-            app:destination="@id/uploadPhotosFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/productListingFragment"
-        android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.ProductListingFragment"
-        android:label="fragment_product_listing"
-        tools:layout="@layout/fragment_product_listing" >
-        <action
-            android:id="@+id/action_productListingFragment_to_stockFragment2"
-            app:destination="@id/stockFragment2" />
-    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/stockFragment"-->
+<!--        android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.StockFragment"-->
+<!--        android:label="fragment_stock"-->
+<!--        tools:layout="@layout/fragment_stock" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_stockFragment2_to_shopkeeperProfileFragment2"-->
+<!--            app:destination="@id/shopkeeperProfileFragment2"-->
+<!--            app:enterAnim="@anim/from_left"-->
+<!--            app:exitAnim="@anim/to_right"-->
+<!--            app:popEnterAnim="@anim/from_right"-->
+<!--            app:popExitAnim="@anim/to_left" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_stockFragment2_to_productListingFragment"-->
+<!--            app:destination="@id/productListingFragment" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_stockFragment2_to_uploadPhotosFragment"-->
+<!--            app:destination="@id/uploadPhotosFragment" />-->
+
+<!--    </fragment>-->
+
     <fragment
         android:id="@+id/uploadPhotosFragment"
         android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.UploadPhotosFragment"

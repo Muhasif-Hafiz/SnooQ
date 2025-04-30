@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
@@ -12,6 +13,16 @@
         <action
             android:id="@+id/action_homeFragment_to_shopkeeperProfileFragment"
             app:destination="@id/shopkeeperProfileFragment2"/>
+
+        <action
+            android:id="@+id/action_homeFragment_to_stockFragment"
+            app:destination="@id/stockFragment"/>
+
+        <action
+            android:id="@+id/action_homeFragment_to_viewProfileFragment"
+            app:destination="@id/viewProfileFragment"/>
+
+
     </fragment>
 
     <fragment
@@ -24,4 +35,25 @@
         android:id="@+id/shopkeeperProfileFragment2"
         android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.ShopkeeperProfileFragment"
         android:label="fragment_shopkeeper"/>
+
+    <fragment
+        android:id="@+id/stockFragment"
+        android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.StockFragment"
+        android:label="fragment_stock"
+        tools:layout="@layout/fragment_stock" >
+
+        <action
+            android:id="@+id/action_stockFragment2_to_productListingFragment"
+            app:destination="@id/productListingFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/productListingFragment"
+        android:name="com.muhasib.snooq.view.ShopProfile.ShopFragment.ProductListingFragment"
+        android:label="fragment_product_listing"/>
+
+
+
+
 </navigation>

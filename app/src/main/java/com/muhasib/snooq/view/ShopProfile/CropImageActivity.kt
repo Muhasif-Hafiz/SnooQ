@@ -12,6 +12,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.firestore.FirebaseFirestore
+import com.muhasib.snooq.Base.AppwriteImageUpload
 import com.muhasib.snooq.Base.MySharedPreferences
 import com.muhasib.snooq.databinding.ActivityCropImageBinding
 import com.muhasib.snooq.singleton.AppWriteSingleton
@@ -137,8 +138,9 @@ class CropImageActivity : BaseActivity() {
             val fileId = fileResponse.id
             val fileUrl = "https://cloud.appwrite.io/v1/storage/buckets/$bucketId/files/$fileId/view?project=677a4b92001bbd3a3742&mode=admin"
 
+          //  val fileUrl = AppwriteImageUpload().uploadImageTo(file , this)
             Log.d("CropImageActivity", "Image uploaded successfully: $fileUrl")
-            saveImageUrlToFirestore(fileUrl)
+            saveImageUrlToFirestore(fileUrl!!)
 
         } catch (e: Exception) {
             Log.e("CropImageActivity", "Appwrite upload failed: ${e.message}")
